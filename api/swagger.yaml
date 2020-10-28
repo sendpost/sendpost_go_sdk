@@ -1,0 +1,6129 @@
+---
+swagger: "2.0"
+info:
+  description: "SendPost API to send transactional emails reliably"
+  version: "1.0.0"
+  title: "SendPost API"
+  termsOfService: "http://sendpost.io/terms-of-service"
+  contact:
+    email: "hello@sendx.io"
+host: "api.sendpost.io"
+basePath: "/api/v1"
+schemes:
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /account/alert/:
+    get:
+      tags:
+      - "account/alert"
+      description: "Get All Alerts"
+      operationId: "AlertRouter.GetAll"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved all alerts for account successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.DetailedAlert"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    post:
+      tags:
+      - "account/alert"
+      description: "create an alert"
+      operationId: "AlertRouter.Create alert"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The List to br sent"
+        required: true
+        schema:
+          $ref: "#/definitions/models.AlertRequest"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Alert Created Successfully\""
+          schema:
+            $ref: "#/definitions/models.Alert"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/alert/{alertid}:
+    put:
+      tags:
+      - "account/alert"
+      description: "Update an Alert"
+      operationId: "AlertRouter.Update"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "alertid"
+        in: "path"
+        description: "The alert you want to update"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Alertid"
+      - in: "body"
+        name: "body"
+        description: "The alert  Settings"
+        required: true
+        schema:
+          $ref: "#/definitions/.alert"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"alert updated successfully\""
+          schema:
+            $ref: "#/definitions/.alert"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":alert is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/alert/count:
+    get:
+      tags:
+      - "account/alert"
+      description: "Count Total Alerts for account"
+      operationId: "AlertRouter.Count"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Total count of ips for a specific account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/event/{eventId}:
+    get:
+      tags:
+      - "account/event"
+      description: "Find Event By Id"
+      operationId: "EventRouter.Get"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "eventId"
+        in: "path"
+        description: "the eventId that you want to retrieve"
+        required: true
+        type: "string"
+        x-exportParamName: "EventId"
+      responses:
+        "200":
+          description: "\"Retrieved Event from eventId successfully\""
+          schema:
+            $ref: "#/definitions/models.QEvent"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":eventId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/event/count:
+    get:
+      tags:
+      - "account/event"
+      description: "Count all events from a account for a given time-range"
+      operationId: "EventRouter.Count all events from a account for a given time-range"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      - name: "type"
+        in: "query"
+        description: "search type"
+        required: false
+        type: "string"
+        x-exportParamName: "Type_"
+        x-optionalDataType: "String"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      - name: "source"
+        in: "query"
+        description: "data source from which to get timestamp keys subaccount or ip"
+        required: false
+        type: "string"
+        x-exportParamName: "Source"
+        x-optionalDataType: "String"
+      - name: "sourceId"
+        in: "query"
+        description: "source id from which to get timestamp keys subaccount or ip"
+        required: false
+        type: "string"
+        x-exportParamName: "SourceId"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Find count of all events of a sub-account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/event/node:
+    post:
+      tags:
+      - "account/event"
+      description: "Find all events of a account from a specific node"
+      operationId: "EventRouter.Get all events of a account from a specific node"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Retrieved event from eventId from a specific node successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.QEvent"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/event/node/{eventId}:
+    get:
+      tags:
+      - "account/event"
+      description: "Find Event From Node by id"
+      operationId: "EventRouter.Get Event In Node"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "eventId"
+        in: "path"
+        description: "the eventId that you want to retrieve"
+        required: true
+        type: "string"
+        x-exportParamName: "EventId"
+      responses:
+        "200":
+          description: "\"Retrieved event from eventId from a specific node successfully\""
+          schema:
+            $ref: "#/definitions/models.QEvent"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":eventId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/event/node/count:
+    get:
+      tags:
+      - "account/event"
+      description: "Count all events from a node of a sub-account for a given time-range"
+      operationId: "EventRouter.Count all events from a node of a sub-account for\
+        \ a given time-range"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      - name: "type"
+        in: "query"
+        description: "search type"
+        required: false
+        type: "string"
+        x-exportParamName: "Type_"
+        x-optionalDataType: "String"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      - name: "source"
+        in: "query"
+        description: "data source from which to get timestamp keys subaccount or ip"
+        required: false
+        type: "string"
+        x-exportParamName: "Source"
+        x-optionalDataType: "String"
+      - name: "sourceId"
+        in: "query"
+        description: "source id from which to get timestamp keys subaccount or ip"
+        required: false
+        type: "string"
+        x-exportParamName: "SourceId"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Find count of all events of a sub-account from a specific\
+            \ node\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/event/node/timestampkeys:
+    get:
+      tags:
+      - "account/event"
+      description: "Find all events of a sub-account from a specific node for a give\
+        \ time-range"
+      operationId: "EventRouter.Get all event timestamp keys of a sub-account from\
+        \ a specific node for a given time-range"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      - name: "type"
+        in: "query"
+        description: "search type"
+        required: false
+        type: "string"
+        x-exportParamName: "Type_"
+        x-optionalDataType: "String"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      - name: "source"
+        in: "query"
+        description: "data source from which to get timestamp keys subaccount or ip"
+        required: false
+        type: "string"
+        x-exportParamName: "Source"
+        x-optionalDataType: "String"
+      - name: "sourceId"
+        in: "query"
+        description: "source id from which to get timestamp keys subaccount or ip"
+        required: false
+        type: "string"
+        x-exportParamName: "SourceId"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved event from eventId from a specific node successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.QEvent"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/integration/:
+    get:
+      tags:
+      - "account/integration"
+      description: "Get All Integrations"
+      operationId: "AccountIntegrationRouter.GetAll"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Retrieved all integrations for account successful\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.Integration"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/integration/{itype}:
+    post:
+      tags:
+      - "account/integration"
+      description: "Create Integration"
+      operationId: "AccountIntegrationRouter.Create"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "itype"
+        in: "path"
+        description: "The integration type you want to create"
+        required: true
+        type: "string"
+        x-exportParamName: "Itype"
+      - in: "body"
+        name: "body"
+        description: "The Integration content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EIntegration"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Integration Created Successfully\""
+          schema:
+            $ref: "#/definitions/models.Integration"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    put:
+      tags:
+      - "account/integration"
+      description: "Update Integration"
+      operationId: "AccountIntegrationRouter.Update"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "itype"
+        in: "path"
+        description: "The integration type you want to update"
+        required: true
+        type: "string"
+        x-exportParamName: "Itype"
+      - in: "body"
+        name: "body"
+        description: "The Integration content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EIntegration"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Integration updated successfully\""
+          schema:
+            $ref: "#/definitions/models.Integration"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "account/integration"
+      description: "Delete Integration"
+      operationId: "AccountIntegrationRouter.Delete"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "itype"
+        in: "path"
+        description: "The integration type you want to update"
+        required: true
+        type: "string"
+        x-exportParamName: "Itype"
+      responses:
+        "200":
+          description: "\"Integration deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.DeleteResponse"
+        "401":
+          description: "Not Authorized"
+        "404":
+          description: "Integration Not Found"
+        "500":
+          description: "Internal Server Error"
+  /account/integration/count:
+    get:
+      tags:
+      - "account/integration"
+      description: "Count Total AccountIntegrations"
+      operationId: "AccountIntegrationRouter.Count"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Total count of integrations for a specific account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/integration/glockapps/monitor/{ipid}:
+    post:
+      tags:
+      - "account/integration"
+      description: "Enable IP Monitoring for a single IP"
+      operationId: "AccountIntegrationRouter.EnableGlockappsIPMonitoring"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ipid"
+        in: "path"
+        description: "the IPId you want to enable monitoring for"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      responses:
+        "200":
+          description: "\"IP Enabled for monitoring (hits GA as well)\""
+          schema:
+            $ref: "#/definitions/models.Response"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "account/integration"
+      description: "Disable IP Monitoring for a single IP"
+      operationId: "AccountIntegrationRouter.DisableGlockappsIPMonitoring"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ipid"
+        in: "path"
+        description: "the IPId you want to disable monitoring for"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      responses:
+        "200":
+          description: "\"IP Disabled for monitoring (hits GA as well - even if that\
+            \ fails Sendpost definitely stops monitoring it)\""
+          schema:
+            $ref: "#/definitions/models.DeleteResponse"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/integration/glockapps/monitor/stat/{ipid}:
+    get:
+      tags:
+      - "account/integration"
+      description: "Get Monitored IP Stats"
+      operationId: "AccountIntegrationRouter.Get Monitored IP Stats"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ipid"
+        in: "path"
+        description: "the IPId for which you want monitored stats"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved stats successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.RGlockappsMonitorStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/ip/:
+    get:
+      tags:
+      - "account/ip"
+      description: "Get All IPs"
+      operationId: "IPRouter.GetAll"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved all ips for account successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.IP"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/ip/{ipid}:
+    get:
+      tags:
+      - "account/ip"
+      description: "Find IP by IPId"
+      operationId: "IPRouter.Get"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ipid"
+        in: "path"
+        description: "the IPId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      responses:
+        "200":
+          description: "\"Retrieved IP from ipid successfully\""
+          schema:
+            $ref: "#/definitions/models.IP"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":ipid is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    put:
+      tags:
+      - "account/ip"
+      description: "Update an IP"
+      operationId: "IPRouter.Update"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ipid"
+        in: "path"
+        description: "The IP you want to update"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      - in: "body"
+        name: "body"
+        description: "The IP Email Provider Settings"
+        required: true
+        schema:
+          $ref: "#/definitions/models.IIP"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"IP updated successfully\""
+          schema:
+            $ref: "#/definitions/models.IP"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":ipid is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "account/ip"
+      description: "Delete IP"
+      operationId: "IPRouter.Delete"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ipid"
+        in: "path"
+        description: "The IPId you want to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      responses:
+        "200":
+          description: "\"IP deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.DeleteResponse"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":ipid is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/ip/allocate:
+    post:
+      tags:
+      - "account/ip"
+      description: "Allocate IP To Account"
+      operationId: "IPRouter.Allocate IP"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Allocated IP for account successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.IP"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/ip/count:
+    get:
+      tags:
+      - "account/ip"
+      description: "Count Total AccountIPs"
+      operationId: "IPRouter.Count"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Total count of ips for a specific account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/ip/stat/{ipid}:
+    get:
+      tags:
+      - "account/ip/stat"
+      description: "Get All IP Stats"
+      operationId: "IPStatRouter.Get All IP Stats"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ipid"
+        in: "path"
+        description: "the IPId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.RIPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/ip/stat/{ipid}/aggregate:
+    get:
+      tags:
+      - "account/ip/stat"
+      description: "Get All Aggregate Stats"
+      operationId: "IPStatRouter.Get All Aggregate IP Stats"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ipid"
+        in: "path"
+        description: "the IPId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats successfully\""
+          schema:
+            $ref: "#/definitions/models.Stat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/ip/stat/{ipid}/aggregate/provider:
+    get:
+      tags:
+      - "account/ip/stat"
+      description: "Get All Aggregate Stats by Group"
+      operationId: "IPStatRouter.Get All Aggregate IP Stats by Group"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ipid"
+        in: "path"
+        description: "the IPId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      - name: "provider"
+        in: "query"
+        description: "the group whose stats you want"
+        required: true
+        type: "string"
+        x-exportParamName: "Provider"
+      responses:
+        "200":
+          description: "\"Retrieved Stats successfully\""
+          schema:
+            $ref: "#/definitions/models.Stat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/ip/stat/{ipid}/aggregate/providers:
+    get:
+      tags:
+      - "account/ip/stat"
+      description: "Get All Aggregated Provider Stats for a IP"
+      operationId: "IPStatRouter.Get All Aggregated Provider Stats for a IP"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      - name: "ipid"
+        in: "path"
+        description: "the IPId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.PIPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/ip/stat/{ipid}/aggregate/sid/{sid}/providers:
+    get:
+      tags:
+      - "account/ip/stat"
+      description: "Get All Aggregated Provider Stats for a Specific Sub-Account of\
+        \ a IP"
+      operationId: "IPStatRouter.Get All Aggregated Provider Stats for a Specific\
+        \ Sub-Account of a IP"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      - name: "ipid"
+        in: "path"
+        description: "the IPId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      - name: "sid"
+        in: "path"
+        description: "the Sub Account Id you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Sid"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.PIPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/ip/stat/{ipid}/aggregate/subaccounts:
+    get:
+      tags:
+      - "account/ip/stat"
+      description: "Get All Aggregated Sub-Account Stats for an IP"
+      operationId: "IPStatRouter.Get All Aggregated Sub-Account Stats for an IP"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      - name: "ipid"
+        in: "path"
+        description: "the IPId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.SIPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/ip/stat/{ipid}/provider:
+    get:
+      tags:
+      - "account/ip/stat"
+      description: "Get All IP Stats by Group"
+      operationId: "IPStatRouter.Get All IP Stats by Group"
+      parameters:
+      - name: "ipid"
+        in: "path"
+        description: "the IPId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      - name: "provider"
+        in: "query"
+        description: "the provider whose stats you want"
+        required: true
+        type: "string"
+        x-exportParamName: "Provider"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.RIPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/ippool/:
+    get:
+      tags:
+      - "account/ippool"
+      description: "Get All AccountIPPools"
+      operationId: "AccountIPPoolRouter.GetAll"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved all ippools for account successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.AccountIPPool"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    post:
+      tags:
+      - "account/ippool"
+      description: "Create AccountIPPool"
+      operationId: "AccountIPPoolRouter.Create"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The AccountIPPool content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EIPPool"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"AccountIPPool Created Successfully\""
+          schema:
+            $ref: "#/definitions/models.AccountIPPool"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/ippool/{ippoolid}:
+    get:
+      tags:
+      - "account/ippool"
+      description: "Find AccountIPPool by AccountIPPoolId"
+      operationId: "AccountIPPoolRouter.Get"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ippoolid"
+        in: "path"
+        description: "the AccountIPPoolId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ippoolid"
+      responses:
+        "200":
+          description: "\"Retrieved AccountIPPool from ippoolid successfully\""
+          schema:
+            $ref: "#/definitions/models.AccountIPPool"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":ippoolid is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    put:
+      tags:
+      - "account/ippool"
+      description: "Update AccountIPPool"
+      operationId: "AccountIPPoolRouter.Update"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ippoolid"
+        in: "path"
+        description: "The AccountIPPoolId you want to update"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ippoolid"
+      - in: "body"
+        name: "body"
+        description: "The body"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EIPPool"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Updated AccountIPPool successfully\""
+          schema:
+            $ref: "#/definitions/models.AccountIPPool"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":ippoolid is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "account/ippool"
+      description: "Delete AccountIPPool"
+      operationId: "AccountIPPoolRouter.Delete"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ippoolid"
+        in: "path"
+        description: "The AccountIPPoolId you want to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ippoolid"
+      responses:
+        "200":
+          description: "\"AccountIPPool deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.DeleteResponse"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":ippoolid is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/ippool/count:
+    get:
+      tags:
+      - "account/ippool"
+      description: "Count Total AccountIPPools"
+      operationId: "AccountIPPoolRouter.Count"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Total count of ippools for a specific account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/label/:
+    get:
+      tags:
+      - "account/label"
+      description: "Get All Labels"
+      operationId: "LabelRouter.GetAll"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Retrieved all labels for sub-account successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.Label"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    post:
+      tags:
+      - "account/label"
+      description: "Create Label"
+      operationId: "LabelRouter.Create"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The Label content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.Label"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Label Created Successfully\""
+          schema:
+            $ref: "#/definitions/models.Label"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/label/{labelId}:
+    get:
+      tags:
+      - "account/label"
+      description: "Find Label by LabelId"
+      operationId: "LabelRouter.Get"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "labelId"
+        in: "path"
+        description: "the LabelId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "LabelId"
+      responses:
+        "200":
+          description: "\"Retrieved Label from labelId successfully\""
+          schema:
+            $ref: "#/definitions/models.Label"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":labelId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    put:
+      tags:
+      - "account/label"
+      description: "Update Label"
+      operationId: "LabelRouter.Update"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "labelId"
+        in: "path"
+        description: "The LabelId you want to update"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "LabelId"
+      - in: "body"
+        name: "body"
+        description: "The body"
+        required: true
+        schema:
+          $ref: "#/definitions/models.Label"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Updated Label successfully\""
+          schema:
+            $ref: "#/definitions/models.Label"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":labelId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "account/label"
+      description: "Delete Label"
+      operationId: "LabelRouter.Delete"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "labelId"
+        in: "path"
+        description: "The LabelId you want to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "LabelId"
+      responses:
+        "200":
+          description: "\"Label deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.DeleteResponse"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":labelId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/label/count:
+    get:
+      tags:
+      - "account/label"
+      description: "Count Total Labels"
+      operationId: "LabelRouter.Count"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Total count of subaccounts for a specific sub-account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/member/:
+    get:
+      tags:
+      - "account/member"
+      description: "Get All Members"
+      operationId: "MemberRouter.GetAll"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Retrieved all members for sub-account successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.Member"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/member/{memberId}:
+    get:
+      tags:
+      - "account/member"
+      description: "Find Member by MemberId"
+      operationId: "MemberRouter.Get"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "memberId"
+        in: "path"
+        description: "the MemberId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "MemberId"
+      responses:
+        "200":
+          description: "\"Retrieved Member from memberId successfully\""
+          schema:
+            $ref: "#/definitions/models.Member"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":memberId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "account/member"
+      description: "Delete Member"
+      operationId: "MemberRouter.Delete"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "memberId"
+        in: "path"
+        description: "The MemberId you want to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "MemberId"
+      responses:
+        "200":
+          description: "\"Member deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.DeleteResponse"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":memberId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/message/{messageId}:
+    get:
+      tags:
+      - "account/message"
+      description: "Find Message By Id"
+      operationId: "MessageRouter.Get"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "messageId"
+        in: "path"
+        description: "the messageId that you want to retrieve"
+        required: true
+        type: "string"
+        x-exportParamName: "MessageId"
+      responses:
+        "200":
+          description: "\"Retrieved Message from MessageStore\""
+          schema:
+            $ref: "#/definitions/models.QEmailMessage"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":messageId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/message/{messageId}/events:
+    get:
+      tags:
+      - "account/message"
+      description: "Find all events associated with a message id"
+      operationId: "MessageRouter.Get all events for a message id"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "messageId"
+        in: "path"
+        description: "the messageId that you want to retrieve"
+        required: true
+        type: "string"
+        x-exportParamName: "MessageId"
+      responses:
+        "200":
+          description: "\"Retrieved events for a message id\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.QEvent"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":messageId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/message/node/{messageId}:
+    get:
+      tags:
+      - "account/message"
+      description: "Find Message from node by specific Id"
+      operationId: "MessageRouter.Get message from node"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "messageId"
+        in: "path"
+        description: "the messageId that you want to retrieve"
+        required: true
+        type: "string"
+        x-exportParamName: "MessageId"
+      responses:
+        "200":
+          description: "\"Retrieved Message from Message Store from a specific node\""
+          schema:
+            $ref: "#/definitions/models.QEmailMessage"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":messageId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/message/node/{messageId}/events:
+    get:
+      tags:
+      - "account/message"
+      description: "Find all message events associated with a message id from a specific\
+        \ node"
+      operationId: "MessageRouter.Get all events for a message id from a node"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "messageId"
+        in: "path"
+        description: "the messageId that you want to retrieve"
+        required: true
+        type: "string"
+        x-exportParamName: "MessageId"
+      responses:
+        "200":
+          description: "\"Retrieved events for a message id\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.QEvent"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":messageId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/recipient/{recipient}/messages:
+    get:
+      tags:
+      - "account/recipient"
+      description: "Find all messages sent to a specific recipient"
+      operationId: "RecipientRouter.Get all messages for a recipient"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "recipient"
+        in: "path"
+        description: "email of the recipient"
+        required: true
+        type: "string"
+        x-exportParamName: "Recipient"
+      responses:
+        "200":
+          description: "\"Retrieved messages for a specific recipient\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.QEmailMessage"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":recipient is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/recipient/node/{recipient}/messages:
+    get:
+      tags:
+      - "account/recipient"
+      description: "Find all message sent to a recipient from a specific node"
+      operationId: "RecipientRouter.Get all messages for a recipient from a node"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "recipient"
+        in: "path"
+        description: "email of the recipient"
+        required: true
+        type: "string"
+        x-exportParamName: "Recipient"
+      responses:
+        "200":
+          description: "\"Retrieved messages for a specific recipient\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.QEmailMessage"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":recipient is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/smtp/stat/ip/{ipid}/aggregate:
+    get:
+      tags:
+      - "account/smtp/stat"
+      description: "Get All Aggregate IP SMTP Stats"
+      operationId: "SMTPStatRouter.Get All Aggregate IP SMTP Stats"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ipid"
+        in: "path"
+        description: "the IPId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.SMTPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/smtp/stat/ip/{ipid}/provider/{pname}/aggregate:
+    get:
+      tags:
+      - "account/smtp/stat"
+      description: "Get All Aggregate IP Provider SMTP Stats"
+      operationId: "SMTPStatRouter.Get All Aggregate IP Provider SMTP Stats"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ipid"
+        in: "path"
+        description: "the IP ID you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      - name: "pname"
+        in: "path"
+        description: "the provider name"
+        required: true
+        type: "string"
+        x-exportParamName: "Pname"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.SMTPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/smtp/stat/ip/{ipid}/subaccount/{sid}/aggregate:
+    get:
+      tags:
+      - "account/smtp/stat"
+      description: "Get All Aggregate IP SMTP Stats For SubAccount"
+      operationId: "SMTPStatRouter.Get All Aggregate IP SMTP Stats For SubAccount"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "ipid"
+        in: "path"
+        description: "the IP ID you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      - name: "sid"
+        in: "path"
+        description: "the SubAccount ID you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Sid"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.SMTPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/smtp/stat/subaccount/{sid}/aggregate:
+    get:
+      tags:
+      - "account/smtp/stat"
+      description: "Get All Aggregate SubAccount SMTP Stats"
+      operationId: "SMTPStatRouter.Get All Aggregate SubAccount SMTP Stats"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "sid"
+        in: "path"
+        description: "the Sub-Account ID you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Sid"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.SMTPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/smtp/stat/subaccount/{sid}/ip/{ipid}/aggregate:
+    get:
+      tags:
+      - "account/smtp/stat"
+      description: "Get All Aggregate SubAccount SMTP Stats For IP"
+      operationId: "SMTPStatRouter.Get All Aggregate SubAccount SMTP Stats For IP"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "sid"
+        in: "path"
+        description: "the Sub-Account ID you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Sid"
+      - name: "ipid"
+        in: "path"
+        description: "the IP  ID you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.SMTPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/smtp/stat/subaccount/{sid}/provider/{pname}/aggregate:
+    get:
+      tags:
+      - "account/smtp/stat"
+      description: "Get All Aggregate SubAccount Provider SMTP Stats"
+      operationId: "SMTPStatRouter.Get All Aggregate SubAccount Provider SMTP Stats"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "sid"
+        in: "path"
+        description: "the SubAccount ID you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Sid"
+      - name: "pname"
+        in: "path"
+        description: "the provider name"
+        required: true
+        type: "string"
+        x-exportParamName: "Pname"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.SMTPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/stat/:
+    get:
+      tags:
+      - "account/stat"
+      description: "Get All Account Stats"
+      operationId: "AccountStatRouter.Get All Account Stats"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.RStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/stat/aggregate:
+    get:
+      tags:
+      - "account/stat"
+      description: "Get All Aggregate Stats"
+      operationId: "AccountStatRouter.Get All Aggregate Account Stats"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats successfully\""
+          schema:
+            $ref: "#/definitions/models.Stat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/stat/aggregate/group:
+    get:
+      tags:
+      - "account/stat"
+      description: "Get All Aggregate Stats by Group"
+      operationId: "AccountStatRouter.Get All Aggregate Account Stats by Group"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      - name: "group"
+        in: "query"
+        description: "the group whose stats you want"
+        required: true
+        type: "string"
+        x-exportParamName: "Group"
+      responses:
+        "200":
+          description: "\"Retrieved Stats successfully\""
+          schema:
+            $ref: "#/definitions/models.Stat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/stat/group:
+    get:
+      tags:
+      - "account/stat"
+      description: "Get All Account Stats by Group"
+      operationId: "AccountStatRouter.Get All Account Stats by Group"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      - name: "group"
+        in: "query"
+        description: "the group whose stats you want"
+        required: true
+        type: "string"
+        x-exportParamName: "Group"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.RStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/subaccount/:
+    get:
+      tags:
+      - "account/subaccount"
+      description: "Get All SubAccounts"
+      operationId: "SubAccountRouter.GetAll"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      - name: "filterBy"
+        in: "query"
+        description: "filterBy"
+        required: false
+        type: "string"
+        x-exportParamName: "FilterBy"
+        x-optionalDataType: "String"
+      - name: "filterValue"
+        in: "query"
+        description: "filterValue"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "FilterValue"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved all subAccounts for sub-account successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.SubAccount"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    post:
+      tags:
+      - "account/subaccount"
+      description: "Create SubAccount"
+      operationId: "SubAccountRouter.Create"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The SubAccount content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.ESubAccount"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"SubAccount Created Successfully\""
+          schema:
+            $ref: "#/definitions/models.SubAccount"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/subaccount/{subAccountId}:
+    get:
+      tags:
+      - "account/subaccount"
+      description: "Find SubAccount by SubAccountId"
+      operationId: "SubAccountRouter.Get"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "subAccountId"
+        in: "path"
+        description: "the SubAccountId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "SubAccountId"
+      responses:
+        "200":
+          description: "\"Retrieved SubAccount from subAccountId successfully\""
+          schema:
+            $ref: "#/definitions/models.SubAccount"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":subAccountId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    put:
+      tags:
+      - "account/subaccount"
+      description: "Update SubAccount"
+      operationId: "SubAccountRouter.Update"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "subAccountId"
+        in: "path"
+        description: "The SubAccountId you want to update"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "SubAccountId"
+      - in: "body"
+        name: "body"
+        description: "The body"
+        required: true
+        schema:
+          $ref: "#/definitions/models.ESubAccount"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Updated SubAccount successfully\""
+          schema:
+            $ref: "#/definitions/models.SubAccount"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":subAccountId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "account/subaccount"
+      description: "Delete SubAccount"
+      operationId: "SubAccountRouter.Delete"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "subAccountId"
+        in: "path"
+        description: "The SubAccountId you want to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "SubAccountId"
+      responses:
+        "200":
+          description: "\"SubAccount deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.DeleteResponse"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":subAccountId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/subaccount/count:
+    get:
+      tags:
+      - "account/subaccount"
+      description: "Count Total Subaccounts"
+      operationId: "SubAccountRouter.Count"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "filterBy"
+        in: "query"
+        description: "filterBy"
+        required: false
+        type: "string"
+        x-exportParamName: "FilterBy"
+        x-optionalDataType: "String"
+      - name: "filterValue"
+        in: "query"
+        description: "filterValue"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "FilterValue"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Total count of subaccounts for a specific sub-account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/validate/:
+    post:
+      tags:
+      - "account/validate"
+      description: "Validate Email List Synchronously"
+      operationId: "ValidateRouter.Validate Email List"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The email list to be sent for being validated"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EmailList"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Cleaned list\""
+          schema:
+            $ref: "#/definitions/models.CleanedList"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: "Request body is not acceptable owing to it exceeding email\
+            \ list size in request body"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/validate/bulk:
+    post:
+      tags:
+      - "account/validate"
+      description: "Validate Emails In File Asynchronously"
+      operationId: "ValidateRouter.Validate Email Bulk"
+      consumes:
+      - "multipart/form-data"
+      parameters:
+      - name: "fileinput"
+        in: "formData"
+        description: "CSV whose emails need to be validated"
+        required: true
+        type: "file"
+        x-exportParamName: "Fileinput"
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Cleaned list\""
+          schema:
+            $ref: "#/definitions/models.BulkResponse"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/validation/:
+    get:
+      tags:
+      - "account/validation"
+      description: "Get all validation"
+      operationId: "ValidationRouter.Get All"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Validations retrieved successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.Validation"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "account/validation"
+      description: "Delete a specific validation"
+      operationId: "ValidationRouter.Delete Validation"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "List of emails to be deleted from validation"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EValidation"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Validations have been deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.Validation"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: "suppression list is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/validation/count:
+    get:
+      tags:
+      - "account/validation"
+      description: "Count Total Validations"
+      operationId: "ValidationRouter.Count"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Total count of domains for a specific sub-account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/webhook/:
+    get:
+      tags:
+      - "account/webhook"
+      description: "Get All AccountWebhooks"
+      operationId: "AccountWebhookRouter.GetAll"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved all whooks for sub-account successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.AccountWebhook"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    post:
+      tags:
+      - "account/webhook"
+      description: "Create AccountWebhook"
+      operationId: "AccountWebhookRouter.Create"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The AccountWebhook content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EWebhook"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"AccountWebhook Created Successfully\""
+          schema:
+            $ref: "#/definitions/models.AccountWebhook"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/webhook/{webhookId}:
+    get:
+      tags:
+      - "account/webhook"
+      description: "Find AccountWebhook by AccountWebhookId"
+      operationId: "AccountWebhookRouter.Get"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "webhookId"
+        in: "path"
+        description: "the AccountWebhookId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "WebhookId"
+      responses:
+        "200":
+          description: "\"Retrieved AccountWebhook from webhookId successfully\""
+          schema:
+            $ref: "#/definitions/models.AccountWebhook"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":webhookId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    put:
+      tags:
+      - "account/webhook"
+      description: "Update AccountWebhook"
+      operationId: "AccountWebhookRouter.Update"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "webhookId"
+        in: "path"
+        description: "The AccountWebhookId you want to update"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "WebhookId"
+      - in: "body"
+        name: "body"
+        description: "The body"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EWebhook"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Updated AccountWebhook successfully\""
+          schema:
+            $ref: "#/definitions/models.AccountWebhook"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":webhookId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "account/webhook"
+      description: "Delete AccountWebhook"
+      operationId: "AccountWebhookRouter.Delete"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "webhookId"
+        in: "path"
+        description: "The AccountWebhookId you want to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "WebhookId"
+      responses:
+        "200":
+          description: "\"AccountWebhook deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.DeleteResponse"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":webhookId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/webhook/cache:
+    post:
+      tags:
+      - "account/webhook"
+      description: "Add Account Webhook To AccountWebhook Cache"
+      operationId: "AccountWebhookRouter.Create AccountWebhook In AccountWebhook Cache"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Add account webhook to cache"
+        required: true
+        schema:
+          $ref: "#/definitions/models.AccountWebhook"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Account webhook has been added successfully to cache\""
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: "AccountWebhook list is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "account/webhook"
+      description: "Delete Account Webhook which is in AccountWebhook Cache"
+      operationId: "AccountWebhookRouter.Delete AccountWebhook in AccountWebhook Cache"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "AccountWebhook content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.AccountWebhook"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Account webhook has been deleted successfully from cache\""
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: "suppression list is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/webhook/count:
+    get:
+      tags:
+      - "account/webhook"
+      description: "Count Total AccountWebhooks"
+      operationId: "AccountWebhookRouter.Count"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Total count of domains for a specific sub-account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /smtp/webhook:
+    post:
+      tags:
+      - "smtp"
+      description: "Receive webhooks raised from SMTP servers"
+      operationId: "SMTPRouter.Receive webhooks raised from SMTP servers"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "The Webhook content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.WMessage"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "Webhook accepted successfully"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/domain/:
+    get:
+      tags:
+      - "subaccount/domain"
+      description: "Get All Domains"
+      operationId: "DomainRouter.GetAll"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved all domains for sub-account successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.Domain"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    post:
+      tags:
+      - "subaccount/domain"
+      description: "Create Domain"
+      operationId: "DomainRouter.Create"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The Domain content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EDomain"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Domain Created Successfully\""
+          schema:
+            $ref: "#/definitions/models.Domain"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/domain/{domainId}:
+    get:
+      tags:
+      - "subaccount/domain"
+      description: "Find Domain by DomainId"
+      operationId: "DomainRouter.Get"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "domainId"
+        in: "path"
+        description: "the DomainId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "DomainId"
+      responses:
+        "200":
+          description: "\"Retrieved Domain from domainId successfully\""
+          schema:
+            $ref: "#/definitions/models.Domain"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":domainId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    put:
+      tags:
+      - "subaccount/domain"
+      description: "Update Domain"
+      operationId: "DomainRouter.Update"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "domainId"
+        in: "path"
+        description: "The DomainId you want to update"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "DomainId"
+      - in: "body"
+        name: "body"
+        description: "The body"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EDomain"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Updated Domain successfully\""
+          schema:
+            $ref: "#/definitions/models.Domain"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":domainId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "subaccount/domain"
+      description: "Delete Domain"
+      operationId: "DomainRouter.Delete"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "domainId"
+        in: "path"
+        description: "The DomainId you want to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "DomainId"
+      responses:
+        "200":
+          description: "\"Domain deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.DeleteResponse"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":domainId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/domain/{domainId}/verify:
+    post:
+      tags:
+      - "subaccount/domain"
+      description: "Verify Domain By Domain Id"
+      operationId: "DomainRouter.Verify"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "domainId"
+        in: "path"
+        description: "the DomainId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "DomainId"
+      responses:
+        "200":
+          description: "\"Retrieved Domain from domainId successfully\""
+          schema:
+            $ref: "#/definitions/models.Domain"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":domainId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/domain/count:
+    get:
+      tags:
+      - "subaccount/domain"
+      description: "Count Total Domains"
+      operationId: "DomainRouter.Count"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      responses:
+        "200":
+          description: "\"Total count of domains for a specific sub-account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/email/:
+    post:
+      tags:
+      - "subaccount/email"
+      description: "Send Email To Contacts"
+      operationId: "EmailRouter.Send Email"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The Email Message"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EmailMessage"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Email Message Processed Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.EmailResponse"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/ippool/:
+    get:
+      tags:
+      - "subaccount/ippool"
+      description: "Get All IPPools"
+      operationId: "IPPoolRouter.GetAll"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved all ippools for sub-account successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.IPPool"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    post:
+      tags:
+      - "subaccount/ippool"
+      description: "Create IPPool"
+      operationId: "IPPoolRouter.Create"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The IPPool content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EIPPool"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"IPPool Created Successfully\""
+          schema:
+            $ref: "#/definitions/models.IPPool"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/ippool/{ippoolid}:
+    get:
+      tags:
+      - "subaccount/ippool"
+      description: "Find IPPool by IPPoolId"
+      operationId: "IPPoolRouter.Get"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "ippoolid"
+        in: "path"
+        description: "the IPPoolId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ippoolid"
+      responses:
+        "200":
+          description: "\"Retrieved IPPool from ippoolid successfully\""
+          schema:
+            $ref: "#/definitions/models.IPPool"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":ippoolid is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    put:
+      tags:
+      - "subaccount/ippool"
+      description: "Update IPPool"
+      operationId: "IPPoolRouter.Update"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "ippoolid"
+        in: "path"
+        description: "The IPPoolId you want to update"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ippoolid"
+      - in: "body"
+        name: "body"
+        description: "The body"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EIPPool"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Updated IPPool successfully\""
+          schema:
+            $ref: "#/definitions/models.IPPool"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":ippoolid is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "subaccount/ippool"
+      description: "Delete IPPool"
+      operationId: "IPPoolRouter.Delete"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "ippoolid"
+        in: "path"
+        description: "The IPPoolId you want to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ippoolid"
+      responses:
+        "200":
+          description: "\"IPPool deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.DeleteResponse"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":ippoolid is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/ippool/count:
+    get:
+      tags:
+      - "subaccount/ippool"
+      description: "Count Total IPPools"
+      operationId: "IPPoolRouter.Count"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      responses:
+        "200":
+          description: "\"Total count of domains for a specific sub-account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/sender/:
+    get:
+      tags:
+      - "subaccount/sender"
+      description: "Get All Senders"
+      operationId: "SenderRouter.GetAll"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved all senders for sub-account successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.Sender"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    post:
+      tags:
+      - "subaccount/sender"
+      description: "Create Sender"
+      operationId: "SenderRouter.Create"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The Sender content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.ESender"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Sender Created Successfully\""
+          schema:
+            $ref: "#/definitions/models.Sender"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/sender/{senderId}:
+    get:
+      tags:
+      - "subaccount/sender"
+      description: "Find Sender by SenderId"
+      operationId: "SenderRouter.Get"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "senderId"
+        in: "path"
+        description: "the SenderId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "SenderId"
+      responses:
+        "200":
+          description: "\"Retrieved Sender from senderId successfully\""
+          schema:
+            $ref: "#/definitions/models.Sender"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":senderId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    put:
+      tags:
+      - "subaccount/sender"
+      description: "Update Sender"
+      operationId: "SenderRouter.Update"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "senderId"
+        in: "path"
+        description: "The SenderId you want to update"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "SenderId"
+      - in: "body"
+        name: "body"
+        description: "The body"
+        required: true
+        schema:
+          $ref: "#/definitions/models.ESender"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Updated Sender successfully\""
+          schema:
+            $ref: "#/definitions/models.Sender"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":senderId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "subaccount/sender"
+      description: "Delete Sender"
+      operationId: "SenderRouter.Delete"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "senderId"
+        in: "path"
+        description: "The SenderId you want to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "SenderId"
+      responses:
+        "200":
+          description: "\"Sender deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.DeleteResponse"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":senderId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/sender/count:
+    get:
+      tags:
+      - "subaccount/sender"
+      description: "Count Total Senders"
+      operationId: "SenderRouter.Count"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      responses:
+        "200":
+          description: "\"Total count of domains for a specific sub-account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/stat/:
+    get:
+      tags:
+      - "subaccount/stat"
+      description: "Get All Sub-Account Stats"
+      operationId: "SubAccountStatRouter.Get All Sub-Account Stats"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.RStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/stat/aggregate:
+    get:
+      tags:
+      - "subaccount/stat"
+      description: "Get All Aggregate Sub-Account Stats"
+      operationId: "SubAccountStatRouter.Get All Aggregate Sub-Account Stats"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats successfully\""
+          schema:
+            $ref: "#/definitions/models.Stat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/stat/aggregate/group:
+    get:
+      tags:
+      - "subaccount/stat"
+      description: "Get All Aggregate Sub-Account Stats by Group"
+      operationId: "SubAccountStatRouter.Get All Aggregate Sub-Account Stats by Group"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      - name: "group"
+        in: "query"
+        description: "the group whose stats you want"
+        required: true
+        type: "string"
+        x-exportParamName: "Group"
+      responses:
+        "200":
+          description: "\"Retrieved Stats successfully\""
+          schema:
+            $ref: "#/definitions/models.Stat"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":group is empty"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/stat/aggregate/groups:
+    get:
+      tags:
+      - "subaccount/stat"
+      description: "Get All Aggregated Group Stats for a Sub-Account"
+      operationId: "SubAccountStatRouter.Get All Aggregated Group Stats for a Sub-Account"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.AGStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/stat/aggregate/ip/{ipid}/providers:
+    get:
+      tags:
+      - "subaccount/stat"
+      description: "Get All Aggregated Provider Stats for a Specific IP of a Sub-Account"
+      operationId: "SubAccountStatRouter.Get All Aggregated Provider Stats for a Specific\
+        \ IP of a Sub-Account"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      - name: "ipid"
+        in: "path"
+        description: "the IPId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Ipid"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.PIPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/stat/aggregate/ips:
+    get:
+      tags:
+      - "subaccount/stat"
+      description: "Get All Aggregated IP Stats for a Sub-Account"
+      operationId: "SubAccountStatRouter.Get All Aggregated IP Stats for a Sub-Account"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.AIPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/stat/aggregate/providers:
+    get:
+      tags:
+      - "subaccount/stat"
+      description: "Get All Aggregated Provider Stats for a Sub-Account"
+      operationId: "SubAccountStatRouter.Get All Aggregated Provider Stats for a Sub-Account"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.PIPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/stat/group:
+    get:
+      tags:
+      - "subaccount/stat"
+      description: "Get All Sub-Account Stats by Group"
+      operationId: "SubAccountStatRouter.Get All Sub-Account Stats by Group"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: false
+        type: "string"
+        x-exportParamName: "From"
+        x-optionalDataType: "String"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: false
+        type: "string"
+        x-exportParamName: "To"
+        x-optionalDataType: "String"
+      - name: "group"
+        in: "query"
+        description: "the tag whose stats you want"
+        required: true
+        type: "string"
+        x-exportParamName: "Group"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.RStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/suppression/:
+    get:
+      tags:
+      - "subaccount/suppression"
+      description: "Get all suppressions"
+      operationId: "SuppressionRouter.Get All Suppressions"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Suppressions retrieved successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.Suppression"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    post:
+      tags:
+      - "subaccount/suppression"
+      description: "Add Email Addresses To Suppression List"
+      operationId: "SuppressionRouter.Create Suppressions"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "Suppression content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.RSuppression"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Suppressions created successfully\""
+          schema:
+            $ref: "#/definitions/models.Suppression"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: "Suppression list is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "subaccount/suppression"
+      description: "Delete specific emails which are in suppression list"
+      operationId: "SuppressionRouter.Delete Suppression"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "Suppression content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.RDSuppression"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Emails in suppression list have been deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.Suppression"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: "suppression list is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/suppression/count:
+    get:
+      tags:
+      - "subaccount/suppression"
+      description: "Count Total Suppressions"
+      operationId: "SuppressionRouter.Count"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      responses:
+        "200":
+          description: "\"Total count of domains for a specific sub-account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/suppression/filter:
+    post:
+      tags:
+      - "subaccount/suppression"
+      description: "Add Email Addresses To Suppression Filter"
+      operationId: "SuppressionRouter.Create Suppressions In Suppression Filter"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Add suppressions to suppression filter"
+        required: true
+        schema:
+          $ref: "#/definitions/models.Suppression"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Emails in suppression list have been added successfully\""
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: "Suppression list is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "subaccount/suppression"
+      description: "Delete specific emails which are in suppression list"
+      operationId: "SuppressionRouter.Delete Suppressions in Suppression Filter"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Suppression content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.Suppression"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Emails in suppression list have been deleted successfully\""
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: "suppression list is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+definitions:
+  ".alert":
+    type: "object"
+  models.AGStat:
+    type: "object"
+    properties:
+      group:
+        type: "string"
+      stat:
+        $ref: "#/definitions/models.Stat"
+    title: "AGStat"
+    example:
+      stat:
+        processed: 2
+        unsubscribed: 3
+        hardBounced: 5
+        dropped: 1
+        softBounced: 7
+        delivered: 6
+        opened: 5
+        spam: 9
+        clicked: 0
+      group: "group"
+  models.AIPStat:
+    type: "object"
+    properties:
+      ipid:
+        type: "integer"
+        format: "int64"
+      publicIP:
+        type: "string"
+      stat:
+        $ref: "#/definitions/models.IPStat"
+    title: "AIPStat"
+    example:
+      stat:
+        processed: 9
+        unsubscribed: 4
+        month: 2
+        hardBounced: 5
+        year: 7
+        dropped: 5
+        softBounced: 3
+        delivered: 1
+        opened: 7
+        spam: 2
+        clicked: 0
+        day: 6
+      ipid: 0
+      publicIP: "publicIP"
+  models.Account:
+    type: "object"
+    properties:
+      apiKey:
+        type: "string"
+      created:
+        type: "integer"
+        format: "int64"
+      id:
+        type: "integer"
+        format: "int64"
+      lock_threshold:
+        type: "integer"
+        format: "int64"
+      locked:
+        type: "boolean"
+      name:
+        type: "string"
+      url:
+        type: "string"
+    title: "Account"
+  models.AccountIPPool:
+    type: "object"
+    properties:
+      created:
+        type: "integer"
+        format: "int64"
+      id:
+        type: "integer"
+        format: "int64"
+      ips:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.IP"
+      name:
+        type: "string"
+      routingMetaData:
+        type: "string"
+      routingStrategy:
+        type: "integer"
+        format: "int64"
+      type:
+        $ref: "#/definitions/models.IPPoolType"
+    title: "AccountIPPool"
+    example:
+      created: 0
+      routingStrategy: 1
+      name: "name"
+      id: 6
+      routingMetaData: "routingMetaData"
+      type: {}
+      ips:
+      - autoWarmupStage: 0
+        yahooSettings: "yahooSettings"
+        comcastSettings: "comcastSettings"
+        created: 6
+        icloudSettings: "icloudSettings"
+        publicIP: "publicIP"
+        type: {}
+        zohoSettings: "zohoSettings"
+        gmxSettings: "gmxSettings"
+        systemDomain:
+          dkim:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          mailboxVerified: true
+          created: 5
+          name: "name"
+          spf:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          dkimVerified: true
+          id: 5
+          dkimConfig: "dkimConfig"
+          track:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          spfVerified: true
+          trackVerified: true
+        reverseDNSHostname: "reverseDNSHostname"
+        autoWarmupEnabled: true
+        mailruSettings: "mailruSettings"
+        aolSettings: "aolSettings"
+        id: 1
+        yandexSettings: "yandexSettings"
+        qqSettings: "qqSettings"
+        defaultSettings: "defaultSettings"
+        gmailSettings: "gmailSettings"
+        microsoftSettings: "microsoftSettings"
+      - autoWarmupStage: 0
+        yahooSettings: "yahooSettings"
+        comcastSettings: "comcastSettings"
+        created: 6
+        icloudSettings: "icloudSettings"
+        publicIP: "publicIP"
+        type: {}
+        zohoSettings: "zohoSettings"
+        gmxSettings: "gmxSettings"
+        systemDomain:
+          dkim:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          mailboxVerified: true
+          created: 5
+          name: "name"
+          spf:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          dkimVerified: true
+          id: 5
+          dkimConfig: "dkimConfig"
+          track:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          spfVerified: true
+          trackVerified: true
+        reverseDNSHostname: "reverseDNSHostname"
+        autoWarmupEnabled: true
+        mailruSettings: "mailruSettings"
+        aolSettings: "aolSettings"
+        id: 1
+        yandexSettings: "yandexSettings"
+        qqSettings: "qqSettings"
+        defaultSettings: "defaultSettings"
+        gmailSettings: "gmailSettings"
+        microsoftSettings: "microsoftSettings"
+  models.AccountWebhook:
+    type: "object"
+    properties:
+      clicked:
+        type: "boolean"
+      created:
+        type: "integer"
+        format: "int64"
+      delivered:
+        type: "boolean"
+      dropped:
+        type: "boolean"
+      enabled:
+        type: "boolean"
+      hardBounced:
+        type: "boolean"
+      id:
+        type: "integer"
+        format: "int64"
+      opened:
+        type: "boolean"
+      processed:
+        type: "boolean"
+      softBounced:
+        type: "boolean"
+      spam:
+        type: "boolean"
+      unsubscribed:
+        type: "boolean"
+      url:
+        type: "string"
+    title: "AccountWebhook"
+    example:
+      hardBounced: true
+      created: 0
+      dropped: true
+      delivered: true
+      opened: true
+      clicked: true
+      enabled: true
+      url: "url"
+      processed: true
+      unsubscribed: true
+      softBounced: true
+      id: 6
+      spam: true
+  models.Alert:
+    type: "object"
+    properties:
+      Condition:
+        type: "string"
+      Notification:
+        type: "string"
+      active:
+        type: "boolean"
+      alert_name:
+        type: "string"
+      created:
+        type: "integer"
+        format: "int64"
+      id:
+        type: "integer"
+        format: "int64"
+      label:
+        $ref: "#/definitions/models.AlertLabel"
+      member:
+        $ref: "#/definitions/models.Member"
+      priority:
+        $ref: "#/definitions/models.Priority"
+      updated:
+        type: "integer"
+        format: "int64"
+    title: "Alert"
+    example:
+      Condition: "Condition"
+      created: 0
+      member:
+        Email: "Email"
+        created: 5
+        IsForbidden: true
+        Id: 1
+        IsVerified: true
+      active: true
+      id: 6
+      label: {}
+      priority: {}
+      updated: 5
+      Notification: "Notification"
+      alert_name: "alert_name"
+  models.AlertLabel:
+    type: "object"
+  models.AlertRequest:
+    type: "object"
+    properties:
+      active:
+        type: "boolean"
+      emails: {}
+      entityType:
+        type: "string"
+      entityValue:
+        type: "integer"
+        format: "int64"
+      label:
+        $ref: "#/definitions/models.AlertLabel"
+      member:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      notificationType:
+        $ref: "#/definitions/models.NotificationType"
+      parameter:
+        type: "integer"
+        format: "int64"
+      provider:
+        type: "string"
+      slackUrl:
+        type: "string"
+      threshold:
+        type: "string"
+    title: "AlertRequest"
+  models.AuthInfo:
+    type: "object"
+    properties:
+      Accounts:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.Account"
+      Member:
+        $ref: "#/definitions/models.Member"
+    title: "AuthInfo"
+  models.BackOffConfiguration:
+    type: "object"
+    properties:
+      concurrentConnections:
+        type: "integer"
+        format: "int64"
+      concurrentConnectionsType:
+        $ref: "#/definitions/models.BackOffDecreaseType"
+      sendPerDay:
+        type: "integer"
+        format: "int64"
+      sendPerDayType:
+        $ref: "#/definitions/models.BackOffDecreaseType"
+      sendPerHour:
+        type: "integer"
+        format: "int64"
+      sendPerHourType:
+        $ref: "#/definitions/models.BackOffDecreaseType"
+      sendPerMinute:
+        type: "integer"
+        format: "int64"
+      sendPerMinuteType:
+        $ref: "#/definitions/models.BackOffDecreaseType"
+    title: "BackOffConfiguration"
+  models.BackOffDecreaseType:
+    type: "object"
+  models.BackOffTrigger:
+    type: "object"
+    properties:
+      deferralPercentage:
+        type: "integer"
+        format: "int64"
+      durationInMinutes:
+        type: "integer"
+        format: "int64"
+      hardBouncePercentage:
+        type: "integer"
+        format: "int64"
+      minimumAttempts:
+        type: "integer"
+        format: "int64"
+    title: "BackOffTrigger"
+  models.BlacklistStatus:
+    type: "integer"
+  models.BulkResponse:
+    type: "object"
+    properties:
+      jobId:
+        type: "integer"
+        format: "int64"
+      message:
+        type: "string"
+    title: "BulkResponse"
+    example:
+      jobId: 0
+      message: "message"
+  models.City:
+    type: "object"
+    properties:
+      cityID:
+        type: "integer"
+        format: "int32"
+      continentCode:
+        type: "string"
+      countryCode:
+        type: "string"
+      postalCode:
+        type: "string"
+      timeZone:
+        type: "string"
+    title: "City"
+    example:
+      countryCode: "countryCode"
+      postalCode: "postalCode"
+      timeZone: "timeZone"
+      cityID: 6
+      continentCode: "continentCode"
+  models.CleanedList:
+    type: "object"
+    properties:
+      detailedResponse:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.SingleCleanedMail"
+      invalid: {}
+      valid: {}
+    title: "CleanedList"
+    example:
+      valid: ""
+      invalid: ""
+      detailedResponse:
+      - valid: true
+        reason: {}
+        error: "error"
+        email: "email"
+      - valid: true
+        reason: {}
+        error: "error"
+        email: "email"
+  models.CountStat:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int64"
+    title: "CountStat"
+    example:
+      count: 0
+  models.DNSRecord:
+    type: "object"
+    properties:
+      host:
+        type: "string"
+      textValue:
+        type: "string"
+      type:
+        type: "string"
+    title: "DNSRecord"
+    example:
+      textValue: "textValue"
+      host: "host"
+      type: "type"
+  models.DeleteResponse:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      message:
+        type: "string"
+    title: "DeleteResponse"
+    example:
+      id: 0
+      message: "message"
+  models.DetailedAlert:
+    type: "object"
+    properties:
+      active:
+        type: "boolean"
+      entityType:
+        type: "string"
+      entityValue:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int64"
+      label:
+        $ref: "#/definitions/models.AlertLabel"
+      name:
+        type: "string"
+      parameter:
+        type: "integer"
+        format: "int64"
+      provider:
+        type: "string"
+      threshold:
+        type: "string"
+    title: "DetailedAlert"
+    example:
+      entityValue: "entityValue"
+      provider: "provider"
+      entityType: "entityType"
+      parameter: 6
+      name: "name"
+      active: true
+      threshold: "threshold"
+      id: 0
+      label: {}
+  models.Domain:
+    type: "object"
+    properties:
+      created:
+        type: "integer"
+        format: "int64"
+      dkim:
+        $ref: "#/definitions/models.DNSRecord"
+      dkimConfig:
+        type: "string"
+      dkimVerified:
+        type: "boolean"
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      returnPath:
+        $ref: "#/definitions/models.DNSRecord"
+      returnPathVerified:
+        type: "boolean"
+      track:
+        $ref: "#/definitions/models.DNSRecord"
+      trackVerified:
+        type: "boolean"
+    title: "Domain"
+    example:
+      dkim:
+        textValue: "textValue"
+        host: "host"
+        type: "type"
+      returnPath:
+        textValue: "textValue"
+        host: "host"
+        type: "type"
+      created: 0
+      name: "name"
+      dkimVerified: true
+      id: 6
+      returnPathVerified: true
+      dkimConfig: "dkimConfig"
+      track:
+        textValue: "textValue"
+        host: "host"
+        type: "type"
+      trackVerified: true
+  models.EAccount:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      signupMode:
+        type: "string"
+      token:
+        type: "string"
+      uid:
+        type: "string"
+    title: "EAccount"
+  models.EDomain:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+    title: "EDomain"
+  models.EIP:
+    type: "object"
+    properties:
+      publicIP:
+        type: "string"
+    title: "EIP"
+  models.EIPPool:
+    type: "object"
+    properties:
+      ips:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.EIP"
+      name:
+        type: "string"
+      routingMapping: {}
+      routingStrategy:
+        type: "integer"
+        format: "int64"
+    title: "EIPPool"
+  models.EIntegration:
+    type: "object"
+    properties:
+      key:
+        type: "string"
+      settings:
+        $ref: "#/definitions/models.IntegrationSettings"
+    title: "EIntegration"
+  models.EInvitation:
+    type: "object"
+    properties:
+      fromEmail:
+        type: "string"
+      toEmail:
+        type: "string"
+    title: "EInvitation"
+  models.ESender:
+    type: "object"
+    properties:
+      domain:
+        type: "string"
+      fromEmail:
+        type: "string"
+      name:
+        type: "string"
+      replyToEmail:
+        type: "string"
+    title: "ESender"
+  models.ESubAccount:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      labels:
+        type: "array"
+        items:
+          type: "string"
+    title: "ESubAccount"
+  models.EValidation:
+    title: "EValidation"
+    type: "array"
+    items:
+      type: "string"
+  models.EWebhook:
+    type: "object"
+    properties:
+      clicked:
+        type: "boolean"
+      delivered:
+        type: "boolean"
+      dropped:
+        type: "boolean"
+      enabled:
+        type: "boolean"
+      hardBounced:
+        type: "boolean"
+      opened:
+        type: "boolean"
+      processed:
+        type: "boolean"
+      softBounced:
+        type: "boolean"
+      spam:
+        type: "boolean"
+      unsubscribed:
+        type: "boolean"
+      url:
+        type: "string"
+    title: "EWebhook"
+  models.EmailErrorCode:
+    type: "object"
+  models.EmailList:
+    type: "object"
+    properties:
+      emailIds: {}
+    title: "EmailList"
+  models.EmailMessage:
+    type: "object"
+    properties:
+      ampBody:
+        type: "string"
+      from:
+        $ref: "#/definitions/models.From"
+      groups: {}
+      headers: {}
+      htmlBody:
+        type: "string"
+      ippool:
+        type: "string"
+      preText:
+        type: "string"
+      replyTo:
+        $ref: "#/definitions/models.ReplyTo"
+      subject:
+        type: "string"
+      textBody:
+        type: "string"
+      to:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.To"
+      trackClicks:
+        type: "boolean"
+      trackOpens:
+        type: "boolean"
+    title: "EmailMessage"
+  models.EmailResponse:
+    type: "object"
+    properties:
+      errorCode:
+        $ref: "#/definitions/models.EmailErrorCode"
+      message:
+        type: "string"
+      messageId:
+        type: "string"
+      submittedAt:
+        type: "integer"
+        format: "int64"
+      to:
+        type: "string"
+    title: "EmailResponse"
+    example:
+      errorCode: {}
+      messageId: "messageId"
+      to: "to"
+      message: "message"
+      submittedAt: 0
+  models.EventMetadata:
+    type: "object"
+    properties:
+      clickedURL:
+        type: "string"
+      device:
+        $ref: "#/definitions/uaparser.Device"
+      geo:
+        $ref: "#/definitions/models.City"
+      os:
+        $ref: "#/definitions/uaparser.Os"
+      smtpCode:
+        type: "integer"
+        format: "int64"
+      smtpDescription:
+        type: "string"
+      userAgent:
+        $ref: "#/definitions/uaparser.UserAgent"
+    title: "EventMetadata"
+    example:
+      geo:
+        countryCode: "countryCode"
+        postalCode: "postalCode"
+        timeZone: "timeZone"
+        cityID: 6
+        continentCode: "continentCode"
+      smtpDescription: "smtpDescription"
+      os:
+        Major: "Major"
+        PatchMinor: "PatchMinor"
+        Family: "Family"
+        Minor: "Minor"
+        Patch: "Patch"
+      clickedURL: "clickedURL"
+      smtpCode: 1
+      userAgent:
+        Major: "Major"
+        Family: "Family"
+        Minor: "Minor"
+        Patch: "Patch"
+      device:
+        Family: "Family"
+  models.EventType:
+    type: "object"
+  models.FrequencyType:
+    type: "integer"
+  models.From:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      name:
+        type: "string"
+    title: "From"
+    example:
+      name: "name"
+      email: "email"
+  models.GlockappsBlacklist:
+    type: "object"
+    properties:
+      server:
+        type: "string"
+      status:
+        $ref: "#/definitions/models.BlacklistStatus"
+      txt:
+        type: "string"
+    title: "GlockappsBlacklist"
+    example:
+      server: "server"
+      txt: "txt"
+      status: {}
+  models.GlockappsMonitorStat:
+    type: "object"
+    properties:
+      day:
+        type: "integer"
+        format: "int64"
+      listedCount:
+        type: "integer"
+        format: "int64"
+      listedIn:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.GlockappsBlacklist"
+      month:
+        type: "integer"
+        format: "int64"
+      senderScore:
+        type: "integer"
+        format: "int64"
+      year:
+        type: "integer"
+        format: "int64"
+    title: "GlockappsMonitorStat"
+    example:
+      month: 1
+      year: 5
+      senderScore: 5
+      day: 0
+      listedCount: 6
+      listedIn:
+      - server: "server"
+        txt: "txt"
+        status: {}
+      - server: "server"
+        txt: "txt"
+        status: {}
+  models.IIP:
+    type: "object"
+    properties:
+      backOffConfiguration:
+        $ref: "#/definitions/models.BackOffConfiguration"
+      backOffTrigger:
+        $ref: "#/definitions/models.BackOffTrigger"
+      maxConcurrentConnections:
+        type: "integer"
+        format: "int64"
+      maxSendPerDay:
+        type: "integer"
+        format: "int64"
+      maxSendPerHour:
+        type: "integer"
+        format: "int64"
+      maxSendPerMinute:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    title: "IIP"
+  models.IP:
+    type: "object"
+    properties:
+      aolSettings:
+        type: "string"
+      autoWarmupEnabled:
+        type: "boolean"
+      autoWarmupStage:
+        type: "integer"
+        format: "int64"
+      comcastSettings:
+        type: "string"
+      created:
+        type: "integer"
+        format: "int64"
+      defaultSettings:
+        type: "string"
+      gmailSettings:
+        type: "string"
+      gmxSettings:
+        type: "string"
+      icloudSettings:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int64"
+      mailruSettings:
+        type: "string"
+      microsoftSettings:
+        type: "string"
+      publicIP:
+        type: "string"
+      qqSettings:
+        type: "string"
+      reverseDNSHostname:
+        type: "string"
+      systemDomain:
+        $ref: "#/definitions/models.SystemDomain"
+      type:
+        $ref: "#/definitions/models.IPType"
+      yahooSettings:
+        type: "string"
+      yandexSettings:
+        type: "string"
+      zohoSettings:
+        type: "string"
+    title: "IP"
+    example:
+      autoWarmupStage: 0
+      yahooSettings: "yahooSettings"
+      comcastSettings: "comcastSettings"
+      created: 6
+      icloudSettings: "icloudSettings"
+      publicIP: "publicIP"
+      type: {}
+      zohoSettings: "zohoSettings"
+      gmxSettings: "gmxSettings"
+      systemDomain:
+        dkim:
+          textValue: "textValue"
+          host: "host"
+          type: "type"
+        mailboxVerified: true
+        created: 5
+        name: "name"
+        spf:
+          textValue: "textValue"
+          host: "host"
+          type: "type"
+        dkimVerified: true
+        id: 5
+        dkimConfig: "dkimConfig"
+        track:
+          textValue: "textValue"
+          host: "host"
+          type: "type"
+        spfVerified: true
+        trackVerified: true
+      reverseDNSHostname: "reverseDNSHostname"
+      autoWarmupEnabled: true
+      mailruSettings: "mailruSettings"
+      aolSettings: "aolSettings"
+      id: 1
+      yandexSettings: "yandexSettings"
+      qqSettings: "qqSettings"
+      defaultSettings: "defaultSettings"
+      gmailSettings: "gmailSettings"
+      microsoftSettings: "microsoftSettings"
+  models.IPPool:
+    type: "object"
+    properties:
+      created:
+        type: "integer"
+        format: "int64"
+      id:
+        type: "integer"
+        format: "int64"
+      ips:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.IP"
+      name:
+        type: "string"
+      routingMetaData:
+        type: "string"
+      routingStrategy:
+        type: "integer"
+        format: "int64"
+      type:
+        $ref: "#/definitions/models.IPPoolType"
+    title: "IPPool"
+    example:
+      created: 0
+      routingStrategy: 1
+      name: "name"
+      id: 6
+      routingMetaData: "routingMetaData"
+      type: {}
+      ips:
+      - autoWarmupStage: 0
+        yahooSettings: "yahooSettings"
+        comcastSettings: "comcastSettings"
+        created: 6
+        icloudSettings: "icloudSettings"
+        publicIP: "publicIP"
+        type: {}
+        zohoSettings: "zohoSettings"
+        gmxSettings: "gmxSettings"
+        systemDomain:
+          dkim:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          mailboxVerified: true
+          created: 5
+          name: "name"
+          spf:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          dkimVerified: true
+          id: 5
+          dkimConfig: "dkimConfig"
+          track:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          spfVerified: true
+          trackVerified: true
+        reverseDNSHostname: "reverseDNSHostname"
+        autoWarmupEnabled: true
+        mailruSettings: "mailruSettings"
+        aolSettings: "aolSettings"
+        id: 1
+        yandexSettings: "yandexSettings"
+        qqSettings: "qqSettings"
+        defaultSettings: "defaultSettings"
+        gmailSettings: "gmailSettings"
+        microsoftSettings: "microsoftSettings"
+      - autoWarmupStage: 0
+        yahooSettings: "yahooSettings"
+        comcastSettings: "comcastSettings"
+        created: 6
+        icloudSettings: "icloudSettings"
+        publicIP: "publicIP"
+        type: {}
+        zohoSettings: "zohoSettings"
+        gmxSettings: "gmxSettings"
+        systemDomain:
+          dkim:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          mailboxVerified: true
+          created: 5
+          name: "name"
+          spf:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          dkimVerified: true
+          id: 5
+          dkimConfig: "dkimConfig"
+          track:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          spfVerified: true
+          trackVerified: true
+        reverseDNSHostname: "reverseDNSHostname"
+        autoWarmupEnabled: true
+        mailruSettings: "mailruSettings"
+        aolSettings: "aolSettings"
+        id: 1
+        yandexSettings: "yandexSettings"
+        qqSettings: "qqSettings"
+        defaultSettings: "defaultSettings"
+        gmailSettings: "gmailSettings"
+        microsoftSettings: "microsoftSettings"
+  models.IPPoolType:
+    type: "object"
+  models.IPStat:
+    type: "object"
+    properties:
+      clicked:
+        type: "integer"
+        format: "int64"
+      day:
+        type: "integer"
+        format: "int64"
+      delivered:
+        type: "integer"
+        format: "int64"
+      dropped:
+        type: "integer"
+        format: "int64"
+      hardBounced:
+        type: "integer"
+        format: "int64"
+      month:
+        type: "integer"
+        format: "int64"
+      opened:
+        type: "integer"
+        format: "int64"
+      processed:
+        type: "integer"
+        format: "int64"
+      softBounced:
+        type: "integer"
+        format: "int64"
+      spam:
+        type: "integer"
+        format: "int64"
+      unsubscribed:
+        type: "integer"
+        format: "int64"
+      year:
+        type: "integer"
+        format: "int64"
+    title: "IPStat"
+    example:
+      processed: 9
+      unsubscribed: 4
+      month: 2
+      hardBounced: 5
+      year: 7
+      dropped: 5
+      softBounced: 3
+      delivered: 1
+      opened: 7
+      spam: 2
+      clicked: 0
+      day: 6
+  models.IPType:
+    type: "object"
+  models.Instance:
+    type: "object"
+    properties:
+      created:
+        type: "integer"
+        format: "int64"
+      endpoint:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int64"
+      ips:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.IP"
+      name:
+        type: "string"
+    title: "Instance"
+  models.Integration:
+    type: "object"
+    properties:
+      created:
+        type: "integer"
+        format: "int64"
+      id:
+        type: "integer"
+        format: "int64"
+      key:
+        type: "string"
+      settings:
+        type: "string"
+      type:
+        $ref: "#/definitions/models.IntegrationType"
+    title: "Integration"
+    example:
+      settings: "settings"
+      created: 0
+      id: 6
+      type: {}
+      key: "key"
+  models.IntegrationSettings:
+    type: "object"
+    properties:
+      autoEnableMonitoring:
+        type: "boolean"
+      emailTo:
+        type: "array"
+        items:
+          type: "string"
+      frequency:
+        $ref: "#/definitions/models.FrequencyType"
+      receiveReports:
+        type: "boolean"
+    title: "IntegrationSettings"
+  models.IntegrationType:
+    type: "string"
+  models.Invitation:
+    type: "object"
+    properties:
+      Id:
+        type: "integer"
+        format: "int64"
+      Role:
+        $ref: "#/definitions/models.MemberRole"
+      Status:
+        $ref: "#/definitions/models.InvitationStatus"
+      ToEmail:
+        type: "string"
+      created:
+        type: "integer"
+        format: "int64"
+    title: "Invitation"
+  models.InvitationStatus:
+    type: "object"
+  models.Label:
+    type: "object"
+    properties:
+      color:
+        type: "string"
+      created:
+        type: "integer"
+        format: "int64"
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    title: "Label"
+    example:
+      color: "color"
+      created: 0
+      name: "name"
+      id: 6
+  models.Member:
+    type: "object"
+    properties:
+      Email:
+        type: "string"
+      Id:
+        type: "integer"
+        format: "int64"
+      IsForbidden:
+        type: "boolean"
+      IsVerified:
+        type: "boolean"
+      created:
+        type: "integer"
+        format: "int64"
+    title: "Member"
+    example:
+      Email: "Email"
+      created: 5
+      IsForbidden: true
+      Id: 1
+      IsVerified: true
+  models.MemberRole:
+    type: "object"
+  models.NotificationType:
+    type: "object"
+  models.PIPStat:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      stat:
+        $ref: "#/definitions/models.IPStat"
+    title: "PIPStat"
+    example:
+      stat:
+        processed: 9
+        unsubscribed: 4
+        month: 2
+        hardBounced: 5
+        year: 7
+        dropped: 5
+        softBounced: 3
+        delivered: 1
+        opened: 7
+        spam: 2
+        clicked: 0
+        day: 6
+      name: "name"
+  models.Priority:
+    type: "object"
+  models.QEmailMessage:
+    type: "object"
+    properties:
+      accountID:
+        type: "integer"
+        format: "int64"
+      ampBody:
+        type: "string"
+      customFields: {}
+      emailType:
+        type: "string"
+      from:
+        $ref: "#/definitions/models.From"
+      groups: {}
+      headers: {}
+      htmlBody:
+        type: "string"
+      ipID:
+        type: "integer"
+        format: "int64"
+      ipPool:
+        type: "string"
+      localIP:
+        type: "string"
+      messageID:
+        type: "string"
+      preText:
+        type: "string"
+      publicIP:
+        type: "string"
+      replyTo:
+        $ref: "#/definitions/models.ReplyTo"
+      subAccountID:
+        type: "integer"
+        format: "int64"
+      subject:
+        type: "string"
+      submittedAt:
+        type: "integer"
+        format: "int64"
+      textBody:
+        type: "string"
+      to:
+        $ref: "#/definitions/models.To"
+      trackClicks:
+        type: "boolean"
+      trackOpens:
+        type: "boolean"
+    title: "QEmailMessage"
+    example:
+      ampBody: "ampBody"
+      headers: ""
+      trackOpens: true
+      customFields: ""
+      subject: "subject"
+      groups: ""
+      messageID: "messageID"
+      preText: "preText"
+      publicIP: "publicIP"
+      textBody: "textBody"
+      accountID: 0
+      htmlBody: "htmlBody"
+      ipID: 6
+      subAccountID: 1
+      emailType: "emailType"
+      replyTo:
+        name: "name"
+        email: "email"
+      localIP: "localIP"
+      from:
+        name: "name"
+        email: "email"
+      to:
+        customFields: ""
+        name: "name"
+        email: "email"
+      submittedAt: 5
+      trackClicks: true
+      ipPool: "ipPool"
+  models.QEvent:
+    type: "object"
+    properties:
+      accountID:
+        type: "integer"
+        format: "int64"
+      eventID:
+        type: "string"
+      eventMetadata:
+        $ref: "#/definitions/models.EventMetadata"
+      from:
+        type: "string"
+      groups: {}
+      ipID:
+        type: "integer"
+        format: "int64"
+      messageID:
+        type: "string"
+      messageType:
+        type: "string"
+      subAccountID:
+        type: "integer"
+        format: "int64"
+      submittedAt:
+        type: "integer"
+        format: "int64"
+      to:
+        type: "string"
+      type:
+        type: "integer"
+        format: "int64"
+    title: "QEvent"
+    example:
+      accountID: 0
+      eventID: "eventID"
+      ipID: 5
+      messageType: "messageType"
+      subAccountID: 5
+      groups: ""
+      messageID: "messageID"
+      from: "from"
+      to: "to"
+      submittedAt: 2
+      type: 7
+      eventMetadata:
+        geo:
+          countryCode: "countryCode"
+          postalCode: "postalCode"
+          timeZone: "timeZone"
+          cityID: 6
+          continentCode: "continentCode"
+        smtpDescription: "smtpDescription"
+        os:
+          Major: "Major"
+          PatchMinor: "PatchMinor"
+          Family: "Family"
+          Minor: "Minor"
+          Patch: "Patch"
+        clickedURL: "clickedURL"
+        smtpCode: 1
+        userAgent:
+          Major: "Major"
+          Family: "Family"
+          Minor: "Minor"
+          Patch: "Patch"
+        device:
+          Family: "Family"
+  models.RDSuppression:
+    type: "object"
+    properties:
+      suppressions:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.SuppressionEmail"
+    title: "RDSuppression"
+  models.RGlockappsMonitorStat:
+    type: "object"
+    properties:
+      date:
+        type: "string"
+      stat:
+        $ref: "#/definitions/models.GlockappsMonitorStat"
+    title: "RGlockappsMonitorStat"
+    example:
+      date: "date"
+      stat:
+        month: 1
+        year: 5
+        senderScore: 5
+        day: 0
+        listedCount: 6
+        listedIn:
+        - server: "server"
+          txt: "txt"
+          status: {}
+        - server: "server"
+          txt: "txt"
+          status: {}
+  models.RIPStat:
+    type: "object"
+    properties:
+      date:
+        type: "string"
+      stat:
+        $ref: "#/definitions/models.IPStat"
+    title: "RIPStat"
+    example:
+      date: "date"
+      stat:
+        processed: 9
+        unsubscribed: 4
+        month: 2
+        hardBounced: 5
+        year: 7
+        dropped: 5
+        softBounced: 3
+        delivered: 1
+        opened: 7
+        spam: 2
+        clicked: 0
+        day: 6
+  models.RStat:
+    type: "object"
+    properties:
+      date:
+        type: "string"
+      stat:
+        $ref: "#/definitions/models.Stat"
+    title: "RStat"
+    example:
+      date: "date"
+      stat:
+        processed: 2
+        unsubscribed: 3
+        hardBounced: 5
+        dropped: 1
+        softBounced: 7
+        delivered: 6
+        opened: 5
+        spam: 9
+        clicked: 0
+  models.RSuppression:
+    type: "object"
+    properties:
+      hardBounce:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.SuppressionEmail"
+      manual:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.SuppressionEmail"
+      spamComplaint:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.SuppressionEmail"
+      unsubscribe:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.SuppressionEmail"
+    title: "RSuppression"
+  models.ReplyTo:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      name:
+        type: "string"
+    title: "ReplyTo"
+    example:
+      name: "name"
+      email: "email"
+  models.Response:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+      status:
+        type: "string"
+    title: "Response"
+    example:
+      message: "message"
+      status: "status"
+  models.SIPStat:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      sid:
+        type: "integer"
+        format: "int64"
+      stat:
+        $ref: "#/definitions/models.IPStat"
+    title: "SIPStat"
+    example:
+      stat:
+        processed: 9
+        unsubscribed: 4
+        month: 2
+        hardBounced: 5
+        year: 7
+        dropped: 5
+        softBounced: 3
+        delivered: 1
+        opened: 7
+        spam: 2
+        clicked: 0
+        day: 6
+      name: "name"
+      sid: 0
+  models.SMTPAuth:
+    type: "object"
+    properties:
+      created:
+        type: "integer"
+        format: "int64"
+      id:
+        type: "integer"
+        format: "int64"
+      password:
+        type: "string"
+      updated:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+    title: "SMTPAuth"
+    example:
+      password: "password"
+      created: 1
+      id: 5
+      updated: 5
+      username: "username"
+  models.SMTPStat:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int64"
+      smtpCode:
+        type: "integer"
+        format: "int64"
+      smtpDescription:
+        type: "string"
+    title: "SMTPStat"
+    example:
+      smtpDescription: "smtpDescription"
+      count: 0
+      smtpCode: 6
+  models.Sender:
+    type: "object"
+    properties:
+      created:
+        type: "integer"
+        format: "int64"
+      domain:
+        type: "string"
+      fromEmail:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      replyToEmail:
+        type: "string"
+      verified:
+        type: "boolean"
+    title: "Sender"
+    example:
+      created: 0
+      domain: "domain"
+      name: "name"
+      verified: true
+      id: 6
+      replyToEmail: "replyToEmail"
+      fromEmail: "fromEmail"
+  models.SingleCleanedMail:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      error:
+        type: "string"
+      reason:
+        $ref: "#/definitions/models.ValidationReason"
+      valid:
+        type: "boolean"
+    title: "SingleCleanedMail"
+    example:
+      valid: true
+      reason: {}
+      error: "error"
+      email: "email"
+  models.Stat:
+    type: "object"
+    properties:
+      clicked:
+        type: "integer"
+        format: "int64"
+      delivered:
+        type: "integer"
+        format: "int64"
+      dropped:
+        type: "integer"
+        format: "int64"
+      hardBounced:
+        type: "integer"
+        format: "int64"
+      opened:
+        type: "integer"
+        format: "int64"
+      processed:
+        type: "integer"
+        format: "int64"
+      softBounced:
+        type: "integer"
+        format: "int64"
+      spam:
+        type: "integer"
+        format: "int64"
+      unsubscribed:
+        type: "integer"
+        format: "int64"
+    title: "Stat"
+    example:
+      processed: 2
+      unsubscribed: 3
+      hardBounced: 5
+      dropped: 1
+      softBounced: 7
+      delivered: 6
+      opened: 5
+      spam: 9
+      clicked: 0
+  models.SubAccount:
+    type: "object"
+    properties:
+      apiKey:
+        type: "string"
+      created:
+        type: "integer"
+        format: "int64"
+      id:
+        type: "integer"
+        format: "int64"
+      labels:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.Label"
+      name:
+        type: "string"
+      smtpAuths:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.SMTPAuth"
+      type:
+        $ref: "#/definitions/models.SubAccountType"
+    title: "SubAccount"
+    example:
+      apiKey: "apiKey"
+      created: 0
+      name: "name"
+      id: 6
+      type: {}
+      labels:
+      - color: "color"
+        created: 0
+        name: "name"
+        id: 6
+      - color: "color"
+        created: 0
+        name: "name"
+        id: 6
+      smtpAuths:
+      - password: "password"
+        created: 1
+        id: 5
+        updated: 5
+        username: "username"
+      - password: "password"
+        created: 1
+        id: 5
+        updated: 5
+        username: "username"
+  models.SubAccountType:
+    type: "object"
+  models.Suppression:
+    type: "object"
+    properties:
+      created:
+        type: "integer"
+        format: "int64"
+      email:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int64"
+      reason:
+        $ref: "#/definitions/models.SuppressionReason"
+      smtp_error:
+        type: "string"
+    title: "Suppression"
+    example:
+      reason: {}
+      created: 0
+      id: 6
+      smtp_error: "smtp_error"
+      email: "email"
+  models.SuppressionEmail:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+    title: "SuppressionEmail"
+  models.SuppressionReason:
+    type: "object"
+  models.SystemDNSRecord:
+    type: "object"
+    properties:
+      host:
+        type: "string"
+      textValue:
+        type: "string"
+      type:
+        type: "string"
+    title: "SystemDNSRecord"
+    example:
+      textValue: "textValue"
+      host: "host"
+      type: "type"
+  models.SystemDomain:
+    type: "object"
+    properties:
+      created:
+        type: "integer"
+        format: "int64"
+      dkim:
+        $ref: "#/definitions/models.SystemDNSRecord"
+      dkimConfig:
+        type: "string"
+      dkimVerified:
+        type: "boolean"
+      id:
+        type: "integer"
+        format: "int64"
+      mailboxVerified:
+        type: "boolean"
+      name:
+        type: "string"
+      spf:
+        $ref: "#/definitions/models.SystemDNSRecord"
+      spfVerified:
+        type: "boolean"
+      track:
+        $ref: "#/definitions/models.SystemDNSRecord"
+      trackVerified:
+        type: "boolean"
+    title: "SystemDomain"
+    example:
+      dkim:
+        textValue: "textValue"
+        host: "host"
+        type: "type"
+      mailboxVerified: true
+      created: 5
+      name: "name"
+      spf:
+        textValue: "textValue"
+        host: "host"
+        type: "type"
+      dkimVerified: true
+      id: 5
+      dkimConfig: "dkimConfig"
+      track:
+        textValue: "textValue"
+        host: "host"
+        type: "type"
+      spfVerified: true
+      trackVerified: true
+  models.To:
+    type: "object"
+    properties:
+      customFields: {}
+      email:
+        type: "string"
+      name:
+        type: "string"
+    title: "To"
+    example:
+      customFields: ""
+      name: "name"
+      email: "email"
+  models.Validation:
+    type: "object"
+    properties:
+      created:
+        type: "integer"
+        format: "int64"
+      email:
+        type: "string"
+      error:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int64"
+      reason:
+        $ref: "#/definitions/models.ValidationReason"
+    title: "Validation"
+    example:
+      reason: {}
+      created: 0
+      id: 6
+      error: "error"
+      email: "email"
+  models.ValidationReason:
+    type: "integer"
+  models.WMessage:
+    type: "object"
+    properties:
+      AccountID:
+        type: "integer"
+        format: "int64"
+      Groups: {}
+      IPID:
+        type: "integer"
+        format: "int64"
+      MessageType:
+        type: "string"
+      MessageUUID:
+        type: "string"
+      MockMessage:
+        type: "boolean"
+      MockTimeShift:
+        type: "integer"
+        format: "int64"
+      SMTPCode:
+        type: "integer"
+        format: "int64"
+      SMTPDescription:
+        type: "string"
+      SubAccountID:
+        type: "integer"
+        format: "int64"
+      To:
+        type: "string"
+      Type:
+        $ref: "#/definitions/models.EventType"
+    title: "WMessage"
+  uaparser.Device:
+    type: "object"
+    properties:
+      Family:
+        type: "string"
+    title: "Device"
+    example:
+      Family: "Family"
+  uaparser.Os:
+    type: "object"
+    properties:
+      Family:
+        type: "string"
+      Major:
+        type: "string"
+      Minor:
+        type: "string"
+      Patch:
+        type: "string"
+      PatchMinor:
+        type: "string"
+    title: "Os"
+    example:
+      Major: "Major"
+      PatchMinor: "PatchMinor"
+      Family: "Family"
+      Minor: "Minor"
+      Patch: "Patch"
+  uaparser.UserAgent:
+    type: "object"
+    properties:
+      Family:
+        type: "string"
+      Major:
+        type: "string"
+      Minor:
+        type: "string"
+      Patch:
+        type: "string"
+    title: "UserAgent"
+    example:
+      Major: "Major"
+      Family: "Family"
+      Minor: "Minor"
+      Patch: "Patch"
