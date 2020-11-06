@@ -28,7 +28,7 @@ var (
 
 type SubaccountdomainApiService service
 
-/* 
+/*
 SubaccountdomainApiService
 Count Total Domains
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -89,9 +89,7 @@ func (a *SubaccountdomainApiService) DomainRouterCount(ctx context.Context, xSub
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -117,7 +115,7 @@ func (a *SubaccountdomainApiService) DomainRouterCount(ctx context.Context, xSub
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountdomainApiService
 Create Domain
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -181,9 +179,7 @@ func (a *SubaccountdomainApiService) DomainRouterCreate(ctx context.Context, xSu
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -209,7 +205,7 @@ func (a *SubaccountdomainApiService) DomainRouterCreate(ctx context.Context, xSu
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountdomainApiService
 Delete Domain
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -272,9 +268,7 @@ func (a *SubaccountdomainApiService) DomainRouterDelete(ctx context.Context, xSu
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -300,7 +294,7 @@ func (a *SubaccountdomainApiService) DomainRouterDelete(ctx context.Context, xSu
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountdomainApiService
 Find Domain by DomainId
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -363,9 +357,7 @@ func (a *SubaccountdomainApiService) DomainRouterGet(ctx context.Context, xSubAc
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -391,7 +383,7 @@ func (a *SubaccountdomainApiService) DomainRouterGet(ctx context.Context, xSubAc
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountdomainApiService
 Get All Domains
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -472,9 +464,7 @@ func (a *SubaccountdomainApiService) DomainRouterGetAll(ctx context.Context, xSu
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -500,7 +490,7 @@ func (a *SubaccountdomainApiService) DomainRouterGetAll(ctx context.Context, xSu
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountdomainApiService
 Update Domain
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -566,9 +556,7 @@ func (a *SubaccountdomainApiService) DomainRouterUpdate(ctx context.Context, xSu
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -594,7 +582,7 @@ func (a *SubaccountdomainApiService) DomainRouterUpdate(ctx context.Context, xSu
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountdomainApiService
 Verify Domain By Domain Id
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -657,9 +645,7 @@ func (a *SubaccountdomainApiService) DomainRouterVerify(ctx context.Context, xSu
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -684,3 +670,4 @@ func (a *SubaccountdomainApiService) DomainRouterVerify(ctx context.Context, xSu
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+

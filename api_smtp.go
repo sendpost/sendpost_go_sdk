@@ -26,7 +26,7 @@ var (
 
 type SmtpApiService service
 
-/* 
+/*
 SmtpApiService
 Receive webhooks raised from SMTP servers
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -97,3 +97,4 @@ func (a *SmtpApiService) SMTPRouterReceiveWebhooksRaisedFromSMTPServers(ctx cont
 
 	return localVarHttpResponse, nil
 }
+

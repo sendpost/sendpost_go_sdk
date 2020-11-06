@@ -10,5 +10,8 @@
 
 package swagger
 
-type ModelsPriority struct {
+type ModelsAlertResponse struct {
+	Id int64 `json:"id,omitempty"`
+	Name string `json:"name,omitempty"`
+	Success bool `json:"success,omitempty"`
 }

@@ -27,7 +27,7 @@ var (
 
 type AccountmemberApiService service
 
-/* 
+/*
 AccountmemberApiService
 Delete Member
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -90,9 +90,7 @@ func (a *AccountmemberApiService) MemberRouterDelete(ctx context.Context, xAccou
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -118,7 +116,7 @@ func (a *AccountmemberApiService) MemberRouterDelete(ctx context.Context, xAccou
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountmemberApiService
 Find Member by MemberId
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -181,9 +179,7 @@ func (a *AccountmemberApiService) MemberRouterGet(ctx context.Context, xAccountA
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -209,7 +205,7 @@ func (a *AccountmemberApiService) MemberRouterGet(ctx context.Context, xAccountA
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountmemberApiService
 Get All Members
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -270,9 +266,7 @@ func (a *AccountmemberApiService) MemberRouterGetAll(ctx context.Context, xAccou
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -297,3 +291,4 @@ func (a *AccountmemberApiService) MemberRouterGetAll(ctx context.Context, xAccou
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+

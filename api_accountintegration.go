@@ -28,7 +28,7 @@ var (
 
 type AccountintegrationApiService service
 
-/* 
+/*
 AccountintegrationApiService
 Count Total AccountIntegrations
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -89,9 +89,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterCount(ctx context
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -117,7 +115,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterCount(ctx context
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountintegrationApiService
 Create Integration
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -183,9 +181,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterCreate(ctx contex
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -211,7 +207,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterCreate(ctx contex
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountintegrationApiService
 Delete Integration
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -274,9 +270,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterDelete(ctx contex
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -302,7 +296,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterDelete(ctx contex
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountintegrationApiService
 Disable IP Monitoring for a single IP
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -365,9 +359,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterDisableGlockappsI
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -393,7 +385,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterDisableGlockappsI
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountintegrationApiService
 Enable IP Monitoring for a single IP
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -456,9 +448,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterEnableGlockappsIP
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -484,7 +474,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterEnableGlockappsIP
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountintegrationApiService
 Get All Integrations
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -545,9 +535,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterGetAll(ctx contex
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -573,7 +561,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterGetAll(ctx contex
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountintegrationApiService
 Get Monitored IP Stats
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -651,9 +639,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterGetMonitoredIPSta
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -679,7 +665,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterGetMonitoredIPSta
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountintegrationApiService
 Update Integration
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -745,9 +731,7 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterUpdate(ctx contex
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -772,3 +756,4 @@ func (a *AccountintegrationApiService) AccountIntegrationRouterUpdate(ctx contex
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+

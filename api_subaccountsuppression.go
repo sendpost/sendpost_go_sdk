@@ -27,7 +27,7 @@ var (
 
 type SubaccountsuppressionApiService service
 
-/* 
+/*
 SubaccountsuppressionApiService
 Count Total Suppressions
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -88,9 +88,7 @@ func (a *SubaccountsuppressionApiService) SuppressionRouterCount(ctx context.Con
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -116,7 +114,7 @@ func (a *SubaccountsuppressionApiService) SuppressionRouterCount(ctx context.Con
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountsuppressionApiService
 Add Email Addresses To Suppression List
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -180,9 +178,7 @@ func (a *SubaccountsuppressionApiService) SuppressionRouterCreateSuppressions(ct
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -208,7 +204,7 @@ func (a *SubaccountsuppressionApiService) SuppressionRouterCreateSuppressions(ct
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountsuppressionApiService
 Add Email Addresses To Suppression Filter
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -280,7 +276,7 @@ func (a *SubaccountsuppressionApiService) SuppressionRouterCreateSuppressionsInS
 	return localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountsuppressionApiService
 Delete specific emails which are in suppression list
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -344,9 +340,7 @@ func (a *SubaccountsuppressionApiService) SuppressionRouterDeleteSuppression(ctx
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -372,7 +366,7 @@ func (a *SubaccountsuppressionApiService) SuppressionRouterDeleteSuppression(ctx
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountsuppressionApiService
 Delete specific emails which are in suppression list
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -444,7 +438,7 @@ func (a *SubaccountsuppressionApiService) SuppressionRouterDeleteSuppressionsInS
 	return localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountsuppressionApiService
 Get all suppressions
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -525,9 +519,7 @@ func (a *SubaccountsuppressionApiService) SuppressionRouterGetAllSuppressions(ct
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -552,3 +544,4 @@ func (a *SubaccountsuppressionApiService) SuppressionRouterGetAllSuppressions(ct
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+

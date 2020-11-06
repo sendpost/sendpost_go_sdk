@@ -13,9 +13,13 @@ package swagger
 type ModelsAccount struct {
 	ApiKey string `json:"apiKey,omitempty"`
 	Created int64 `json:"created,omitempty"`
+	CurrentEmailServiceProvider string `json:"currentEmailServiceProvider,omitempty"`
 	Id int64 `json:"id,omitempty"`
+	Industry string `json:"industry,omitempty"`
 	LockThreshold int64 `json:"lock_threshold,omitempty"`
 	Locked bool `json:"locked,omitempty"`
 	Name string `json:"name,omitempty"`
+	OnboardQAnswered bool `json:"onboardQAnswered,omitempty"`
+	SendingVolumePerMonth string `json:"sendingVolumePerMonth,omitempty"`
 	Url string `json:"url,omitempty"`
 }

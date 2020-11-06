@@ -28,7 +28,7 @@ var (
 
 type AccountipApiService service
 
-/* 
+/*
 AccountipApiService
 Allocate IP To Account
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -89,9 +89,7 @@ func (a *AccountipApiService) IPRouterAllocateIP(ctx context.Context, xAccountAp
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -117,7 +115,7 @@ func (a *AccountipApiService) IPRouterAllocateIP(ctx context.Context, xAccountAp
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountipApiService
 Count Total AccountIPs
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -188,9 +186,7 @@ func (a *AccountipApiService) IPRouterCount(ctx context.Context, xAccountApiKey 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -216,7 +212,7 @@ func (a *AccountipApiService) IPRouterCount(ctx context.Context, xAccountApiKey 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountipApiService
 Delete IP
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -279,9 +275,7 @@ func (a *AccountipApiService) IPRouterDelete(ctx context.Context, xAccountApiKey
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -307,7 +301,7 @@ func (a *AccountipApiService) IPRouterDelete(ctx context.Context, xAccountApiKey
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountipApiService
 Find IP by IPId
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -370,9 +364,7 @@ func (a *AccountipApiService) IPRouterGet(ctx context.Context, xAccountApiKey st
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -398,7 +390,7 @@ func (a *AccountipApiService) IPRouterGet(ctx context.Context, xAccountApiKey st
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountipApiService
 Get All IPs
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -479,9 +471,7 @@ func (a *AccountipApiService) IPRouterGetAll(ctx context.Context, xAccountApiKey
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -507,7 +497,7 @@ func (a *AccountipApiService) IPRouterGetAll(ctx context.Context, xAccountApiKey
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountipApiService
 Update an IP
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -573,9 +563,7 @@ func (a *AccountipApiService) IPRouterUpdate(ctx context.Context, xAccountApiKey
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -600,3 +588,4 @@ func (a *AccountipApiService) IPRouterUpdate(ctx context.Context, xAccountApiKey
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+

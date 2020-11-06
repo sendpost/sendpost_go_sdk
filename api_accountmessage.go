@@ -27,7 +27,7 @@ var (
 
 type AccountmessageApiService service
 
-/* 
+/*
 AccountmessageApiService
 Find Message By Id
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -90,9 +90,7 @@ func (a *AccountmessageApiService) MessageRouterGet(ctx context.Context, xAccoun
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -118,7 +116,7 @@ func (a *AccountmessageApiService) MessageRouterGet(ctx context.Context, xAccoun
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountmessageApiService
 Find all events associated with a message id
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -181,9 +179,7 @@ func (a *AccountmessageApiService) MessageRouterGetAllEventsForAMessageId(ctx co
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -209,7 +205,7 @@ func (a *AccountmessageApiService) MessageRouterGetAllEventsForAMessageId(ctx co
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountmessageApiService
 Find all message events associated with a message id from a specific node
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -272,9 +268,7 @@ func (a *AccountmessageApiService) MessageRouterGetAllEventsForAMessageIdFromANo
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -300,7 +294,7 @@ func (a *AccountmessageApiService) MessageRouterGetAllEventsForAMessageIdFromANo
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountmessageApiService
 Find Message from node by specific Id
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -363,9 +357,7 @@ func (a *AccountmessageApiService) MessageRouterGetMessageFromNode(ctx context.C
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -390,3 +382,4 @@ func (a *AccountmessageApiService) MessageRouterGetMessageFromNode(ctx context.C
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+

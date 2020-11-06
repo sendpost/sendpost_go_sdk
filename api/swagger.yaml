@@ -16,152 +16,6 @@ consumes:
 produces:
 - "application/json"
 paths:
-  /account/alert/:
-    get:
-      tags:
-      - "account/alert"
-      description: "Get All Alerts"
-      operationId: "AlertRouter.GetAll"
-      parameters:
-      - name: "X-Account-ApiKey"
-        in: "header"
-        description: "Account API Key"
-        required: true
-        type: "string"
-        x-exportParamName: "XAccountApiKey"
-      - name: "offset"
-        in: "query"
-        description: "offset"
-        required: false
-        type: "integer"
-        format: "int64"
-        x-exportParamName: "Offset"
-        x-optionalDataType: "Int64"
-      - name: "limit"
-        in: "query"
-        description: "limit"
-        required: false
-        type: "integer"
-        format: "int64"
-        x-exportParamName: "Limit"
-        x-optionalDataType: "Int64"
-      - name: "search"
-        in: "query"
-        description: "search term"
-        required: false
-        type: "string"
-        x-exportParamName: "Search"
-        x-optionalDataType: "String"
-      responses:
-        "200":
-          description: "\"Retrieved all alerts for account successfully\""
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/models.DetailedAlert"
-        "401":
-          description: "Not Authorized"
-        "500":
-          description: "Internal Server Error"
-    post:
-      tags:
-      - "account/alert"
-      description: "create an alert"
-      operationId: "AlertRouter.Create alert"
-      parameters:
-      - name: "X-Account-ApiKey"
-        in: "header"
-        description: "Account API Key"
-        required: true
-        type: "string"
-        x-exportParamName: "XAccountApiKey"
-      - in: "body"
-        name: "body"
-        description: "The List to br sent"
-        required: true
-        schema:
-          $ref: "#/definitions/models.AlertRequest"
-        x-exportParamName: "Body"
-      responses:
-        "200":
-          description: "\"Alert Created Successfully\""
-          schema:
-            $ref: "#/definitions/models.Alert"
-        "401":
-          description: "Not Authorized"
-        "422":
-          description: "Request body is not in proper format"
-        "500":
-          description: "Internal Server Error"
-  /account/alert/{alertid}:
-    put:
-      tags:
-      - "account/alert"
-      description: "Update an Alert"
-      operationId: "AlertRouter.Update"
-      parameters:
-      - name: "X-Account-ApiKey"
-        in: "header"
-        description: "Account API Key"
-        required: true
-        type: "string"
-        x-exportParamName: "XAccountApiKey"
-      - name: "alertid"
-        in: "path"
-        description: "The alert you want to update"
-        required: true
-        type: "integer"
-        format: "int64"
-        x-exportParamName: "Alertid"
-      - in: "body"
-        name: "body"
-        description: "The alert  Settings"
-        required: true
-        schema:
-          $ref: "#/definitions/.alert"
-        x-exportParamName: "Body"
-      responses:
-        "200":
-          description: "\"alert updated successfully\""
-          schema:
-            $ref: "#/definitions/.alert"
-        "401":
-          description: "Not Authorized"
-        "406":
-          description: ":alert is empty"
-        "422":
-          description: "Request body is not in proper format"
-        "500":
-          description: "Internal Server Error"
-  /account/alert/count:
-    get:
-      tags:
-      - "account/alert"
-      description: "Count Total Alerts for account"
-      operationId: "AlertRouter.Count"
-      parameters:
-      - name: "X-Account-ApiKey"
-        in: "header"
-        description: "Account API Key"
-        required: true
-        type: "string"
-        x-exportParamName: "XAccountApiKey"
-      - name: "search"
-        in: "query"
-        description: "search term"
-        required: false
-        type: "string"
-        x-exportParamName: "Search"
-        x-optionalDataType: "String"
-      responses:
-        "200":
-          description: "\"Total count of ips for a specific account\""
-          schema:
-            $ref: "#/definitions/models.CountStat"
-        "401":
-          description: "Not Authorized"
-        "500":
-          description: "Internal Server Error"
   /account/event/{eventId}:
     get:
       tags:
@@ -2612,72 +2466,6 @@ paths:
           description: "Not Authorized"
         "500":
           description: "Internal Server Error"
-  /account/validate/:
-    post:
-      tags:
-      - "account/validate"
-      description: "Validate Email List Synchronously"
-      operationId: "ValidateRouter.Validate Email List"
-      parameters:
-      - name: "X-Account-ApiKey"
-        in: "header"
-        description: "Account API Key"
-        required: true
-        type: "string"
-        x-exportParamName: "XAccountApiKey"
-      - in: "body"
-        name: "body"
-        description: "The email list to be sent for being validated"
-        required: true
-        schema:
-          $ref: "#/definitions/models.EmailList"
-        x-exportParamName: "Body"
-      responses:
-        "200":
-          description: "\"Cleaned list\""
-          schema:
-            $ref: "#/definitions/models.CleanedList"
-        "401":
-          description: "Not Authorized"
-        "406":
-          description: "Request body is not acceptable owing to it exceeding email\
-            \ list size in request body"
-        "422":
-          description: "Request body is not in proper format"
-        "500":
-          description: "Internal Server Error"
-  /account/validate/bulk:
-    post:
-      tags:
-      - "account/validate"
-      description: "Validate Emails In File Asynchronously"
-      operationId: "ValidateRouter.Validate Email Bulk"
-      consumes:
-      - "multipart/form-data"
-      parameters:
-      - name: "fileinput"
-        in: "formData"
-        description: "CSV whose emails need to be validated"
-        required: true
-        type: "file"
-        x-exportParamName: "Fileinput"
-      - name: "X-Account-ApiKey"
-        in: "header"
-        description: "Account API Key"
-        required: true
-        type: "string"
-        x-exportParamName: "XAccountApiKey"
-      responses:
-        "200":
-          description: "\"Cleaned list\""
-          schema:
-            $ref: "#/definitions/models.BulkResponse"
-        "401":
-          description: "Not Authorized"
-        "422":
-          description: "Request body is not in proper format"
-        "500":
-          description: "Internal Server Error"
   /account/validation/:
     get:
       tags:
@@ -2725,6 +2513,39 @@ paths:
           description: "Not Authorized"
         "500":
           description: "Internal Server Error"
+    post:
+      tags:
+      - "account/validation"
+      description: "Validate Email List Synchronously"
+      operationId: "ValidationRouter.Validate Email List"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The email list to be sent for being validated"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EmailList"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Cleaned list\""
+          schema:
+            $ref: "#/definitions/models.CleanedList"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: "Request body is not acceptable owing to it exceeding email\
+            \ list size in request body"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
     delete:
       tags:
       - "account/validation"
@@ -2753,6 +2574,38 @@ paths:
           description: "Not Authorized"
         "406":
           description: "suppression list is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/validation/bulk:
+    post:
+      tags:
+      - "account/validation"
+      description: "Validate Emails In File Asynchronously"
+      operationId: "ValidateRouter.Validate Email Bulk"
+      consumes:
+      - "multipart/form-data"
+      parameters:
+      - name: "fileinput"
+        in: "formData"
+        description: "CSV whose emails need to be validated"
+        required: true
+        type: "file"
+        x-exportParamName: "Fileinput"
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Cleaned list\""
+          schema:
+            $ref: "#/definitions/models.BulkResponse"
+        "401":
+          description: "Not Authorized"
         "422":
           description: "Request body is not in proper format"
         "500":
@@ -4291,15 +4144,23 @@ definitions:
       created:
         type: "integer"
         format: "int64"
+      currentEmailServiceProvider:
+        type: "string"
       id:
         type: "integer"
         format: "int64"
+      industry:
+        type: "string"
       lock_threshold:
         type: "integer"
         format: "int64"
       locked:
         type: "boolean"
       name:
+        type: "string"
+      onboardQAnswered:
+        type: "boolean"
+      sendingVolumePerMonth:
         type: "string"
       url:
         type: "string"
@@ -4461,49 +4322,6 @@ definitions:
       softBounced: true
       id: 6
       spam: true
-  models.Alert:
-    type: "object"
-    properties:
-      Condition:
-        type: "string"
-      Notification:
-        type: "string"
-      active:
-        type: "boolean"
-      alert_name:
-        type: "string"
-      created:
-        type: "integer"
-        format: "int64"
-      id:
-        type: "integer"
-        format: "int64"
-      label:
-        $ref: "#/definitions/models.AlertLabel"
-      member:
-        $ref: "#/definitions/models.Member"
-      priority:
-        $ref: "#/definitions/models.Priority"
-      updated:
-        type: "integer"
-        format: "int64"
-    title: "Alert"
-    example:
-      Condition: "Condition"
-      created: 0
-      member:
-        Email: "Email"
-        created: 5
-        IsForbidden: true
-        Id: 1
-        IsVerified: true
-      active: true
-      id: 6
-      label: {}
-      priority: {}
-      updated: 5
-      Notification: "Notification"
-      alert_name: "alert_name"
   models.AlertLabel:
     type: "object"
   models.AlertRequest:
@@ -4536,6 +4354,17 @@ definitions:
       threshold:
         type: "string"
     title: "AlertRequest"
+  models.AlertResponse:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      success:
+        type: "boolean"
+    title: "AlertResponse"
   models.AuthInfo:
     type: "object"
     properties:
@@ -4704,16 +4533,6 @@ definitions:
       threshold:
         type: "string"
     title: "DetailedAlert"
-    example:
-      entityValue: "entityValue"
-      provider: "provider"
-      entityType: "entityType"
-      parameter: 6
-      name: "name"
-      active: true
-      threshold: "threshold"
-      id: 0
-      label: {}
   models.Domain:
     type: "object"
     properties:
@@ -4772,6 +4591,28 @@ definitions:
       uid:
         type: "string"
     title: "EAccount"
+  models.EAccountMember:
+    type: "object"
+    properties:
+      companyName:
+        type: "string"
+      currentEmailServiceProvider:
+        type: "string"
+      industry:
+        type: "string"
+      name:
+        type: "string"
+      onboardQAnswered:
+        type: "boolean"
+      phoneNumber:
+        type: "string"
+      sendingVolumePerMonth:
+        type: "string"
+      uid:
+        type: "string"
+      verifyEmail:
+        type: "boolean"
+    title: "EAccountMember"
   models.EDomain:
     type: "object"
     properties:
@@ -5415,15 +5256,24 @@ definitions:
         type: "boolean"
       IsVerified:
         type: "boolean"
+      companyName:
+        type: "string"
       created:
         type: "integer"
         format: "int64"
+      name:
+        type: "string"
+      phoneNumber:
+        type: "string"
     title: "Member"
     example:
       Email: "Email"
-      created: 5
+      phoneNumber: "phoneNumber"
+      created: 6
+      companyName: "companyName"
+      name: "name"
       IsForbidden: true
-      Id: 1
+      Id: 0
       IsVerified: true
   models.MemberRole:
     type: "object"
@@ -5452,8 +5302,6 @@ definitions:
         clicked: 0
         day: 6
       name: "name"
-  models.Priority:
-    type: "object"
   models.QEmailMessage:
     type: "object"
     properties:

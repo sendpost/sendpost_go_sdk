@@ -27,7 +27,7 @@ var (
 
 type AccountlabelApiService service
 
-/* 
+/*
 AccountlabelApiService
 Count Total Labels
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -88,9 +88,7 @@ func (a *AccountlabelApiService) LabelRouterCount(ctx context.Context, xAccountA
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -116,7 +114,7 @@ func (a *AccountlabelApiService) LabelRouterCount(ctx context.Context, xAccountA
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountlabelApiService
 Create Label
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -180,9 +178,7 @@ func (a *AccountlabelApiService) LabelRouterCreate(ctx context.Context, xAccount
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -208,7 +204,7 @@ func (a *AccountlabelApiService) LabelRouterCreate(ctx context.Context, xAccount
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountlabelApiService
 Delete Label
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -271,9 +267,7 @@ func (a *AccountlabelApiService) LabelRouterDelete(ctx context.Context, xAccount
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -299,7 +293,7 @@ func (a *AccountlabelApiService) LabelRouterDelete(ctx context.Context, xAccount
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountlabelApiService
 Find Label by LabelId
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -362,9 +356,7 @@ func (a *AccountlabelApiService) LabelRouterGet(ctx context.Context, xAccountApi
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -390,7 +382,7 @@ func (a *AccountlabelApiService) LabelRouterGet(ctx context.Context, xAccountApi
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountlabelApiService
 Get All Labels
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -451,9 +443,7 @@ func (a *AccountlabelApiService) LabelRouterGetAll(ctx context.Context, xAccount
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -479,7 +469,7 @@ func (a *AccountlabelApiService) LabelRouterGetAll(ctx context.Context, xAccount
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountlabelApiService
 Update Label
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -545,9 +535,7 @@ func (a *AccountlabelApiService) LabelRouterUpdate(ctx context.Context, xAccount
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -572,3 +560,4 @@ func (a *AccountlabelApiService) LabelRouterUpdate(ctx context.Context, xAccount
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+

@@ -28,7 +28,7 @@ var (
 
 type SubaccountippoolApiService service
 
-/* 
+/*
 SubaccountippoolApiService
 Count Total IPPools
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -89,9 +89,7 @@ func (a *SubaccountippoolApiService) IPPoolRouterCount(ctx context.Context, xSub
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -117,7 +115,7 @@ func (a *SubaccountippoolApiService) IPPoolRouterCount(ctx context.Context, xSub
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountippoolApiService
 Create IPPool
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -181,9 +179,7 @@ func (a *SubaccountippoolApiService) IPPoolRouterCreate(ctx context.Context, xSu
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -209,7 +205,7 @@ func (a *SubaccountippoolApiService) IPPoolRouterCreate(ctx context.Context, xSu
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountippoolApiService
 Delete IPPool
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -272,9 +268,7 @@ func (a *SubaccountippoolApiService) IPPoolRouterDelete(ctx context.Context, xSu
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -300,7 +294,7 @@ func (a *SubaccountippoolApiService) IPPoolRouterDelete(ctx context.Context, xSu
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountippoolApiService
 Find IPPool by IPPoolId
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -363,9 +357,7 @@ func (a *SubaccountippoolApiService) IPPoolRouterGet(ctx context.Context, xSubAc
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -391,7 +383,7 @@ func (a *SubaccountippoolApiService) IPPoolRouterGet(ctx context.Context, xSubAc
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountippoolApiService
 Get All IPPools
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -472,9 +464,7 @@ func (a *SubaccountippoolApiService) IPPoolRouterGetAll(ctx context.Context, xSu
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -500,7 +490,7 @@ func (a *SubaccountippoolApiService) IPPoolRouterGetAll(ctx context.Context, xSu
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountippoolApiService
 Update IPPool
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -566,9 +556,7 @@ func (a *SubaccountippoolApiService) IPPoolRouterUpdate(ctx context.Context, xSu
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -593,3 +581,4 @@ func (a *SubaccountippoolApiService) IPPoolRouterUpdate(ctx context.Context, xSu
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+

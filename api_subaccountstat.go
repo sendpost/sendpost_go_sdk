@@ -28,7 +28,7 @@ var (
 
 type SubaccountstatApiService service
 
-/* 
+/*
 SubaccountstatApiService
 Get All Aggregate Sub-Account Stats
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -104,9 +104,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllAggregateSubAccount
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -132,7 +130,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllAggregateSubAccount
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountstatApiService
 Get All Aggregate Sub-Account Stats by Group
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -210,9 +208,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllAggregateSubAccount
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -238,7 +234,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllAggregateSubAccount
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountstatApiService
 Get All Aggregated Group Stats for a Sub-Account
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -314,9 +310,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllAggregatedGroupStat
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -342,7 +336,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllAggregatedGroupStat
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountstatApiService
 Get All Aggregated IP Stats for a Sub-Account
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -418,9 +412,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllAggregatedIPStatsFo
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -446,7 +438,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllAggregatedIPStatsFo
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountstatApiService
 Get All Aggregated Provider Stats for a Specific IP of a Sub-Account
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -524,9 +516,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllAggregatedProviderS
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -552,7 +542,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllAggregatedProviderS
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountstatApiService
 Get All Aggregated Provider Stats for a Sub-Account
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -628,9 +618,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllAggregatedProviderS
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -656,7 +644,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllAggregatedProviderS
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountstatApiService
 Get All Sub-Account Stats
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -732,9 +720,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllSubAccountStats(ctx
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -760,7 +746,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllSubAccountStats(ctx
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 SubaccountstatApiService
 Get All Sub-Account Stats by Group
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -838,9 +824,7 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllSubAccountStatsByGr
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -865,3 +849,4 @@ func (a *SubaccountstatApiService) SubAccountStatRouterGetAllSubAccountStatsByGr
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+

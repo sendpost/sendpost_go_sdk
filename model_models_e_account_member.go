@@ -10,13 +10,14 @@
 
 package swagger
 
-type ModelsMember struct {
-	Email string `json:"Email,omitempty"`
-	Id int64 `json:"Id,omitempty"`
-	IsForbidden bool `json:"IsForbidden,omitempty"`
-	IsVerified bool `json:"IsVerified,omitempty"`
+type ModelsEAccountMember struct {
 	CompanyName string `json:"companyName,omitempty"`
-	Created int64 `json:"created,omitempty"`
+	CurrentEmailServiceProvider string `json:"currentEmailServiceProvider,omitempty"`
+	Industry string `json:"industry,omitempty"`
 	Name string `json:"name,omitempty"`
+	OnboardQAnswered bool `json:"onboardQAnswered,omitempty"`
 	PhoneNumber string `json:"phoneNumber,omitempty"`
+	SendingVolumePerMonth string `json:"sendingVolumePerMonth,omitempty"`
+	Uid string `json:"uid,omitempty"`
+	VerifyEmail bool `json:"verifyEmail,omitempty"`
 }

@@ -28,7 +28,7 @@ var (
 
 type AccountsmtpstatApiService service
 
-/* 
+/*
 AccountsmtpstatApiService
 Get All Aggregate IP Provider SMTP Stats
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -108,9 +108,7 @@ func (a *AccountsmtpstatApiService) SMTPStatRouterGetAllAggregateIPProviderSMTPS
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -136,7 +134,7 @@ func (a *AccountsmtpstatApiService) SMTPStatRouterGetAllAggregateIPProviderSMTPS
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountsmtpstatApiService
 Get All Aggregate IP SMTP Stats
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -214,9 +212,7 @@ func (a *AccountsmtpstatApiService) SMTPStatRouterGetAllAggregateIPSMTPStats(ctx
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -242,7 +238,7 @@ func (a *AccountsmtpstatApiService) SMTPStatRouterGetAllAggregateIPSMTPStats(ctx
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountsmtpstatApiService
 Get All Aggregate IP SMTP Stats For SubAccount
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -322,9 +318,7 @@ func (a *AccountsmtpstatApiService) SMTPStatRouterGetAllAggregateIPSMTPStatsForS
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -350,7 +344,7 @@ func (a *AccountsmtpstatApiService) SMTPStatRouterGetAllAggregateIPSMTPStatsForS
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountsmtpstatApiService
 Get All Aggregate SubAccount Provider SMTP Stats
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -430,9 +424,7 @@ func (a *AccountsmtpstatApiService) SMTPStatRouterGetAllAggregateSubAccountProvi
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -458,7 +450,7 @@ func (a *AccountsmtpstatApiService) SMTPStatRouterGetAllAggregateSubAccountProvi
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountsmtpstatApiService
 Get All Aggregate SubAccount SMTP Stats
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -536,9 +528,7 @@ func (a *AccountsmtpstatApiService) SMTPStatRouterGetAllAggregateSubAccountSMTPS
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -564,7 +554,7 @@ func (a *AccountsmtpstatApiService) SMTPStatRouterGetAllAggregateSubAccountSMTPS
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountsmtpstatApiService
 Get All Aggregate SubAccount SMTP Stats For IP
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -644,9 +634,7 @@ func (a *AccountsmtpstatApiService) SMTPStatRouterGetAllAggregateSubAccountSMTPS
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -671,3 +659,4 @@ func (a *AccountsmtpstatApiService) SMTPStatRouterGetAllAggregateSubAccountSMTPS
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+

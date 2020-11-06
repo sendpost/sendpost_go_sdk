@@ -28,7 +28,7 @@ var (
 
 type AccountipstatApiService service
 
-/* 
+/*
 AccountipstatApiService
 Get All Aggregate Stats
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -106,9 +106,7 @@ func (a *AccountipstatApiService) IPStatRouterGetAllAggregateIPStats(ctx context
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -134,7 +132,7 @@ func (a *AccountipstatApiService) IPStatRouterGetAllAggregateIPStats(ctx context
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountipstatApiService
 Get All Aggregate Stats by Group
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -214,9 +212,7 @@ func (a *AccountipstatApiService) IPStatRouterGetAllAggregateIPStatsByGroup(ctx 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -242,7 +238,7 @@ func (a *AccountipstatApiService) IPStatRouterGetAllAggregateIPStatsByGroup(ctx 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountipstatApiService
 Get All Aggregated Provider Stats for a IP
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -320,9 +316,7 @@ func (a *AccountipstatApiService) IPStatRouterGetAllAggregatedProviderStatsForAI
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -348,7 +342,7 @@ func (a *AccountipstatApiService) IPStatRouterGetAllAggregatedProviderStatsForAI
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountipstatApiService
 Get All Aggregated Provider Stats for a Specific Sub-Account of a IP
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -428,9 +422,7 @@ func (a *AccountipstatApiService) IPStatRouterGetAllAggregatedProviderStatsForAS
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -456,7 +448,7 @@ func (a *AccountipstatApiService) IPStatRouterGetAllAggregatedProviderStatsForAS
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountipstatApiService
 Get All Aggregated Sub-Account Stats for an IP
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -534,9 +526,7 @@ func (a *AccountipstatApiService) IPStatRouterGetAllAggregatedSubAccountStatsFor
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -562,7 +552,7 @@ func (a *AccountipstatApiService) IPStatRouterGetAllAggregatedSubAccountStatsFor
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountipstatApiService
 Get All IP Stats
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -640,9 +630,7 @@ func (a *AccountipstatApiService) IPStatRouterGetAllIPStats(ctx context.Context,
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -668,7 +656,7 @@ func (a *AccountipstatApiService) IPStatRouterGetAllIPStats(ctx context.Context,
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 AccountipstatApiService
 Get All IP Stats by Group
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -748,9 +736,7 @@ func (a *AccountipstatApiService) IPStatRouterGetAllIPStatsByGroup(ctx context.C
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -775,3 +761,4 @@ func (a *AccountipstatApiService) IPStatRouterGetAllIPStatsByGroup(ctx context.C
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
