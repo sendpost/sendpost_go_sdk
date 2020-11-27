@@ -48,6 +48,8 @@ type APIClient struct {
 
 	AccounteventApi *AccounteventApiService
 
+	AccountincidentApi *AccountincidentApiService
+
 	AccountintegrationApi *AccountintegrationApiService
 
 	AccountipApi *AccountipApiService
@@ -62,6 +64,10 @@ type APIClient struct {
 
 	AccountmessageApi *AccountmessageApiService
 
+	AccountonboardingApi *AccountonboardingApiService
+
+	AccountpaymentApi *AccountpaymentApiService
+
 	AccountrecipientApi *AccountrecipientApiService
 
 	AccountsmtpstatApi *AccountsmtpstatApiService
@@ -70,9 +76,17 @@ type APIClient struct {
 
 	AccountsubaccountApi *AccountsubaccountApiService
 
+	AccounttagApi *AccounttagApiService
+
+	AccounttemplateApi *AccounttemplateApiService
+
 	AccountvalidationApi *AccountvalidationApiService
 
 	AccountwebhookApi *AccountwebhookApiService
+
+	ClusterApi *ClusterApiService
+
+	EditorApi *EditorApiService
 
 	SmtpApi *SmtpApiService
 
@@ -87,6 +101,8 @@ type APIClient struct {
 	SubaccountstatApi *SubaccountstatApiService
 
 	SubaccountsuppressionApi *SubaccountsuppressionApiService
+
+	SystemApi *SystemApiService
 }
 
 type service struct {
@@ -106,6 +122,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.AccounteventApi = (*AccounteventApiService)(&c.common)
+	c.AccountincidentApi = (*AccountincidentApiService)(&c.common)
 	c.AccountintegrationApi = (*AccountintegrationApiService)(&c.common)
 	c.AccountipApi = (*AccountipApiService)(&c.common)
 	c.AccountippoolApi = (*AccountippoolApiService)(&c.common)
@@ -113,12 +130,18 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AccountlabelApi = (*AccountlabelApiService)(&c.common)
 	c.AccountmemberApi = (*AccountmemberApiService)(&c.common)
 	c.AccountmessageApi = (*AccountmessageApiService)(&c.common)
+	c.AccountonboardingApi = (*AccountonboardingApiService)(&c.common)
+	c.AccountpaymentApi = (*AccountpaymentApiService)(&c.common)
 	c.AccountrecipientApi = (*AccountrecipientApiService)(&c.common)
 	c.AccountsmtpstatApi = (*AccountsmtpstatApiService)(&c.common)
 	c.AccountstatApi = (*AccountstatApiService)(&c.common)
 	c.AccountsubaccountApi = (*AccountsubaccountApiService)(&c.common)
+	c.AccounttagApi = (*AccounttagApiService)(&c.common)
+	c.AccounttemplateApi = (*AccounttemplateApiService)(&c.common)
 	c.AccountvalidationApi = (*AccountvalidationApiService)(&c.common)
 	c.AccountwebhookApi = (*AccountwebhookApiService)(&c.common)
+	c.ClusterApi = (*ClusterApiService)(&c.common)
+	c.EditorApi = (*EditorApiService)(&c.common)
 	c.SmtpApi = (*SmtpApiService)(&c.common)
 	c.SubaccountdomainApi = (*SubaccountdomainApiService)(&c.common)
 	c.SubaccountemailApi = (*SubaccountemailApiService)(&c.common)
@@ -126,6 +149,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SubaccountsenderApi = (*SubaccountsenderApiService)(&c.common)
 	c.SubaccountstatApi = (*SubaccountstatApiService)(&c.common)
 	c.SubaccountsuppressionApi = (*SubaccountsuppressionApiService)(&c.common)
+	c.SystemApi = (*SystemApiService)(&c.common)
 
 	return c
 }

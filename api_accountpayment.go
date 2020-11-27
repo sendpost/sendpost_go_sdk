@@ -24,28 +24,27 @@ var (
 	_ context.Context
 )
 
-type SubaccountemailApiService service
+type AccountpaymentApiService service
 
 /*
-SubaccountemailApiService
-Send Email To Contacts
+AccountpaymentApiService
+Create Customer Portal for account
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param xSubAccountApiKey Sub-Account API Key
- * @param body The Email Message
+ * @param xAccountApiKey Account API Key
 
-@return []ModelsEmailResponse
+@return ModelsBillingPortalSession
 */
-func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xSubAccountApiKey string, body ModelsEmailMessage) ([]ModelsEmailResponse, *http.Response, error) {
+func (a *AccountpaymentApiService) PaymentRouterCreateCustomerPortal(ctx context.Context, xAccountApiKey string) (ModelsBillingPortalSession, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue []ModelsEmailResponse
+		localVarReturnValue ModelsBillingPortalSession
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/subaccount/email/"
+	localVarPath := a.client.cfg.BasePath + "/account/payment/portal"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -68,9 +67,7 @@ func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xS
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
-	localVarHeaderParams["X-SubAccount-ApiKey"] = parameterToString(xSubAccountApiKey, "")
-	// body params
-	localVarPostBody = &body
+	localVarHeaderParams["X-Account-ApiKey"] = parameterToString(xAccountApiKey, "")
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -100,7 +97,7 @@ func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xS
 		}
 		
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []ModelsEmailResponse
+			var v ModelsBillingPortalSession
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -117,25 +114,25 @@ func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xS
 }
 
 /*
-SubaccountemailApiService
-Send Email To Contacts With Template
+AccountpaymentApiService
+Create Payment Subscription for Stripe
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param xSubAccountApiKey Sub-Account API Key
- * @param body The Email Message
+ * @param xAccountApiKey Account API Key
+ * @param body PaymentOptions content
 
-@return []ModelsEmailResponse
+@return ModelsPaymentStatus
 */
-func (a *SubaccountemailApiService) EmailRouterSendEmailWithTemplate(ctx context.Context, xSubAccountApiKey string, body ModelsEmailMessage) ([]ModelsEmailResponse, *http.Response, error) {
+func (a *AccountpaymentApiService) PaymentRouterCreatePaymentSubscription(ctx context.Context, xAccountApiKey string, body ModelsPaymentOptions) (ModelsPaymentStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue []ModelsEmailResponse
+		localVarReturnValue ModelsPaymentStatus
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/subaccount/email/template"
+	localVarPath := a.client.cfg.BasePath + "/account/payment/subscription"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -158,7 +155,7 @@ func (a *SubaccountemailApiService) EmailRouterSendEmailWithTemplate(ctx context
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
-	localVarHeaderParams["X-SubAccount-ApiKey"] = parameterToString(xSubAccountApiKey, "")
+	localVarHeaderParams["X-Account-ApiKey"] = parameterToString(xAccountApiKey, "")
 	// body params
 	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -190,7 +187,7 @@ func (a *SubaccountemailApiService) EmailRouterSendEmailWithTemplate(ctx context
 		}
 		
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []ModelsEmailResponse
+			var v ModelsPaymentStatus
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -204,5 +201,74 @@ func (a *SubaccountemailApiService) EmailRouterSendEmailWithTemplate(ctx context
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+AccountpaymentApiService
+Handle Payment Related Webhooks
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
+
+*/
+func (a *AccountpaymentApiService) PaymentRouterHandlePaymentWebhook(ctx context.Context) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/account/payment/webhook"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
 }
 

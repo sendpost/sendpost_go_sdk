@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **PreText** | **string** |  | [optional] [default to null]
 **ReplyTo** | [***ModelsReplyTo**](models.ReplyTo.md) |  | [optional] [default to null]
 **Subject** | **string** |  | [optional] [default to null]
+**Template** | **string** |  | [optional] [default to null]
 **TextBody** | **string** |  | [optional] [default to null]
 **To** | [**[]ModelsTo**](models.To.md) |  | [optional] [default to null]
 **TrackClicks** | **bool** |  | [optional] [default to null]

@@ -1,22 +1,21 @@
-# \AccountwebhookApi
+# \AccounttemplateApi
 
 All URIs are relative to *https://api.sendpost.io/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AccountWebhookRouterCount**](AccountwebhookApi.md#AccountWebhookRouterCount) | **Get** /account/webhook/count | 
-[**AccountWebhookRouterCreate**](AccountwebhookApi.md#AccountWebhookRouterCreate) | **Post** /account/webhook/ | 
-[**AccountWebhookRouterDelete**](AccountwebhookApi.md#AccountWebhookRouterDelete) | **Delete** /account/webhook/{webhookId} | 
-[**AccountWebhookRouterGet**](AccountwebhookApi.md#AccountWebhookRouterGet) | **Get** /account/webhook/{webhookId} | 
-[**AccountWebhookRouterGetAll**](AccountwebhookApi.md#AccountWebhookRouterGetAll) | **Get** /account/webhook/ | 
-[**AccountWebhookRouterUpdate**](AccountwebhookApi.md#AccountWebhookRouterUpdate) | **Put** /account/webhook/{webhookId} | 
+[**AccountTemplateRouterCreate**](AccounttemplateApi.md#AccountTemplateRouterCreate) | **Post** /account/template/ | 
+[**AccountTemplateRouterDelete**](AccounttemplateApi.md#AccountTemplateRouterDelete) | **Delete** /account/template/{templateid} | 
+[**AccountTemplateRouterGet**](AccounttemplateApi.md#AccountTemplateRouterGet) | **Get** /account/template/{templateid} | 
+[**AccountTemplateRouterGetAll**](AccounttemplateApi.md#AccountTemplateRouterGetAll) | **Get** /account/template/ | 
+[**AccountTemplateRouterUpdate**](AccounttemplateApi.md#AccountTemplateRouterUpdate) | **Put** /account/template/{templateid} | 
 
 
-# **AccountWebhookRouterCount**
-> ModelsCountStat AccountWebhookRouterCount(ctx, xAccountApiKey)
+# **AccountTemplateRouterCreate**
+> ModelsAccountTemplate AccountTemplateRouterCreate(ctx, xAccountApiKey, body)
 
 
-Count Total AccountWebhooks
+Create a new template
 
 ### Required Parameters
 
@@ -24,10 +23,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **xAccountApiKey** | **string**| Account API Key | 
+  **body** | [**ModelsAccountTemplate**](ModelsAccountTemplate.md)| The AccountTemplate content | 
 
 ### Return type
 
-[**ModelsCountStat**](models.CountStat.md)
+[**ModelsAccountTemplate**](models.AccountTemplate.md)
 
 ### Authorization
 
@@ -40,40 +40,11 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **AccountWebhookRouterCreate**
-> ModelsAccountWebhook AccountWebhookRouterCreate(ctx, xAccountApiKey, body)
+# **AccountTemplateRouterDelete**
+> ModelsDeleteResponse AccountTemplateRouterDelete(ctx, xAccountApiKey, templateid)
 
 
-Create AccountWebhook
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **xAccountApiKey** | **string**| Account API Key | 
-  **body** | [**ModelsEWebhook**](ModelsEWebhook.md)| The AccountWebhook content | 
-
-### Return type
-
-[**ModelsAccountWebhook**](models.AccountWebhook.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **AccountWebhookRouterDelete**
-> ModelsDeleteResponse AccountWebhookRouterDelete(ctx, xAccountApiKey, webhookId)
-
-
-Delete AccountWebhook
+Delete AccountTemplate
 
 ### Required Parameters
 
@@ -81,7 +52,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **xAccountApiKey** | **string**| Account API Key | 
-  **webhookId** | **int64**| The AccountWebhookId you want to delete | 
+  **templateid** | **int64**| The id of the template you want to delete | 
 
 ### Return type
 
@@ -98,11 +69,11 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **AccountWebhookRouterGet**
-> ModelsAccountWebhook AccountWebhookRouterGet(ctx, xAccountApiKey, webhookId)
+# **AccountTemplateRouterGet**
+> ModelsAccountTemplate AccountTemplateRouterGet(ctx, xAccountApiKey, templateid)
 
 
-Find AccountWebhook by AccountWebhookId
+Get single template
 
 ### Required Parameters
 
@@ -110,11 +81,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **xAccountApiKey** | **string**| Account API Key | 
-  **webhookId** | **int64**| the AccountWebhookId you want to get | 
+  **templateid** | **int64**| ID of the template required | 
 
 ### Return type
 
-[**ModelsAccountWebhook**](models.AccountWebhook.md)
+[**ModelsAccountTemplate**](models.AccountTemplate.md)
 
 ### Authorization
 
@@ -127,11 +98,11 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **AccountWebhookRouterGetAll**
-> []ModelsAccountWebhook AccountWebhookRouterGetAll(ctx, xAccountApiKey, optional)
+# **AccountTemplateRouterGetAll**
+> []ModelsAccountTemplate AccountTemplateRouterGetAll(ctx, xAccountApiKey)
 
 
-Get All AccountWebhooks
+Get all templates
 
 ### Required Parameters
 
@@ -139,21 +110,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **xAccountApiKey** | **string**| Account API Key | 
- **optional** | ***AccountwebhookApiAccountWebhookRouterGetAllOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a AccountwebhookApiAccountWebhookRouterGetAllOpts struct
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **offset** | **optional.Int64**| offset | 
- **limit** | **optional.Int64**| limit | 
- **search** | **optional.String**| search | 
 
 ### Return type
 
-[**[]ModelsAccountWebhook**](models.AccountWebhook.md)
+[**[]ModelsAccountTemplate**](models.AccountTemplate.md)
 
 ### Authorization
 
@@ -166,11 +126,11 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **AccountWebhookRouterUpdate**
-> ModelsAccountWebhook AccountWebhookRouterUpdate(ctx, xAccountApiKey, webhookId, body)
+# **AccountTemplateRouterUpdate**
+> ModelsAccountTemplate AccountTemplateRouterUpdate(ctx, xAccountApiKey, templateid, body)
 
 
-Update AccountWebhook
+update template
 
 ### Required Parameters
 
@@ -178,12 +138,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **xAccountApiKey** | **string**| Account API Key | 
-  **webhookId** | **int64**| The AccountWebhookId you want to update | 
-  **body** | [**ModelsEWebhook**](ModelsEWebhook.md)| The body | 
+  **templateid** | **int64**| The id of the template you want to update | 
+  **body** | [**ModelsAccountTemplate**](ModelsAccountTemplate.md)| The template content | 
 
 ### Return type
 
-[**ModelsAccountWebhook**](models.AccountWebhook.md)
+[**ModelsAccountTemplate**](models.AccountTemplate.md)
 
 ### Authorization
 

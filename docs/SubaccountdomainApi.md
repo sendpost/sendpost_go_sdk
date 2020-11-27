@@ -11,6 +11,8 @@ Method | HTTP request | Description
 [**DomainRouterGetAll**](SubaccountdomainApi.md#DomainRouterGetAll) | **Get** /subaccount/domain/ | 
 [**DomainRouterUpdate**](SubaccountdomainApi.md#DomainRouterUpdate) | **Put** /subaccount/domain/{domainId} | 
 [**DomainRouterVerify**](SubaccountdomainApi.md#DomainRouterVerify) | **Post** /subaccount/domain/{domainId}/verify | 
+[**DomainRouterVerifyByToken**](SubaccountdomainApi.md#DomainRouterVerifyByToken) | **Post** /subaccount/domain/{domainId}/verify/email/{token} | 
+[**DomainRouterVerifyRequest**](SubaccountdomainApi.md#DomainRouterVerifyRequest) | **Post** /subaccount/domain/{domainId}/verify/email | 
 
 
 # **DomainRouterCount**
@@ -214,6 +216,66 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ModelsDomain**](models.Domain.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **DomainRouterVerifyByToken**
+> ModelsDomain DomainRouterVerifyByToken(ctx, xSubAccountApiKey, domainId, token)
+
+
+Verify Domain By Signed Token
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **xSubAccountApiKey** | **string**| Sub-Account API Key | 
+  **domainId** | **int64**| the DomainId you want to get | 
+  **token** | **string**| The signed token used to verify | 
+
+### Return type
+
+[**ModelsDomain**](models.Domain.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **DomainRouterVerifyRequest**
+> DomainRouterVerifyRequest(ctx, xSubAccountApiKey, domainId, body)
+
+
+Verify Domain By Email Request
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **xSubAccountApiKey** | **string**| Sub-Account API Key | 
+  **domainId** | **int64**| the DomainId you want to get | 
+  **body** | [**ModelsVerifyByTokenRequest**](ModelsVerifyByTokenRequest.md)| The Email to be used to verify | 
+
+### Return type
+
+ (empty response body)
 
 ### Authorization
 

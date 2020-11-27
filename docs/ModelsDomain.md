@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **ReturnPathVerified** | **bool** |  | [optional] [default to null]
 **Track** | [***ModelsDnsRecord**](models.DNSRecord.md) |  | [optional] [default to null]
 **TrackVerified** | **bool** |  | [optional] [default to null]
+**Verified** | **bool** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

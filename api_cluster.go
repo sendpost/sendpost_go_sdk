@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -24,33 +25,47 @@ var (
 	_ context.Context
 )
 
-type SubaccountemailApiService service
+type ClusterApiService service
 
 /*
-SubaccountemailApiService
-Send Email To Contacts
+ClusterApiService
+Delete item from cache of every node in cluster
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param xSubAccountApiKey Sub-Account API Key
- * @param body The Email Message
+ * @param xSystemApiKey System API Key
+ * @param optional nil or *ClusterApiClusterRouterDeleteItemFromCacheOfEveryNodeInClusterOpts - Optional Parameters:
+     * @param "Name" (optional.String) -  cache name
+     * @param "Key" (optional.String) -  cache item key to delete
 
-@return []ModelsEmailResponse
+
 */
-func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xSubAccountApiKey string, body ModelsEmailMessage) ([]ModelsEmailResponse, *http.Response, error) {
+
+type ClusterApiClusterRouterDeleteItemFromCacheOfEveryNodeInClusterOpts struct { 
+	Name optional.String
+	Key optional.String
+}
+
+func (a *ClusterApiService) ClusterRouterDeleteItemFromCacheOfEveryNodeInCluster(ctx context.Context, xSystemApiKey string, localVarOptionals *ClusterApiClusterRouterDeleteItemFromCacheOfEveryNodeInClusterOpts) (*http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
+		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue []ModelsEmailResponse
+		
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/subaccount/email/"
+	localVarPath := a.client.cfg.BasePath + "/cluster/cache"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Name.IsSet() {
+		localVarQueryParams.Add("name", parameterToString(localVarOptionals.Name.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Key.IsSet() {
+		localVarQueryParams.Add("key", parameterToString(localVarOptionals.Key.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{"application/json"}
 
@@ -68,30 +83,23 @@ func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xS
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
-	localVarHeaderParams["X-SubAccount-ApiKey"] = parameterToString(xSubAccountApiKey, "")
-	// body params
-	localVarPostBody = &body
+	localVarHeaderParams["X-System-ApiKey"] = parameterToString(xSystemApiKey, "")
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
+		return localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
+		return localVarHttpResponse, err
 	}
 
-	if localVarHttpResponse.StatusCode < 300 {
-		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		return localVarReturnValue, localVarHttpResponse, err
-	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
@@ -99,48 +107,51 @@ func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xS
 			error: localVarHttpResponse.Status,
 		}
 		
-		if localVarHttpResponse.StatusCode == 200 {
-			var v []ModelsEmailResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
-				return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		
-		return localVarReturnValue, localVarHttpResponse, newErr
+		return localVarHttpResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHttpResponse, nil
+	return localVarHttpResponse, nil
 }
 
 /*
-SubaccountemailApiService
-Send Email To Contacts With Template
+ClusterApiService
+Delete item from cache of specific node in cluster
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param xSubAccountApiKey Sub-Account API Key
- * @param body The Email Message
+ * @param xSystemApiKey System API Key
+ * @param optional nil or *ClusterApiClusterRouterDeleteItemFromCacheOfSpecificNodeInClusterOpts - Optional Parameters:
+     * @param "Name" (optional.String) -  cache name
+     * @param "Key" (optional.String) -  cache item key to delete
 
-@return []ModelsEmailResponse
+
 */
-func (a *SubaccountemailApiService) EmailRouterSendEmailWithTemplate(ctx context.Context, xSubAccountApiKey string, body ModelsEmailMessage) ([]ModelsEmailResponse, *http.Response, error) {
+
+type ClusterApiClusterRouterDeleteItemFromCacheOfSpecificNodeInClusterOpts struct { 
+	Name optional.String
+	Key optional.String
+}
+
+func (a *ClusterApiService) ClusterRouterDeleteItemFromCacheOfSpecificNodeInCluster(ctx context.Context, xSystemApiKey string, localVarOptionals *ClusterApiClusterRouterDeleteItemFromCacheOfSpecificNodeInClusterOpts) (*http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
+		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue []ModelsEmailResponse
+		
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/subaccount/email/template"
+	localVarPath := a.client.cfg.BasePath + "/cluster/cache/node"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Name.IsSet() {
+		localVarQueryParams.Add("name", parameterToString(localVarOptionals.Name.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Key.IsSet() {
+		localVarQueryParams.Add("key", parameterToString(localVarOptionals.Key.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{"application/json"}
 
@@ -158,30 +169,23 @@ func (a *SubaccountemailApiService) EmailRouterSendEmailWithTemplate(ctx context
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
-	localVarHeaderParams["X-SubAccount-ApiKey"] = parameterToString(xSubAccountApiKey, "")
-	// body params
-	localVarPostBody = &body
+	localVarHeaderParams["X-System-ApiKey"] = parameterToString(xSystemApiKey, "")
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
+		return localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
+		return localVarHttpResponse, err
 	}
 
-	if localVarHttpResponse.StatusCode < 300 {
-		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		return localVarReturnValue, localVarHttpResponse, err
-	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
@@ -189,20 +193,9 @@ func (a *SubaccountemailApiService) EmailRouterSendEmailWithTemplate(ctx context
 			error: localVarHttpResponse.Status,
 		}
 		
-		if localVarHttpResponse.StatusCode == 200 {
-			var v []ModelsEmailResponse
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
-				return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		
-		return localVarReturnValue, localVarHttpResponse, newErr
+		return localVarHttpResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHttpResponse, nil
+	return localVarHttpResponse, nil
 }
 

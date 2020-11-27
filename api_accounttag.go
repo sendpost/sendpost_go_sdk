@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"fmt"
 )
 
 // Linger please
@@ -24,28 +25,28 @@ var (
 	_ context.Context
 )
 
-type SubaccountemailApiService service
+type AccounttagApiService service
 
 /*
-SubaccountemailApiService
-Send Email To Contacts
+AccounttagApiService
+Create Tag
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param xSubAccountApiKey Sub-Account API Key
- * @param body The Email Message
+ * @param xAccountApiKey Account API Key
+ * @param body The Tag content
 
-@return []ModelsEmailResponse
+@return ModelsTag
 */
-func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xSubAccountApiKey string, body ModelsEmailMessage) ([]ModelsEmailResponse, *http.Response, error) {
+func (a *AccounttagApiService) TagRouterCreate(ctx context.Context, xAccountApiKey string, body ModelsTag) (ModelsTag, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue []ModelsEmailResponse
+		localVarReturnValue ModelsTag
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/subaccount/email/"
+	localVarPath := a.client.cfg.BasePath + "/account/tag/"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -68,7 +69,7 @@ func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xS
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
-	localVarHeaderParams["X-SubAccount-ApiKey"] = parameterToString(xSubAccountApiKey, "")
+	localVarHeaderParams["X-Account-ApiKey"] = parameterToString(xAccountApiKey, "")
 	// body params
 	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -100,7 +101,7 @@ func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xS
 		}
 		
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []ModelsEmailResponse
+			var v ModelsTag
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -117,25 +118,26 @@ func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xS
 }
 
 /*
-SubaccountemailApiService
-Send Email To Contacts With Template
+AccounttagApiService
+Delete Tag
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param xSubAccountApiKey Sub-Account API Key
- * @param body The Email Message
+ * @param xAccountApiKey Account API Key
+ * @param tagid The AccountTagId you want to delete
 
-@return []ModelsEmailResponse
+@return ModelsDeleteResponse
 */
-func (a *SubaccountemailApiService) EmailRouterSendEmailWithTemplate(ctx context.Context, xSubAccountApiKey string, body ModelsEmailMessage) ([]ModelsEmailResponse, *http.Response, error) {
+func (a *AccounttagApiService) TagRouterDelete(ctx context.Context, xAccountApiKey string, tagid int64) (ModelsDeleteResponse, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
+		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue []ModelsEmailResponse
+		localVarReturnValue ModelsDeleteResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/subaccount/email/template"
+	localVarPath := a.client.cfg.BasePath + "/account/tag/{tagid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"tagid"+"}", fmt.Sprintf("%v", tagid), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -158,9 +160,7 @@ func (a *SubaccountemailApiService) EmailRouterSendEmailWithTemplate(ctx context
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
-	localVarHeaderParams["X-SubAccount-ApiKey"] = parameterToString(xSubAccountApiKey, "")
-	// body params
-	localVarPostBody = &body
+	localVarHeaderParams["X-Account-ApiKey"] = parameterToString(xAccountApiKey, "")
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -190,7 +190,94 @@ func (a *SubaccountemailApiService) EmailRouterSendEmailWithTemplate(ctx context
 		}
 		
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []ModelsEmailResponse
+			var v ModelsDeleteResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+AccounttagApiService
+Get All Tags
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param xAccountApiKey Account API Key
+
+@return []ModelsTag
+*/
+func (a *AccounttagApiService) TagRouterGetAll(ctx context.Context, xAccountApiKey string) ([]ModelsTag, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue []ModelsTag
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/account/tag/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	localVarHeaderParams["X-Account-ApiKey"] = parameterToString(xAccountApiKey, "")
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []ModelsTag
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

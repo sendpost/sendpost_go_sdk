@@ -14,7 +14,9 @@ type ModelsEAccountMember struct {
 	CompanyName string `json:"companyName,omitempty"`
 	CurrentEmailServiceProvider string `json:"currentEmailServiceProvider,omitempty"`
 	Industry string `json:"industry,omitempty"`
+	LogoURL string `json:"logoURL,omitempty"`
 	Name string `json:"name,omitempty"`
+	OnboardCFinished bool `json:"onboardCFinished,omitempty"`
 	OnboardQAnswered bool `json:"onboardQAnswered,omitempty"`
 	PhoneNumber string `json:"phoneNumber,omitempty"`
 	SendingVolumePerMonth string `json:"sendingVolumePerMonth,omitempty"`

@@ -16,9 +16,13 @@ type ModelsAccount struct {
 	CurrentEmailServiceProvider string `json:"currentEmailServiceProvider,omitempty"`
 	Id int64 `json:"id,omitempty"`
 	Industry string `json:"industry,omitempty"`
-	LockThreshold int64 `json:"lock_threshold,omitempty"`
+	IsCanceled bool `json:"isCanceled,omitempty"`
+	IsLastPaymentFailed bool `json:"isLastPaymentFailed,omitempty"`
+	IsUpgraded bool `json:"isUpgraded,omitempty"`
+	LockThreshold int64 `json:"lockThreshold,omitempty"`
 	Locked bool `json:"locked,omitempty"`
 	Name string `json:"name,omitempty"`
+	OnboardCFinished bool `json:"onboardCFinished,omitempty"`
 	OnboardQAnswered bool `json:"onboardQAnswered,omitempty"`
 	SendingVolumePerMonth string `json:"sendingVolumePerMonth,omitempty"`
 	Url string `json:"url,omitempty"`

@@ -20,6 +20,7 @@ type ModelsEmailMessage struct {
 	PreText string `json:"preText,omitempty"`
 	ReplyTo *ModelsReplyTo `json:"replyTo,omitempty"`
 	Subject string `json:"subject,omitempty"`
+	Template string `json:"template,omitempty"`
 	TextBody string `json:"textBody,omitempty"`
 	To []ModelsTo `json:"to,omitempty"`
 	TrackClicks bool `json:"trackClicks,omitempty"`

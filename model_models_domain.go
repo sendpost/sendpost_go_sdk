@@ -21,4 +21,5 @@ type ModelsDomain struct {
 	ReturnPathVerified bool `json:"returnPathVerified,omitempty"`
 	Track *ModelsDnsRecord `json:"track,omitempty"`
 	TrackVerified bool `json:"trackVerified,omitempty"`
+	Verified bool `json:"verified,omitempty"`
 }

@@ -310,6 +310,292 @@ paths:
           description: "Request body is not in proper format"
         "500":
           description: "Internal Server Error"
+  /account/incident/:
+    get:
+      tags:
+      - "account/incident"
+      description: "Get All Incidents"
+      operationId: "IncidentRouter.GetAll"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      - name: "status"
+        in: "query"
+        description: "status"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Status"
+        x-optionalDataType: "Int64"
+      - name: "tag"
+        in: "query"
+        description: "status"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Tag"
+        x-optionalDataType: "Int64"
+      responses:
+        "200":
+          description: "\"Retrieved all incidents for account successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.Incident"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    post:
+      tags:
+      - "account/incident"
+      description: "Create Incident"
+      operationId: "IncidentRouter.Create"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The Incident content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EIncident"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Incident Created Successfully\""
+          schema:
+            $ref: "#/definitions/models.Incident"
+        "401":
+          description: "Not Authorized"
+        "404":
+          description: "Any Related Entity if not found"
+        "406":
+          description: "Not Acceptable (Empty Incident Summary)"
+        "422":
+          description: "Unprocessable entity bad json, no authorId, not related to\
+            \ anything"
+        "500":
+          description: "Internal Server Error"
+  /account/incident/{incidentId}:
+    get:
+      tags:
+      - "account/incident"
+      description: "Find Incident by incidentId"
+      operationId: "IncidentRouter.GetIncident"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "incidentId"
+        in: "path"
+        description: "the IncidentId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "IncidentId"
+      responses:
+        "200":
+          description: "\"Retrieved Incident from incidentId successfully\""
+          schema:
+            $ref: "#/definitions/models.Incident"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":incidentId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+    put:
+      tags:
+      - "account/incident"
+      description: "Update Incident"
+      operationId: "IncidentRouter.Update"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "incidentId"
+        in: "path"
+        description: "the Incident Id you want to update"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "IncidentId"
+      - in: "body"
+        name: "body"
+        description: "The Incident content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EIncident"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Incident Updated Successfully\""
+          schema:
+            $ref: "#/definitions/models.Incident"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: "Not Acceptable (Empty Incident Summary)"
+        "422":
+          description: "Unprocessable entity bad json, no authorId, not related to\
+            \ anything"
+        "500":
+          description: "Internal Server Error"
+  /account/incident/{incidentId}/comment:
+    get:
+      tags:
+      - "account/incident"
+      description: "Get All Comments Associated with Incident"
+      operationId: "IncidentRouter.GetAllComments"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "incidentId"
+        in: "path"
+        description: "the IncidentId you want to get comments for"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "IncidentId"
+      responses:
+        "200":
+          description: "\"Retrieved all comments for incident successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.Comment"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    post:
+      tags:
+      - "account/incident"
+      description: "Add comment to Incident"
+      operationId: "IncidentRouter.Add"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "incidentId"
+        in: "path"
+        description: "the incident id"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "IncidentId"
+      - in: "body"
+        name: "body"
+        description: "The Comment content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EComment"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Comment Added Successfully\""
+          schema:
+            $ref: "#/definitions/models.Comment"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: "Not Acceptable (Empty Comment Content)"
+        "422":
+          description: "Unprocessable entity bad json"
+        "500":
+          description: "Internal Server Error"
+  /account/incident/count:
+    get:
+      tags:
+      - "account/incident"
+      description: "Count Total Incidents"
+      operationId: "IncidentRouter.Count"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "status"
+        in: "query"
+        description: "status"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Status"
+        x-optionalDataType: "Int64"
+      - name: "tag"
+        in: "query"
+        description: "status"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Tag"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Total count of incidents for a specific account\""
+          schema:
+            $ref: "#/definitions/models.CountStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
   /account/integration/:
     get:
       tags:
@@ -1702,6 +1988,100 @@ paths:
           description: "Request body is not in proper format"
         "500":
           description: "Internal Server Error"
+  /account/onboarding/checklist:
+    get:
+      tags:
+      - "account/onboarding"
+      description: "Gets Onboarding Checklist data for account if not present creates\
+        \ a default entry"
+      operationId: "OnboardingRouter.Get Onboarding Checklist"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Retrieved checklist for account successfully\""
+          schema:
+            $ref: "#/definitions/models.OnboardingChecklist"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/payment/portal:
+    post:
+      tags:
+      - "account/payment"
+      description: "Create Customer Portal for account"
+      operationId: "PaymentRouter.Create Customer Portal"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Retrieved stripe billing portal session\""
+          schema:
+            $ref: "#/definitions/models.BillingPortalSession"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/payment/subscription:
+    post:
+      tags:
+      - "account/payment"
+      description: "Create Payment Subscription for Stripe"
+      operationId: "PaymentRouter.Create Payment Subscription"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "PaymentOptions content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.PaymentOptions"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Return state of payment\""
+          schema:
+            $ref: "#/definitions/models.PaymentStatus"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/payment/webhook:
+    post:
+      tags:
+      - "account/payment"
+      description: "Handle Payment Related Webhooks"
+      operationId: "PaymentRouter.Handle Payment Webhook"
+      parameters: []
+      responses:
+        "200":
+          description: "Successfully handled webhook"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
   /account/recipient/{recipient}/messages:
     get:
       tags:
@@ -2466,6 +2846,245 @@ paths:
           description: "Not Authorized"
         "500":
           description: "Internal Server Error"
+  /account/tag/:
+    get:
+      tags:
+      - "account/tag"
+      description: "Get All Tags"
+      operationId: "TagRouter.GetAll"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Retrieved all tags for account successful\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.Tag"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    post:
+      tags:
+      - "account/tag"
+      description: "Create Tag"
+      operationId: "TagRouter.Create"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The Tag content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.Tag"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Tag Created Successfully\""
+          schema:
+            $ref: "#/definitions/models.Tag"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: "Not Acceptable e.g. Color not right, MinLength not satisfied"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/tag/{tagid}:
+    delete:
+      tags:
+      - "account/tag"
+      description: "Delete Tag"
+      operationId: "TagRouter.Delete"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "tagid"
+        in: "path"
+        description: "The AccountTagId you want to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Tagid"
+      responses:
+        "200":
+          description: "\"Tag deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.DeleteResponse"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":tagid is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /account/template/:
+    get:
+      tags:
+      - "account/template"
+      description: "Get all templates"
+      operationId: "AccountTemplateRouter.GetAll"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"All Templates data received successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.AccountTemplate"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+    post:
+      tags:
+      - "account/template"
+      description: "Create a new template"
+      operationId: "AccountTemplateRouter.Create"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The AccountTemplate content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.AccountTemplate"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"AccountTemplate Created Successfully\""
+          schema:
+            $ref: "#/definitions/models.AccountTemplate"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/template/{templateid}:
+    get:
+      tags:
+      - "account/template"
+      description: "Get single template"
+      operationId: "AccountTemplateRouter.Get"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "templateid"
+        in: "path"
+        description: "ID of the template required"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Templateid"
+      responses:
+        "200":
+          description: "\"AccountTemplate data received successfully from templateid\""
+          schema:
+            $ref: "#/definitions/models.AccountTemplate"
+        "401":
+          description: "Not Authorized"
+        "404":
+          description: "AccountTemplate Not Found"
+    put:
+      tags:
+      - "account/template"
+      description: "update template"
+      operationId: "AccountTemplateRouter.update"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "templateid"
+        in: "path"
+        description: "The id of the template you want to update"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Templateid"
+      - in: "body"
+        name: "body"
+        description: "The template content"
+        required: true
+        schema:
+          $ref: "#/definitions/models.AccountTemplate"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"AccountTemplate updated successfully\""
+          schema:
+            $ref: "#/definitions/models.AccountTemplate"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "AccountTemplate Not Found"
+        "500":
+          description: "Internal server error"
+    delete:
+      tags:
+      - "account/template"
+      description: "Delete AccountTemplate"
+      operationId: "AccountTemplateRouter.Delete"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "templateid"
+        in: "path"
+        description: "The id of the template you want to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Templateid"
+      responses:
+        "200":
+          description: "\"AccountTemplate deleted successfully\""
+          schema:
+            $ref: "#/definitions/models.DeleteResponse"
+        "401":
+          description: "Not Authorized"
+        "404":
+          description: "AccountTemplate Not Found"
+        "500":
+          description: "Internal Server Error"
   /account/validation/:
     get:
       tags:
@@ -2813,55 +3432,6 @@ paths:
           description: "Request body is not in proper format"
         "500":
           description: "Internal Server Error"
-  /account/webhook/cache:
-    post:
-      tags:
-      - "account/webhook"
-      description: "Add Account Webhook To AccountWebhook Cache"
-      operationId: "AccountWebhookRouter.Create AccountWebhook In AccountWebhook Cache"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Add account webhook to cache"
-        required: true
-        schema:
-          $ref: "#/definitions/models.AccountWebhook"
-        x-exportParamName: "Body"
-      responses:
-        "200":
-          description: "\"Account webhook has been added successfully to cache\""
-        "401":
-          description: "Not Authorized"
-        "406":
-          description: "AccountWebhook list is empty"
-        "422":
-          description: "Request body is not in proper format"
-        "500":
-          description: "Internal Server Error"
-    delete:
-      tags:
-      - "account/webhook"
-      description: "Delete Account Webhook which is in AccountWebhook Cache"
-      operationId: "AccountWebhookRouter.Delete AccountWebhook in AccountWebhook Cache"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "AccountWebhook content"
-        required: true
-        schema:
-          $ref: "#/definitions/models.AccountWebhook"
-        x-exportParamName: "Body"
-      responses:
-        "200":
-          description: "\"Account webhook has been deleted successfully from cache\""
-        "401":
-          description: "Not Authorized"
-        "406":
-          description: "suppression list is empty"
-        "422":
-          description: "Request body is not in proper format"
-        "500":
-          description: "Internal Server Error"
   /account/webhook/count:
     get:
       tags:
@@ -2884,6 +3454,102 @@ paths:
           description: "Not Authorized"
         "500":
           description: "Internal Server Error"
+  /cluster/cache:
+    delete:
+      tags:
+      - "cluster"
+      description: "Delete item from cache of every node in cluster"
+      operationId: "ClusterRouter.Delete item from cache of every node in cluster"
+      parameters:
+      - name: "X-System-ApiKey"
+        in: "header"
+        description: "System API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSystemApiKey"
+      - name: "name"
+        in: "query"
+        description: "cache name"
+        required: false
+        type: "string"
+        x-exportParamName: "Name"
+        x-optionalDataType: "String"
+      - name: "key"
+        in: "query"
+        description: "cache item key to delete"
+        required: false
+        type: "string"
+        x-exportParamName: "Key"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Removed item from cache of every node of cluster successfully\""
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /cluster/cache/node:
+    delete:
+      tags:
+      - "cluster"
+      description: "Delete item from cache of specific node in cluster"
+      operationId: "ClusterRouter.Delete item from cache of specific node in cluster"
+      parameters:
+      - name: "X-System-ApiKey"
+        in: "header"
+        description: "System API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSystemApiKey"
+      - name: "name"
+        in: "query"
+        description: "cache name"
+        required: false
+        type: "string"
+        x-exportParamName: "Name"
+        x-optionalDataType: "String"
+      - name: "key"
+        in: "query"
+        description: "cache item key to delete"
+        required: false
+        type: "string"
+        x-exportParamName: "Key"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "\"Removed item from cache of specific node of cluster successfully\""
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /editor/:
+    get:
+      tags:
+      - "editor"
+      description: "fetch Bee editor token"
+      operationId: "EditorApiRouter.GetToken"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"Bee editor token received\""
+          schema:
+            $ref: "#/definitions/models.EditorTokenResponse"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Bee editor API response body is not in proper format"
+        "503":
+          description: "Bee editor API unavailable"
   /smtp/webhook:
     post:
       tags:
@@ -3121,6 +3787,85 @@ paths:
           description: "Request body is not in proper format"
         "500":
           description: "Internal Server Error"
+  /subaccount/domain/{domainId}/verify/email:
+    post:
+      tags:
+      - "subaccount/domain"
+      description: "Verify Domain By Email Request"
+      operationId: "DomainRouter.Verify Request"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "domainId"
+        in: "path"
+        description: "the DomainId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "DomainId"
+      - in: "body"
+        name: "body"
+        description: "The Email to be used to verify"
+        required: true
+        schema:
+          $ref: "#/definitions/models.VerifyByTokenRequest"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "Success Email Verification Link sent"
+        "400":
+          description: "Bad Request Email and Domain don't match or not"
+        "401":
+          description: "Not Authorized"
+        "403":
+          description: "Forbidden Already verified"
+        "406":
+          description: ":domainId is empty"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/domain/{domainId}/verify/email/{token}:
+    post:
+      tags:
+      - "subaccount/domain"
+      description: "Verify Domain By Signed Token"
+      operationId: "DomainRouter.Verify By Token"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - name: "domainId"
+        in: "path"
+        description: "the DomainId you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "DomainId"
+      - name: "token"
+        in: "path"
+        description: "The signed token used to verify"
+        required: true
+        type: "string"
+        x-exportParamName: "Token"
+      responses:
+        "200":
+          description: "\"Retrieved Domain from domainId successfully\""
+          schema:
+            $ref: "#/definitions/models.Domain"
+        "401":
+          description: "Not Authorized"
+        "406":
+          description: ":domainId is empty or token is invalid"
+        "500":
+          description: "Internal Server Error"
   /subaccount/domain/count:
     get:
       tags:
@@ -3149,6 +3894,39 @@ paths:
       - "subaccount/email"
       description: "Send Email To Contacts"
       operationId: "EmailRouter.Send Email"
+      parameters:
+      - name: "X-SubAccount-ApiKey"
+        in: "header"
+        description: "Sub-Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XSubAccountApiKey"
+      - in: "body"
+        name: "body"
+        description: "The Email Message"
+        required: true
+        schema:
+          $ref: "#/definitions/models.EmailMessage"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "\"Email Message Processed Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.EmailResponse"
+        "401":
+          description: "Not Authorized"
+        "422":
+          description: "Request body is not in proper format"
+        "500":
+          description: "Internal Server Error"
+  /subaccount/email/template:
+    post:
+      tags:
+      - "subaccount/email"
+      description: "Send Email To Contacts With Template"
+      operationId: "EmailRouter.Send Email With Template"
       parameters:
       - name: "X-SubAccount-ApiKey"
         in: "header"
@@ -4086,6 +4864,30 @@ paths:
           description: "Request body is not in proper format"
         "500":
           description: "Internal Server Error"
+  /system/template:
+    get:
+      tags:
+      - "system"
+      description: "Get all System Templates"
+      operationId: "SystemTemplateRouter.GetAllSystemTemplates"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      responses:
+        "200":
+          description: "\"All System Templates data received successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.SystemTemplate"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
 definitions:
   ".alert":
     type: "object"
@@ -4151,13 +4953,21 @@ definitions:
         format: "int64"
       industry:
         type: "string"
-      lock_threshold:
+      isCanceled:
+        type: "boolean"
+      isLastPaymentFailed:
+        type: "boolean"
+      isUpgraded:
+        type: "boolean"
+      lockThreshold:
         type: "integer"
         format: "int64"
       locked:
         type: "boolean"
       name:
         type: "string"
+      onboardCFinished:
+        type: "boolean"
       onboardQAnswered:
         type: "boolean"
       sendingVolumePerMonth:
@@ -4196,10 +5006,10 @@ definitions:
       routingMetaData: "routingMetaData"
       type: {}
       ips:
-      - autoWarmupStage: 0
+      - autoWarmupStage: 5
         yahooSettings: "yahooSettings"
         comcastSettings: "comcastSettings"
-        created: 6
+        created: 2
         icloudSettings: "icloudSettings"
         publicIP: "publicIP"
         type: {}
@@ -4211,14 +5021,14 @@ definitions:
             host: "host"
             type: "type"
           mailboxVerified: true
-          created: 5
+          created: 9
           name: "name"
           spf:
             textValue: "textValue"
             host: "host"
             type: "type"
           dkimVerified: true
-          id: 5
+          id: 3
           dkimConfig: "dkimConfig"
           track:
             textValue: "textValue"
@@ -4230,16 +5040,16 @@ definitions:
         autoWarmupEnabled: true
         mailruSettings: "mailruSettings"
         aolSettings: "aolSettings"
-        id: 1
+        id: 7
         yandexSettings: "yandexSettings"
         qqSettings: "qqSettings"
         defaultSettings: "defaultSettings"
         gmailSettings: "gmailSettings"
         microsoftSettings: "microsoftSettings"
-      - autoWarmupStage: 0
+      - autoWarmupStage: 5
         yahooSettings: "yahooSettings"
         comcastSettings: "comcastSettings"
-        created: 6
+        created: 2
         icloudSettings: "icloudSettings"
         publicIP: "publicIP"
         type: {}
@@ -4251,14 +5061,14 @@ definitions:
             host: "host"
             type: "type"
           mailboxVerified: true
-          created: 5
+          created: 9
           name: "name"
           spf:
             textValue: "textValue"
             host: "host"
             type: "type"
           dkimVerified: true
-          id: 5
+          id: 3
           dkimConfig: "dkimConfig"
           track:
             textValue: "textValue"
@@ -4270,12 +5080,41 @@ definitions:
         autoWarmupEnabled: true
         mailruSettings: "mailruSettings"
         aolSettings: "aolSettings"
-        id: 1
+        id: 7
         yandexSettings: "yandexSettings"
         qqSettings: "qqSettings"
         defaultSettings: "defaultSettings"
         gmailSettings: "gmailSettings"
         microsoftSettings: "microsoftSettings"
+  models.AccountTemplate:
+    type: "object"
+    properties:
+      created:
+        type: "integer"
+        format: "int64"
+      html:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      template:
+        type: "string"
+      text:
+        type: "string"
+      updated:
+        type: "integer"
+        format: "int64"
+    title: "AccountTemplate"
+    example:
+      template: "template"
+      created: 0
+      name: "name"
+      html: "html"
+      id: 6
+      text: "text"
+      updated: 1
   models.AccountWebhook:
     type: "object"
     properties:
@@ -4417,6 +5256,33 @@ definitions:
         type: "integer"
         format: "int64"
     title: "BackOffTrigger"
+  models.BillingPortalSession:
+    type: "object"
+    properties:
+      created:
+        type: "integer"
+        format: "int64"
+      customer:
+        type: "string"
+      id:
+        type: "string"
+      livemode:
+        type: "boolean"
+      object:
+        type: "string"
+      return_url:
+        type: "string"
+      url:
+        type: "string"
+    title: "BillingPortalSession"
+    example:
+      livemode: true
+      created: 0
+      return_url: "return_url"
+      id: "id"
+      url: "url"
+      customer: "customer"
+      object: "object"
   models.BlacklistStatus:
     type: "integer"
   models.BulkResponse:
@@ -4474,6 +5340,131 @@ definitions:
         reason: {}
         error: "error"
         email: "email"
+  models.Comment:
+    type: "object"
+    properties:
+      author:
+        $ref: "#/definitions/models.Member"
+      content:
+        type: "string"
+      created:
+        type: "integer"
+        format: "int64"
+      id:
+        type: "integer"
+        format: "int64"
+      incident:
+        $ref: "#/definitions/models.Incident"
+    title: "Comment"
+    example:
+      author:
+        Email: "Email"
+        phoneNumber: "phoneNumber"
+        created: 6
+        companyName: "companyName"
+        name: "name"
+        IsForbidden: true
+        Id: 0
+        IsVerified: true
+      created: 0
+      id: 6
+      incident:
+        summary: "summary"
+        relatedSubAccount:
+          apiKey: "apiKey"
+          created: 2
+          name: "name"
+          id: 4
+          type: {}
+          labels:
+          - color: "color"
+            created: 7
+            name: "name"
+            id: 1
+          - color: "color"
+            created: 7
+            name: "name"
+            id: 1
+          smtpAuths:
+          - password: "password"
+            created: 1
+            id: 1
+            updated: 6
+            username: "username"
+          - password: "password"
+            created: 1
+            id: 1
+            updated: 6
+            username: "username"
+        author:
+          Email: "Email"
+          phoneNumber: "phoneNumber"
+          created: 6
+          companyName: "companyName"
+          name: "name"
+          IsForbidden: true
+          Id: 0
+          IsVerified: true
+        created: 1
+        description: "description"
+        id: 5
+        relatedIP:
+          autoWarmupStage: 5
+          yahooSettings: "yahooSettings"
+          comcastSettings: "comcastSettings"
+          created: 2
+          icloudSettings: "icloudSettings"
+          publicIP: "publicIP"
+          type: {}
+          zohoSettings: "zohoSettings"
+          gmxSettings: "gmxSettings"
+          systemDomain:
+            dkim:
+              textValue: "textValue"
+              host: "host"
+              type: "type"
+            mailboxVerified: true
+            created: 9
+            name: "name"
+            spf:
+              textValue: "textValue"
+              host: "host"
+              type: "type"
+            dkimVerified: true
+            id: 3
+            dkimConfig: "dkimConfig"
+            track:
+              textValue: "textValue"
+              host: "host"
+              type: "type"
+            spfVerified: true
+            trackVerified: true
+          reverseDNSHostname: "reverseDNSHostname"
+          autoWarmupEnabled: true
+          mailruSettings: "mailruSettings"
+          aolSettings: "aolSettings"
+          id: 7
+          yandexSettings: "yandexSettings"
+          qqSettings: "qqSettings"
+          defaultSettings: "defaultSettings"
+          gmailSettings: "gmailSettings"
+          microsoftSettings: "microsoftSettings"
+        updated: 5
+        status: {}
+        tags:
+        - color: "color"
+          created: 7
+          name: "name"
+          description: "description"
+          id: 1
+          updated: 4
+        - color: "color"
+          created: 7
+          name: "name"
+          description: "description"
+          id: 1
+          updated: 4
+      content: "content"
   models.CountStat:
     type: "object"
     properties:
@@ -4483,6 +5474,8 @@ definitions:
     title: "CountStat"
     example:
       count: 0
+  models.CustomerQuality:
+    type: "object"
   models.DNSRecord:
     type: "object"
     properties:
@@ -4558,6 +5551,8 @@ definitions:
         $ref: "#/definitions/models.DNSRecord"
       trackVerified:
         type: "boolean"
+      verified:
+        type: "boolean"
     title: "Domain"
     example:
       dkim:
@@ -4570,6 +5565,7 @@ definitions:
         type: "type"
       created: 0
       name: "name"
+      verified: true
       dkimVerified: true
       id: 6
       returnPathVerified: true
@@ -4600,8 +5596,12 @@ definitions:
         type: "string"
       industry:
         type: "string"
+      logoURL:
+        type: "string"
       name:
         type: "string"
+      onboardCFinished:
+        type: "boolean"
       onboardQAnswered:
         type: "boolean"
       phoneNumber:
@@ -4613,6 +5613,14 @@ definitions:
       verifyEmail:
         type: "boolean"
     title: "EAccountMember"
+  models.EComment:
+    type: "object"
+    properties:
+      author:
+        $ref: "#/definitions/models.IEMember"
+      content:
+        type: "string"
+    title: "EComment"
   models.EDomain:
     type: "object"
     properties:
@@ -4639,6 +5647,27 @@ definitions:
         type: "integer"
         format: "int64"
     title: "EIPPool"
+  models.EIncident:
+    type: "object"
+    properties:
+      author:
+        $ref: "#/definitions/models.IEMember"
+      description:
+        type: "string"
+      relatedIP:
+        $ref: "#/definitions/models.IEIP"
+      relatedSubAccount:
+        $ref: "#/definitions/models.IESubAccount"
+      status:
+        type: "integer"
+        format: "int64"
+      summary:
+        type: "string"
+      tags:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.IETag"
+    title: "EIncident"
   models.EIntegration:
     type: "object"
     properties:
@@ -4708,6 +5737,39 @@ definitions:
       url:
         type: "string"
     title: "EWebhook"
+  models.EditorTokenResponse:
+    type: "object"
+    properties:
+      ".expires":
+        type: "string"
+      ".issued":
+        type: "string"
+      access_token:
+        type: "string"
+      as:client_id:
+        type: "string"
+      as:region:
+        type: "string"
+      expires_in:
+        type: "integer"
+        format: "int32"
+      refresh_token:
+        type: "string"
+      token_type:
+        type: "string"
+      userName:
+        type: "string"
+    title: "EditorTokenResponse"
+    example:
+      access_token: "access_token"
+      refresh_token: "refresh_token"
+      as:client_id: "as:client_id"
+      ".expires": ".expires"
+      as:region: "as:region"
+      token_type: "token_type"
+      userName: "userName"
+      expires_in: 0
+      ".issued": ".issued"
   models.EmailErrorCode:
     type: "object"
   models.EmailList:
@@ -4733,6 +5795,8 @@ definitions:
       replyTo:
         $ref: "#/definitions/models.ReplyTo"
       subject:
+        type: "string"
+      template:
         type: "string"
       textBody:
         type: "string"
@@ -4873,6 +5937,34 @@ definitions:
       - server: "server"
         txt: "txt"
         status: {}
+  models.IEIP:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    title: "IEIP"
+  models.IEMember:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    title: "IEMember"
+  models.IESubAccount:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    title: "IESubAccount"
+  models.IETag:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+    title: "IETag"
   models.IIP:
     type: "object"
     properties:
@@ -4943,10 +6035,10 @@ definitions:
         type: "string"
     title: "IP"
     example:
-      autoWarmupStage: 0
+      autoWarmupStage: 5
       yahooSettings: "yahooSettings"
       comcastSettings: "comcastSettings"
-      created: 6
+      created: 2
       icloudSettings: "icloudSettings"
       publicIP: "publicIP"
       type: {}
@@ -4958,14 +6050,14 @@ definitions:
           host: "host"
           type: "type"
         mailboxVerified: true
-        created: 5
+        created: 9
         name: "name"
         spf:
           textValue: "textValue"
           host: "host"
           type: "type"
         dkimVerified: true
-        id: 5
+        id: 3
         dkimConfig: "dkimConfig"
         track:
           textValue: "textValue"
@@ -4977,7 +6069,7 @@ definitions:
       autoWarmupEnabled: true
       mailruSettings: "mailruSettings"
       aolSettings: "aolSettings"
-      id: 1
+      id: 7
       yandexSettings: "yandexSettings"
       qqSettings: "qqSettings"
       defaultSettings: "defaultSettings"
@@ -5014,10 +6106,10 @@ definitions:
       routingMetaData: "routingMetaData"
       type: {}
       ips:
-      - autoWarmupStage: 0
+      - autoWarmupStage: 5
         yahooSettings: "yahooSettings"
         comcastSettings: "comcastSettings"
-        created: 6
+        created: 2
         icloudSettings: "icloudSettings"
         publicIP: "publicIP"
         type: {}
@@ -5029,14 +6121,14 @@ definitions:
             host: "host"
             type: "type"
           mailboxVerified: true
-          created: 5
+          created: 9
           name: "name"
           spf:
             textValue: "textValue"
             host: "host"
             type: "type"
           dkimVerified: true
-          id: 5
+          id: 3
           dkimConfig: "dkimConfig"
           track:
             textValue: "textValue"
@@ -5048,16 +6140,16 @@ definitions:
         autoWarmupEnabled: true
         mailruSettings: "mailruSettings"
         aolSettings: "aolSettings"
-        id: 1
+        id: 7
         yandexSettings: "yandexSettings"
         qqSettings: "qqSettings"
         defaultSettings: "defaultSettings"
         gmailSettings: "gmailSettings"
         microsoftSettings: "microsoftSettings"
-      - autoWarmupStage: 0
+      - autoWarmupStage: 5
         yahooSettings: "yahooSettings"
         comcastSettings: "comcastSettings"
-        created: 6
+        created: 2
         icloudSettings: "icloudSettings"
         publicIP: "publicIP"
         type: {}
@@ -5069,14 +6161,14 @@ definitions:
             host: "host"
             type: "type"
           mailboxVerified: true
-          created: 5
+          created: 9
           name: "name"
           spf:
             textValue: "textValue"
             host: "host"
             type: "type"
           dkimVerified: true
-          id: 5
+          id: 3
           dkimConfig: "dkimConfig"
           track:
             textValue: "textValue"
@@ -5088,7 +6180,7 @@ definitions:
         autoWarmupEnabled: true
         mailruSettings: "mailruSettings"
         aolSettings: "aolSettings"
-        id: 1
+        id: 7
         yandexSettings: "yandexSettings"
         qqSettings: "qqSettings"
         defaultSettings: "defaultSettings"
@@ -5151,6 +6243,133 @@ definitions:
       day: 6
   models.IPType:
     type: "object"
+  models.Incident:
+    type: "object"
+    properties:
+      author:
+        $ref: "#/definitions/models.Member"
+      created:
+        type: "integer"
+        format: "int64"
+      description:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int64"
+      relatedIP:
+        $ref: "#/definitions/models.IP"
+      relatedSubAccount:
+        $ref: "#/definitions/models.SubAccount"
+      status:
+        $ref: "#/definitions/models.IncidentStatus"
+      summary:
+        type: "string"
+      tags:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.Tag"
+      updated:
+        type: "integer"
+        format: "int64"
+    title: "Incident"
+    example:
+      summary: "summary"
+      relatedSubAccount:
+        apiKey: "apiKey"
+        created: 2
+        name: "name"
+        id: 4
+        type: {}
+        labels:
+        - color: "color"
+          created: 7
+          name: "name"
+          id: 1
+        - color: "color"
+          created: 7
+          name: "name"
+          id: 1
+        smtpAuths:
+        - password: "password"
+          created: 1
+          id: 1
+          updated: 6
+          username: "username"
+        - password: "password"
+          created: 1
+          id: 1
+          updated: 6
+          username: "username"
+      author:
+        Email: "Email"
+        phoneNumber: "phoneNumber"
+        created: 6
+        companyName: "companyName"
+        name: "name"
+        IsForbidden: true
+        Id: 0
+        IsVerified: true
+      created: 1
+      description: "description"
+      id: 5
+      relatedIP:
+        autoWarmupStage: 5
+        yahooSettings: "yahooSettings"
+        comcastSettings: "comcastSettings"
+        created: 2
+        icloudSettings: "icloudSettings"
+        publicIP: "publicIP"
+        type: {}
+        zohoSettings: "zohoSettings"
+        gmxSettings: "gmxSettings"
+        systemDomain:
+          dkim:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          mailboxVerified: true
+          created: 9
+          name: "name"
+          spf:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          dkimVerified: true
+          id: 3
+          dkimConfig: "dkimConfig"
+          track:
+            textValue: "textValue"
+            host: "host"
+            type: "type"
+          spfVerified: true
+          trackVerified: true
+        reverseDNSHostname: "reverseDNSHostname"
+        autoWarmupEnabled: true
+        mailruSettings: "mailruSettings"
+        aolSettings: "aolSettings"
+        id: 7
+        yandexSettings: "yandexSettings"
+        qqSettings: "qqSettings"
+        defaultSettings: "defaultSettings"
+        gmailSettings: "gmailSettings"
+        microsoftSettings: "microsoftSettings"
+      updated: 5
+      status: {}
+      tags:
+      - color: "color"
+        created: 7
+        name: "name"
+        description: "description"
+        id: 1
+        updated: 4
+      - color: "color"
+        created: 7
+        name: "name"
+        description: "description"
+        id: 1
+        updated: 4
+  models.IncidentStatus:
+    type: "integer"
   models.Instance:
     type: "object"
     properties:
@@ -5241,9 +6460,9 @@ definitions:
     title: "Label"
     example:
       color: "color"
-      created: 0
+      created: 7
       name: "name"
-      id: 6
+      id: 1
   models.Member:
     type: "object"
     properties:
@@ -5279,6 +6498,24 @@ definitions:
     type: "object"
   models.NotificationType:
     type: "object"
+  models.OnboardingChecklist:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      isDomainAdded:
+        type: "boolean"
+      isDomainVerified:
+        type: "boolean"
+      isFirstEmailSent:
+        type: "boolean"
+    title: "OnboardingChecklist"
+    example:
+      isFirstEmailSent: true
+      id: 0
+      isDomainAdded: true
+      isDomainVerified: true
   models.PIPStat:
     type: "object"
     properties:
@@ -5302,6 +6539,24 @@ definitions:
         clicked: 0
         day: 6
       name: "name"
+  models.PaymentOptions:
+    type: "object"
+    properties:
+      customerId:
+        type: "string"
+      paymentMethodId:
+        type: "string"
+      priceId:
+        type: "string"
+    title: "PaymentOptions"
+  models.PaymentStatus:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+    title: "PaymentStatus"
+    example:
+      status: "status"
   models.QEmailMessage:
     type: "object"
     properties:
@@ -5611,8 +6866,8 @@ definitions:
     example:
       password: "password"
       created: 1
-      id: 5
-      updated: 5
+      id: 1
+      updated: 6
       username: "username"
   models.SMTPStat:
     type: "object"
@@ -5742,29 +6997,29 @@ definitions:
     title: "SubAccount"
     example:
       apiKey: "apiKey"
-      created: 0
+      created: 2
       name: "name"
-      id: 6
+      id: 4
       type: {}
       labels:
       - color: "color"
-        created: 0
+        created: 7
         name: "name"
-        id: 6
+        id: 1
       - color: "color"
-        created: 0
+        created: 7
         name: "name"
-        id: 6
+        id: 1
       smtpAuths:
       - password: "password"
         created: 1
-        id: 5
-        updated: 5
+        id: 1
+        updated: 6
         username: "username"
       - password: "password"
         created: 1
-        id: 5
-        updated: 5
+        id: 1
+        updated: 6
         username: "username"
   models.SubAccountType:
     type: "object"
@@ -5846,14 +7101,14 @@ definitions:
         host: "host"
         type: "type"
       mailboxVerified: true
-      created: 5
+      created: 9
       name: "name"
       spf:
         textValue: "textValue"
         host: "host"
         type: "type"
       dkimVerified: true
-      id: 5
+      id: 3
       dkimConfig: "dkimConfig"
       track:
         textValue: "textValue"
@@ -5861,6 +7116,69 @@ definitions:
         type: "type"
       spfVerified: true
       trackVerified: true
+  models.SystemIPPool:
+    type: "object"
+    properties:
+      IPs:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.IP"
+      created:
+        type: "integer"
+        format: "int64"
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    title: "SystemIPPool"
+  models.SystemTemplate:
+    type: "object"
+    properties:
+      html:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      template:
+        type: "string"
+      text:
+        type: "string"
+    title: "SystemTemplate"
+    example:
+      template: "template"
+      name: "name"
+      html: "html"
+      id: 0
+      text: "text"
+  models.Tag:
+    type: "object"
+    properties:
+      color:
+        type: "string"
+      created:
+        type: "integer"
+        format: "int64"
+      description:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      updated:
+        type: "integer"
+        format: "int64"
+    title: "Tag"
+    example:
+      color: "color"
+      created: 7
+      name: "name"
+      description: "description"
+      id: 1
+      updated: 4
   models.To:
     type: "object"
     properties:
@@ -5898,6 +7216,12 @@ definitions:
       email: "email"
   models.ValidationReason:
     type: "integer"
+  models.VerifyByTokenRequest:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+    title: "VerifyByTokenRequest"
   models.WMessage:
     type: "object"
     properties:
