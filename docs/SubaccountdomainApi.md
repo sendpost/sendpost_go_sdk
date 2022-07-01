@@ -259,7 +259,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DomainRouterVerifyRequest**
-> DomainRouterVerifyRequest(ctx, xSubAccountApiKey, domainId, body)
+> DomainRouterVerifyRequest(ctx, xSubAccountApiKey, domainId, body, optional)
 
 
 Verify Domain By Email Request
@@ -272,6 +272,17 @@ Name | Type | Description  | Notes
   **xSubAccountApiKey** | **string**| Sub-Account API Key | 
   **domainId** | **int64**| the DomainId you want to get | 
   **body** | [**ModelsVerifyByTokenRequest**](ModelsVerifyByTokenRequest.md)| The Email to be used to verify | 
+ **optional** | ***SubaccountdomainApiDomainRouterVerifyRequestOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a SubaccountdomainApiDomainRouterVerifyRequestOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **redirectPath** | **optional.String**| redirectPath | 
 
 ### Return type
 

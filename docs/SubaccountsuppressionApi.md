@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **SuppressionRouterCount**
-> ModelsCountStat SuppressionRouterCount(ctx, xSubAccountApiKey)
+> ModelsCountStat SuppressionRouterCount(ctx, xSubAccountApiKey, optional)
 
 
 Count Total Suppressions
@@ -24,6 +24,16 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **xSubAccountApiKey** | **string**| Sub-Account API Key | 
+ **optional** | ***SubaccountsuppressionApiSuppressionRouterCountOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a SubaccountsuppressionApiSuppressionRouterCountOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **from** | **optional.String**| from date | 
+ **to** | **optional.String**| to date | 
 
 ### Return type
 
@@ -177,6 +187,8 @@ Name | Type | Description  | Notes
  **offset** | **optional.Int64**| offset | 
  **limit** | **optional.Int64**| limit | 
  **search** | **optional.String**| search | 
+ **from** | **optional.String**| from date | 
+ **to** | **optional.String**| to date | 
 
 ### Return type
 

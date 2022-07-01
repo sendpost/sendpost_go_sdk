@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Email** | **string** |  | [optional] [default to null]
+**JwtToken** | **string** |  | [optional] [default to null]
 **SignupMode** | **string** |  | [optional] [default to null]
 **Token** | **string** |  | [optional] [default to null]
 **Uid** | **string** |  | [optional] [default to null]

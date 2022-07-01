@@ -3,7 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CustomFields** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
+**Bcc** | [**[]ModelsCopyTo**](models.CopyTo.md) |  | [optional] [default to null]
+**Cc** | [**[]ModelsCopyTo**](models.CopyTo.md) |  | [optional] [default to null]
+**CustomFields** | **interface{}** |  | [optional] [default to null]
 **Email** | **string** |  | [optional] [default to null]
 **Name** | **string** |  | [optional] [default to null]
 

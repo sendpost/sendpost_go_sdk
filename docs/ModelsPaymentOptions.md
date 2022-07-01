@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CustomerId** | **string** |  | [optional] [default to null]
+**IpCount** | **int64** |  | [optional] [default to null]
 **PaymentMethodId** | **string** |  | [optional] [default to null]
 **PriceId** | **string** |  | [optional] [default to null]
 

@@ -3,7 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AssignedTo** | [***ModelsMember**](models.Member.md) |  | [optional] [default to null]
 **Author** | [***ModelsMember**](models.Member.md) |  | [optional] [default to null]
+**Closed** | **int64** |  | [optional] [default to null]
 **Created** | **int64** |  | [optional] [default to null]
 **Description** | **string** |  | [optional] [default to null]
 **Id** | **int64** |  | [optional] [default to null]

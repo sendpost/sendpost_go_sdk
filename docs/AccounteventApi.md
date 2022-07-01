@@ -8,6 +8,8 @@ Method | HTTP request | Description
 [**EventRouterCountAllEventsFromANodeOfASubAccountForAGivenTimeRange**](AccounteventApi.md#EventRouterCountAllEventsFromANodeOfASubAccountForAGivenTimeRange) | **Get** /account/event/node/count | 
 [**EventRouterGet**](AccounteventApi.md#EventRouterGet) | **Get** /account/event/{eventId} | 
 [**EventRouterGetAllEventTimestampKeysOfASubAccountFromASpecificNodeForAGivenTimeRange**](AccounteventApi.md#EventRouterGetAllEventTimestampKeysOfASubAccountFromASpecificNodeForAGivenTimeRange) | **Get** /account/event/node/timestampkeys | 
+[**EventRouterGetAllEventsFromAAccountForAGivenTimeRange**](AccounteventApi.md#EventRouterGetAllEventsFromAAccountForAGivenTimeRange) | **Get** /account/event/ | 
+[**EventRouterGetAllEventsFromAnAccountWhichHasOnlyProccessed**](AccounteventApi.md#EventRouterGetAllEventsFromAnAccountWhichHasOnlyProccessed) | **Get** /account/event/node/eventType | 
 [**EventRouterGetAllEventsOfAAccountFromASpecificNode**](AccounteventApi.md#EventRouterGetAllEventsOfAAccountFromASpecificNode) | **Post** /account/event/node | 
 [**EventRouterGetEventInNode**](AccounteventApi.md#EventRouterGetEventInNode) | **Get** /account/event/node/{eventId} | 
 
@@ -149,6 +151,94 @@ Name | Type | Description  | Notes
  **type_** | **optional.String**| search type | 
  **from** | **optional.String**| from date | 
  **to** | **optional.String**| to date | 
+ **source** | **optional.String**| data source from which to get timestamp keys subaccount or ip | 
+ **sourceId** | **optional.String**| source id from which to get timestamp keys subaccount or ip | 
+
+### Return type
+
+[**[]ModelsQEvent**](models.QEvent.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EventRouterGetAllEventsFromAAccountForAGivenTimeRange**
+> []ModelsQEvent EventRouterGetAllEventsFromAAccountForAGivenTimeRange(ctx, xAccountApiKey, optional)
+
+
+Find all events from a account for a given time-range
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **xAccountApiKey** | **string**| Account API Key | 
+ **optional** | ***AccounteventApiEventRouterGetAllEventsFromAAccountForAGivenTimeRangeOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a AccounteventApiEventRouterGetAllEventsFromAAccountForAGivenTimeRangeOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **offset** | **optional.Int64**| offset | 
+ **limit** | **optional.Int64**| limit | 
+ **search** | **optional.String**| search term | 
+ **type_** | **optional.String**| search type | 
+ **from** | **optional.String**| from date | 
+ **to** | **optional.String**| to date | 
+ **source** | **optional.String**| data source from which to get timestamp keys subaccount or ip | 
+ **sourceId** | **optional.String**| source id from which to get timestamp keys subaccount or ip | 
+
+### Return type
+
+[**[]ModelsQEvent**](models.QEvent.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EventRouterGetAllEventsFromAnAccountWhichHasOnlyProccessed**
+> []ModelsQEvent EventRouterGetAllEventsFromAnAccountWhichHasOnlyProccessed(ctx, xAccountApiKey, optional)
+
+
+Find all events from a account for a given time-range
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **xAccountApiKey** | **string**| Account API Key | 
+ **optional** | ***AccounteventApiEventRouterGetAllEventsFromAnAccountWhichHasOnlyProccessedOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a AccounteventApiEventRouterGetAllEventsFromAnAccountWhichHasOnlyProccessedOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **offset** | **optional.Int64**| offset | 
+ **limit** | **optional.Int64**| limit | 
+ **type_** | **optional.String**| search type | 
+ **from** | **optional.String**| from date | 
+ **to** | **optional.String**| to date | 
+ **filterEvent** | **optional.String**| filter event types | 
  **source** | **optional.String**| data source from which to get timestamp keys subaccount or ip | 
  **sourceId** | **optional.String**| source id from which to get timestamp keys subaccount or ip | 
 

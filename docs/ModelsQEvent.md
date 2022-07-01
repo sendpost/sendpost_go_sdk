@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **EventID** | **string** |  | [optional] [default to null]
 **EventMetadata** | [***ModelsEventMetadata**](models.EventMetadata.md) |  | [optional] [default to null]
 **From** | **string** |  | [optional] [default to null]
-**Groups** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
+**Groups** | **interface{}** |  | [optional] [default to null]
 **IpID** | **int64** |  | [optional] [default to null]
 **MessageID** | **string** |  | [optional] [default to null]
 **MessageType** | **string** |  | [optional] [default to null]

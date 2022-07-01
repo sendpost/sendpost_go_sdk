@@ -4,16 +4,16 @@ All URIs are relative to *https://api.sendpost.io/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**SMTPStatRouterGetAllAggregateIPProviderSMTPStats**](AccountsmtpstatApi.md#SMTPStatRouterGetAllAggregateIPProviderSMTPStats) | **Get** /account/smtp/stat/ip/{ipid}/provider/{pname}/aggregate | 
+[**SMTPStatRouterGetAllAggregateIPProviderSMTPStats**](AccountsmtpstatApi.md#SMTPStatRouterGetAllAggregateIPProviderSMTPStats) | **Get** /account/smtp/stat/ip/{ipid}/provider/{provider}/aggregate | 
 [**SMTPStatRouterGetAllAggregateIPSMTPStats**](AccountsmtpstatApi.md#SMTPStatRouterGetAllAggregateIPSMTPStats) | **Get** /account/smtp/stat/ip/{ipid}/aggregate | 
 [**SMTPStatRouterGetAllAggregateIPSMTPStatsForSubAccount**](AccountsmtpstatApi.md#SMTPStatRouterGetAllAggregateIPSMTPStatsForSubAccount) | **Get** /account/smtp/stat/ip/{ipid}/subaccount/{sid}/aggregate | 
-[**SMTPStatRouterGetAllAggregateSubAccountProviderSMTPStats**](AccountsmtpstatApi.md#SMTPStatRouterGetAllAggregateSubAccountProviderSMTPStats) | **Get** /account/smtp/stat/subaccount/{sid}/provider/{pname}/aggregate | 
+[**SMTPStatRouterGetAllAggregateSubAccountProviderSMTPStats**](AccountsmtpstatApi.md#SMTPStatRouterGetAllAggregateSubAccountProviderSMTPStats) | **Get** /account/smtp/stat/subaccount/{sid}/provider/{provider}/aggregate | 
 [**SMTPStatRouterGetAllAggregateSubAccountSMTPStats**](AccountsmtpstatApi.md#SMTPStatRouterGetAllAggregateSubAccountSMTPStats) | **Get** /account/smtp/stat/subaccount/{sid}/aggregate | 
 [**SMTPStatRouterGetAllAggregateSubAccountSMTPStatsForIP**](AccountsmtpstatApi.md#SMTPStatRouterGetAllAggregateSubAccountSMTPStatsForIP) | **Get** /account/smtp/stat/subaccount/{sid}/ip/{ipid}/aggregate | 
 
 
 # **SMTPStatRouterGetAllAggregateIPProviderSMTPStats**
-> []ModelsSmtpStat SMTPStatRouterGetAllAggregateIPProviderSMTPStats(ctx, xAccountApiKey, ipid, pname, optional)
+> []ModelsSmtpStat SMTPStatRouterGetAllAggregateIPProviderSMTPStats(ctx, xAccountApiKey, ipid, provider, optional)
 
 
 Get All Aggregate IP Provider SMTP Stats
@@ -25,7 +25,7 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **xAccountApiKey** | **string**| Account API Key | 
   **ipid** | **int64**| the IP ID you want to get | 
-  **pname** | **string**| the provider name | 
+  **provider** | **string**| the provider name | 
  **optional** | ***AccountsmtpstatApiSMTPStatRouterGetAllAggregateIPProviderSMTPStatsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -78,6 +78,7 @@ Name | Type | Description  | Notes
 
  **from** | **optional.String**| from date | 
  **to** | **optional.String**| to date | 
+ **provider** | **optional.String**| the provider whose stats you want | 
 
 ### Return type
 
@@ -120,6 +121,7 @@ Name | Type | Description  | Notes
 
  **from** | **optional.String**| from date | 
  **to** | **optional.String**| to date | 
+ **provider** | **optional.String**| the provider whose stats you want | 
 
 ### Return type
 
@@ -137,7 +139,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SMTPStatRouterGetAllAggregateSubAccountProviderSMTPStats**
-> []ModelsSmtpStat SMTPStatRouterGetAllAggregateSubAccountProviderSMTPStats(ctx, xAccountApiKey, sid, pname, optional)
+> []ModelsSmtpStat SMTPStatRouterGetAllAggregateSubAccountProviderSMTPStats(ctx, xAccountApiKey, sid, provider, optional)
 
 
 Get All Aggregate SubAccount Provider SMTP Stats
@@ -149,7 +151,7 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **xAccountApiKey** | **string**| Account API Key | 
   **sid** | **int64**| the SubAccount ID you want to get | 
-  **pname** | **string**| the provider name | 
+  **provider** | **string**| the provider name | 
  **optional** | ***AccountsmtpstatApiSMTPStatRouterGetAllAggregateSubAccountProviderSMTPStatsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -202,6 +204,7 @@ Name | Type | Description  | Notes
 
  **from** | **optional.String**| from date | 
  **to** | **optional.String**| to date | 
+ **provider** | **optional.String**| the provider whose stats you want | 
 
 ### Return type
 
@@ -244,6 +247,7 @@ Name | Type | Description  | Notes
 
  **from** | **optional.String**| from date | 
  **to** | **optional.String**| to date | 
+ **provider** | **optional.String**| the provider whose stats you want | 
 
 ### Return type
 

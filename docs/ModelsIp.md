@@ -5,7 +5,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AolSettings** | **string** |  | [optional] [default to null]
 **AutoWarmupEnabled** | **bool** |  | [optional] [default to null]
-**AutoWarmupStage** | **int64** |  | [optional] [default to null]
 **ComcastSettings** | **string** |  | [optional] [default to null]
 **Created** | **int64** |  | [optional] [default to null]
 **DefaultSettings** | **string** |  | [optional] [default to null]
@@ -13,6 +12,10 @@ Name | Type | Description | Notes
 **GmxSettings** | **string** |  | [optional] [default to null]
 **IcloudSettings** | **string** |  | [optional] [default to null]
 **Id** | **int64** |  | [optional] [default to null]
+**InfraClassification** | **string** |  | [optional] [default to null]
+**InfraMonitor** | **bool** |  | [optional] [default to null]
+**IpDomainWarmupStatus** | [**[]ModelsIpDomainWarmupStatus**](models.IPDomainWarmupStatus.md) |  | [optional] [default to null]
+**Labels** | [**[]ModelsLabel**](models.Label.md) |  | [optional] [default to null]
 **MailruSettings** | **string** |  | [optional] [default to null]
 **MicrosoftSettings** | **string** |  | [optional] [default to null]
 **PublicIP** | **string** |  | [optional] [default to null]

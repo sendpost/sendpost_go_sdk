@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **LabelRouterCount**
-> ModelsCountStat LabelRouterCount(ctx, xAccountApiKey)
+> ModelsCountStat LabelRouterCount(ctx, xAccountApiKey, type_)
 
 
 Count Total Labels
@@ -24,6 +24,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **xAccountApiKey** | **string**| Account API Key | 
+  **type_** | **string**| get all labels type | 
 
 ### Return type
 
@@ -128,7 +129,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LabelRouterGetAll**
-> []ModelsLabel LabelRouterGetAll(ctx, xAccountApiKey)
+> []ModelsLabel LabelRouterGetAll(ctx, xAccountApiKey, type_)
 
 
 Get All Labels
@@ -139,6 +140,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **xAccountApiKey** | **string**| Account API Key | 
+  **type_** | **string**| get all labels type | 
 
 ### Return type
 

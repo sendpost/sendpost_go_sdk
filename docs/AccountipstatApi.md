@@ -5,12 +5,11 @@ All URIs are relative to *https://api.sendpost.io/api/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**IPStatRouterGetAllAggregateIPStats**](AccountipstatApi.md#IPStatRouterGetAllAggregateIPStats) | **Get** /account/ip/stat/{ipid}/aggregate | 
-[**IPStatRouterGetAllAggregateIPStatsByGroup**](AccountipstatApi.md#IPStatRouterGetAllAggregateIPStatsByGroup) | **Get** /account/ip/stat/{ipid}/aggregate/provider | 
+[**IPStatRouterGetAllAggregateIPStatsByProvider**](AccountipstatApi.md#IPStatRouterGetAllAggregateIPStatsByProvider) | **Get** /account/ip/stat/{ipid}/aggregate/provider | 
 [**IPStatRouterGetAllAggregatedProviderStatsForAIP**](AccountipstatApi.md#IPStatRouterGetAllAggregatedProviderStatsForAIP) | **Get** /account/ip/stat/{ipid}/aggregate/providers | 
 [**IPStatRouterGetAllAggregatedProviderStatsForASpecificSubAccountOfAIP**](AccountipstatApi.md#IPStatRouterGetAllAggregatedProviderStatsForASpecificSubAccountOfAIP) | **Get** /account/ip/stat/{ipid}/aggregate/sid/{sid}/providers | 
 [**IPStatRouterGetAllAggregatedSubAccountStatsForAnIP**](AccountipstatApi.md#IPStatRouterGetAllAggregatedSubAccountStatsForAnIP) | **Get** /account/ip/stat/{ipid}/aggregate/subaccounts | 
 [**IPStatRouterGetAllIPStats**](AccountipstatApi.md#IPStatRouterGetAllIPStats) | **Get** /account/ip/stat/{ipid} | 
-[**IPStatRouterGetAllIPStatsByGroup**](AccountipstatApi.md#IPStatRouterGetAllIPStatsByGroup) | **Get** /account/ip/stat/{ipid}/provider | 
 
 
 # **IPStatRouterGetAllAggregateIPStats**
@@ -37,6 +36,7 @@ Name | Type | Description  | Notes
 
  **from** | **optional.String**| from date | 
  **to** | **optional.String**| to date | 
+ **provider** | **optional.String**| the provider whose stats you want | 
 
 ### Return type
 
@@ -53,11 +53,11 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **IPStatRouterGetAllAggregateIPStatsByGroup**
-> ModelsStat IPStatRouterGetAllAggregateIPStatsByGroup(ctx, xAccountApiKey, ipid, provider, optional)
+# **IPStatRouterGetAllAggregateIPStatsByProvider**
+> ModelsStat IPStatRouterGetAllAggregateIPStatsByProvider(ctx, xAccountApiKey, ipid, optional)
 
 
-Get All Aggregate Stats by Group
+Get All Aggregate Stats by Provider
 
 ### Required Parameters
 
@@ -66,19 +66,18 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **xAccountApiKey** | **string**| Account API Key | 
   **ipid** | **int64**| the IPId you want to get | 
-  **provider** | **string**| the group whose stats you want | 
- **optional** | ***AccountipstatApiIPStatRouterGetAllAggregateIPStatsByGroupOpts** | optional parameters | nil if no parameters
+ **optional** | ***AccountipstatApiIPStatRouterGetAllAggregateIPStatsByProviderOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a AccountipstatApiIPStatRouterGetAllAggregateIPStatsByGroupOpts struct
+Optional parameters are passed through a pointer to a AccountipstatApiIPStatRouterGetAllAggregateIPStatsByProviderOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
-
  **from** | **optional.String**| from date | 
  **to** | **optional.String**| to date | 
+ **provider** | **optional.String**| the provider whose stats you want | 
 
 ### Return type
 
@@ -201,6 +200,8 @@ Name | Type | Description  | Notes
 
  **from** | **optional.String**| from date | 
  **to** | **optional.String**| to date | 
+ **provider** | **optional.String**| the provider whose stats you want | 
+ **sortBy** | **optional.String**| the sorting order | 
 
 ### Return type
 
@@ -241,48 +242,7 @@ Name | Type | Description  | Notes
 
  **from** | **optional.String**| from date | 
  **to** | **optional.String**| to date | 
-
-### Return type
-
-[**[]ModelsRipStat**](models.RIPStat.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **IPStatRouterGetAllIPStatsByGroup**
-> []ModelsRipStat IPStatRouterGetAllIPStatsByGroup(ctx, ipid, xAccountApiKey, provider, optional)
-
-
-Get All IP Stats by Group
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **ipid** | **int64**| the IPId you want to get | 
-  **xAccountApiKey** | **string**| Account API Key | 
-  **provider** | **string**| the provider whose stats you want | 
- **optional** | ***AccountipstatApiIPStatRouterGetAllIPStatsByGroupOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a AccountipstatApiIPStatRouterGetAllIPStatsByGroupOpts struct
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
- **from** | **optional.String**| from date | 
- **to** | **optional.String**| to date | 
+ **provider** | **optional.String**| the provider whose stats you want | 
 
 ### Return type
 

@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**SubAccountRouterDelete**](AccountsubaccountApi.md#SubAccountRouterDelete) | **Delete** /account/subaccount/{subAccountId} | 
 [**SubAccountRouterGet**](AccountsubaccountApi.md#SubAccountRouterGet) | **Get** /account/subaccount/{subAccountId} | 
 [**SubAccountRouterGetAll**](AccountsubaccountApi.md#SubAccountRouterGetAll) | **Get** /account/subaccount/ | 
+[**SubAccountRouterGetAllSubAccountIncidents**](AccountsubaccountApi.md#SubAccountRouterGetAllSubAccountIncidents) | **Get** /account/subaccount/{subAccountId}/incident | 
 [**SubAccountRouterUpdate**](AccountsubaccountApi.md#SubAccountRouterUpdate) | **Put** /account/subaccount/{subAccountId} | 
 
 
@@ -167,6 +168,35 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]ModelsSubAccount**](models.SubAccount.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **SubAccountRouterGetAllSubAccountIncidents**
+> []ModelsIncident SubAccountRouterGetAllSubAccountIncidents(ctx, xAccountApiKey, subAccountId)
+
+
+Get All Incidents associated with a sub-account
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **xAccountApiKey** | **string**| Account API Key | 
+  **subAccountId** | **int64**| The SubAccountId you want to delete | 
+
+### Return type
+
+[**[]ModelsIncident**](models.Incident.md)
 
 ### Authorization
 

@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AssignedTo** | [***ModelsIeMember**](models.IEMember.md) |  | [optional] [default to null]
 **Author** | [***ModelsIeMember**](models.IEMember.md) |  | [optional] [default to null]
 **Description** | **string** |  | [optional] [default to null]
 **RelatedIP** | [***ModelsIeip**](models.IEIP.md) |  | [optional] [default to null]

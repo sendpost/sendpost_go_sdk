@@ -4,9 +4,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AmpBody** | **string** |  | [optional] [default to null]
+**Attachments** | [**[]ModelsAttachment**](models.Attachment.md) |  | [optional] [default to null]
 **From** | [***ModelsFrom**](models.From.md) |  | [optional] [default to null]
-**Groups** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
-**Headers** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
+**Groups** | **interface{}** |  | [optional] [default to null]
+**Headers** | **interface{}** |  | [optional] [default to null]
 **HtmlBody** | **string** |  | [optional] [default to null]
 **Ippool** | **string** |  | [optional] [default to null]
 **PreText** | **string** |  | [optional] [default to null]

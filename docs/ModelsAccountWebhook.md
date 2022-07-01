@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Id** | **int64** |  | [optional] [default to null]
 **Opened** | **bool** |  | [optional] [default to null]
 **Processed** | **bool** |  | [optional] [default to null]
+**Sent** | **bool** |  | [optional] [default to null]
 **SoftBounced** | **bool** |  | [optional] [default to null]
 **Spam** | **bool** |  | [optional] [default to null]
 **Unsubscribed** | **bool** |  | [optional] [default to null]

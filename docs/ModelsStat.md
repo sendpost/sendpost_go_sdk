@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **HardBounced** | **int64** |  | [optional] [default to null]
 **Opened** | **int64** |  | [optional] [default to null]
 **Processed** | **int64** |  | [optional] [default to null]
+**Sent** | **int64** |  | [optional] [default to null]
 **SoftBounced** | **int64** |  | [optional] [default to null]
 **Spam** | **int64** |  | [optional] [default to null]
 **Unsubscribed** | **int64** |  | [optional] [default to null]
