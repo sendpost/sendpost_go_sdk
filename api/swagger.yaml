@@ -6587,7 +6587,7 @@ definitions:
         created: 1
         name: "name"
         id: 5
-        type: {}
+        type: 4
         labels:
         - color: "color"
           created: 5
@@ -7471,7 +7471,7 @@ definitions:
           created: 1
           name: "name"
           id: 5
-          type: {}
+          type: 4
           labels:
           - color: "color"
             created: 5
@@ -8827,7 +8827,7 @@ definitions:
         created: 1
         name: "name"
         id: 5
-        type: {}
+        type: 4
         labels:
         - color: "color"
           created: 5
@@ -9909,14 +9909,15 @@ definitions:
         items:
           $ref: "#/definitions/models.SMTPAuth"
       type:
-        $ref: "#/definitions/models.SubAccountType"
+        type: "integer"
+        format: "int64"
     title: "SubAccount"
     example:
       apiKey: "apiKey"
       created: 1
       name: "name"
       id: 5
-      type: {}
+      type: 4
       labels:
       - color: "color"
         created: 5
@@ -9940,7 +9941,8 @@ definitions:
         updated: 2
         username: "username"
   models.SubAccountType:
-    type: "object"
+    type: "integer"
+    format: "int64"
   models.Suppression:
     type: "object"
     properties:
