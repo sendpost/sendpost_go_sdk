@@ -9064,7 +9064,8 @@ definitions:
       id: 2
       type: {}
   models.LabelType:
-    type: "object"
+    type: "integer"
+    format: "int64"
   models.MailReportResult:
     type: "object"
     properties:
