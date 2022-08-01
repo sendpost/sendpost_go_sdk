@@ -11,7 +11,7 @@
 package swagger
 
 type ModelsEmailResponse struct {
-	ErrorCode *ModelsEmailErrorCode `json:"errorCode,omitempty"`
+	ErrorCode int64 `json:"errorCode,omitempty"`
 	Message string `json:"message,omitempty"`
 	MessageId string `json:"messageId,omitempty"`
 	SubmittedAt int64 `json:"submittedAt,omitempty"`

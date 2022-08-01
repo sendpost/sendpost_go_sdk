@@ -8487,7 +8487,8 @@ definitions:
     type: "object"
     properties:
       errorCode:
-        $ref: "#/definitions/models.EmailErrorCode"
+        type: "integer"
+        format: "int64"
       message:
         type: "string"
       messageId:
@@ -8499,11 +8500,11 @@ definitions:
         type: "string"
     title: "EmailResponse"
     example:
-      errorCode: {}
+      errorCode: 0
       messageId: "messageId"
       to: "to"
       message: "message"
-      submittedAt: 0
+      submittedAt: 6
   models.EventMetadata:
     type: "object"
     properties:

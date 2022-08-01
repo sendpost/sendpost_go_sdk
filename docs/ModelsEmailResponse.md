@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ErrorCode** | [***ModelsEmailErrorCode**](models.EmailErrorCode.md) |  | [optional] [default to null]
+**ErrorCode** | **int64** |  | [optional] [default to null]
 **Message** | **string** |  | [optional] [default to null]
 **MessageId** | **string** |  | [optional] [default to null]
 **SubmittedAt** | **int64** |  | [optional] [default to null]
