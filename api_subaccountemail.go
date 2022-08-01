@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -32,10 +33,19 @@ Send Email To Contacts
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param xSubAccountApiKey Sub-Account API Key
  * @param body The Email Message
+ * @param optional nil or *SubaccountemailApiEmailRouterSendEmailOpts - Optional Parameters:
+     * @param "XSendPostMockEmail" (optional.Bool) -  Mock email header
+     * @param "XSendPostMockTimeShift" (optional.String) -  Mock email time shift
 
 @return []ModelsEmailResponse
 */
-func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xSubAccountApiKey string, body ModelsEmailMessage) ([]ModelsEmailResponse, *http.Response, error) {
+
+type SubaccountemailApiEmailRouterSendEmailOpts struct { 
+	XSendPostMockEmail optional.Bool
+	XSendPostMockTimeShift optional.String
+}
+
+func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xSubAccountApiKey string, body ModelsEmailMessage, localVarOptionals *SubaccountemailApiEmailRouterSendEmailOpts) ([]ModelsEmailResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -69,6 +79,12 @@ func (a *SubaccountemailApiService) EmailRouterSendEmail(ctx context.Context, xS
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
 	localVarHeaderParams["X-SubAccount-ApiKey"] = parameterToString(xSubAccountApiKey, "")
+	if localVarOptionals != nil && localVarOptionals.XSendPostMockEmail.IsSet() {
+		localVarHeaderParams["X-SendPost-Mock-Email"] = parameterToString(localVarOptionals.XSendPostMockEmail.Value(), "")
+	}
+	if localVarOptionals != nil && localVarOptionals.XSendPostMockTimeShift.IsSet() {
+		localVarHeaderParams["X-SendPost-Mock-Time-Shift"] = parameterToString(localVarOptionals.XSendPostMockTimeShift.Value(), "")
+	}
 	// body params
 	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)

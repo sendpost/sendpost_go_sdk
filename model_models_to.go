@@ -11,9 +11,9 @@
 package swagger
 
 type ModelsTo struct {
-	Bcc []ModelsCopyTo `json:"bcc,omitempty"`
-	Cc []ModelsCopyTo `json:"cc,omitempty"`
-	CustomFields interface{} `json:"customFields,omitempty"`
-	Email string `json:"email,omitempty"`
 	Name string `json:"name,omitempty"`
+	Email string `json:"email,omitempty"`
+	Cc []ModelsCopyTo `json:"cc,omitempty"`
+	Bcc []ModelsCopyTo `json:"bcc,omitempty"`
+	CustomFields interface{} `json:"customFields,omitempty"`
 }

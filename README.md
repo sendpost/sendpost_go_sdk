@@ -114,6 +114,8 @@ Class | Method | HTTP request | Description
 *AccountstatApi* | [**AccountStatRouterGetAllAccountStatsByGroup**](docs/AccountstatApi.md#accountstatroutergetallaccountstatsbygroup) | **Get** /account/stat/group | 
 *AccountstatApi* | [**AccountStatRouterGetAllAggregateAccountStats**](docs/AccountstatApi.md#accountstatroutergetallaggregateaccountstats) | **Get** /account/stat/aggregate | 
 *AccountstatApi* | [**AccountStatRouterGetAllAggregateAccountStatsByGroup**](docs/AccountstatApi.md#accountstatroutergetallaggregateaccountstatsbygroup) | **Get** /account/stat/aggregate/group | 
+*AccountstatApi* | [**AccountStatRouterGetAllAggregateIPStats**](docs/AccountstatApi.md#accountstatroutergetallaggregateipstats) | **Get** /account/stat/aggregate/ip | 
+*AccountstatApi* | [**AccountStatRouterGetAllAggregateSubAccountStats**](docs/AccountstatApi.md#accountstatroutergetallaggregatesubaccountstats) | **Get** /account/stat/aggregate/subaccount | 
 *AccountsubaccountApi* | [**SubAccountRouterCount**](docs/AccountsubaccountApi.md#subaccountroutercount) | **Get** /account/subaccount/count | 
 *AccountsubaccountApi* | [**SubAccountRouterCreate**](docs/AccountsubaccountApi.md#subaccountroutercreate) | **Post** /account/subaccount/ | 
 *AccountsubaccountApi* | [**SubAccountRouterDelete**](docs/AccountsubaccountApi.md#subaccountrouterdelete) | **Delete** /account/subaccount/{subAccountId} | 
@@ -207,6 +209,8 @@ Class | Method | HTTP request | Description
  - [ModelsAccountTemplate](docs/ModelsAccountTemplate.md)
  - [ModelsAccountWebhook](docs/ModelsAccountWebhook.md)
  - [ModelsAgStat](docs/ModelsAgStat.md)
+ - [ModelsAgSubAccountStat](docs/ModelsAgSubAccountStat.md)
+ - [ModelsAgipStat](docs/ModelsAgipStat.md)
  - [ModelsAipStat](docs/ModelsAipStat.md)
  - [ModelsAlertLabel](docs/ModelsAlertLabel.md)
  - [ModelsAlertRequest](docs/ModelsAlertRequest.md)

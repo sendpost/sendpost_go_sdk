@@ -237,7 +237,7 @@ func (a *AccountstatApiService) AccountStatRouterGetAllAccountStatsByGroup(ctx c
 AccountstatApiService
 Get All Aggregate Stats
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param xAccountApiKey Sub-Account API Key
+ * @param xAccountApiKey Account API Key
  * @param optional nil or *AccountstatApiAccountStatRouterGetAllAggregateAccountStatsOpts - Optional Parameters:
      * @param "From" (optional.String) -  from date
      * @param "To" (optional.String) -  to date
@@ -424,6 +424,268 @@ func (a *AccountstatApiService) AccountStatRouterGetAllAggregateAccountStatsByGr
 		
 		if localVarHttpResponse.StatusCode == 200 {
 			var v ModelsStat
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+AccountstatApiService
+Get All Aggregate IP Stats
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param xAccountApiKey Account API Key
+ * @param from from date
+ * @param to to date
+ * @param optional nil or *AccountstatApiAccountStatRouterGetAllAggregateIPStatsOpts - Optional Parameters:
+     * @param "FilterBy" (optional.String) -  filterBy
+     * @param "FilterValue" (optional.Int64) -  filterValue
+     * @param "OrderBy" (optional.String) -  orderBy
+     * @param "SortOrder" (optional.String) -  sortOrder
+     * @param "Search" (optional.String) -  search term
+     * @param "Offset" (optional.Int64) -  offset
+     * @param "Limit" (optional.Int64) -  limit
+
+@return []ModelsAgipStat
+*/
+
+type AccountstatApiAccountStatRouterGetAllAggregateIPStatsOpts struct { 
+	FilterBy optional.String
+	FilterValue optional.Int64
+	OrderBy optional.String
+	SortOrder optional.String
+	Search optional.String
+	Offset optional.Int64
+	Limit optional.Int64
+}
+
+func (a *AccountstatApiService) AccountStatRouterGetAllAggregateIPStats(ctx context.Context, xAccountApiKey string, from string, to string, localVarOptionals *AccountstatApiAccountStatRouterGetAllAggregateIPStatsOpts) ([]ModelsAgipStat, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue []ModelsAgipStat
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/account/stat/aggregate/ip"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	localVarQueryParams.Add("from", parameterToString(from, ""))
+	localVarQueryParams.Add("to", parameterToString(to, ""))
+	if localVarOptionals != nil && localVarOptionals.FilterBy.IsSet() {
+		localVarQueryParams.Add("filterBy", parameterToString(localVarOptionals.FilterBy.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.FilterValue.IsSet() {
+		localVarQueryParams.Add("filterValue", parameterToString(localVarOptionals.FilterValue.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.OrderBy.IsSet() {
+		localVarQueryParams.Add("orderBy", parameterToString(localVarOptionals.OrderBy.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortOrder.IsSet() {
+		localVarQueryParams.Add("sortOrder", parameterToString(localVarOptionals.SortOrder.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Search.IsSet() {
+		localVarQueryParams.Add("search", parameterToString(localVarOptionals.Search.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	localVarHeaderParams["X-Account-ApiKey"] = parameterToString(xAccountApiKey, "")
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []ModelsAgipStat
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+AccountstatApiService
+Get All Aggregate SubAccount Stats
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param xAccountApiKey Account API Key
+ * @param from from date
+ * @param to to date
+ * @param optional nil or *AccountstatApiAccountStatRouterGetAllAggregateSubAccountStatsOpts - Optional Parameters:
+     * @param "FilterBy" (optional.String) -  filterBy
+     * @param "FilterValue" (optional.Int64) -  filterValue
+     * @param "OrderBy" (optional.String) -  orderBy
+     * @param "SortOrder" (optional.String) -  sortOrder
+     * @param "Search" (optional.String) -  search term
+     * @param "Offset" (optional.Int64) -  offset
+     * @param "Limit" (optional.Int64) -  limit
+
+@return []ModelsAgSubAccountStat
+*/
+
+type AccountstatApiAccountStatRouterGetAllAggregateSubAccountStatsOpts struct { 
+	FilterBy optional.String
+	FilterValue optional.Int64
+	OrderBy optional.String
+	SortOrder optional.String
+	Search optional.String
+	Offset optional.Int64
+	Limit optional.Int64
+}
+
+func (a *AccountstatApiService) AccountStatRouterGetAllAggregateSubAccountStats(ctx context.Context, xAccountApiKey string, from string, to string, localVarOptionals *AccountstatApiAccountStatRouterGetAllAggregateSubAccountStatsOpts) ([]ModelsAgSubAccountStat, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue []ModelsAgSubAccountStat
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/account/stat/aggregate/subaccount"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	localVarQueryParams.Add("from", parameterToString(from, ""))
+	localVarQueryParams.Add("to", parameterToString(to, ""))
+	if localVarOptionals != nil && localVarOptionals.FilterBy.IsSet() {
+		localVarQueryParams.Add("filterBy", parameterToString(localVarOptionals.FilterBy.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.FilterValue.IsSet() {
+		localVarQueryParams.Add("filterValue", parameterToString(localVarOptionals.FilterValue.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.OrderBy.IsSet() {
+		localVarQueryParams.Add("orderBy", parameterToString(localVarOptionals.OrderBy.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortOrder.IsSet() {
+		localVarQueryParams.Add("sortOrder", parameterToString(localVarOptionals.SortOrder.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Search.IsSet() {
+		localVarQueryParams.Add("search", parameterToString(localVarOptionals.Search.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	localVarHeaderParams["X-Account-ApiKey"] = parameterToString(xAccountApiKey, "")
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []ModelsAgSubAccountStat
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

@@ -2351,6 +2351,29 @@ paths:
         required: true
         type: "string"
         x-exportParamName: "Type_"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
       responses:
         "200":
           description: "\"Retrieved all labels for sub-account successfully\""
@@ -3502,7 +3525,7 @@ paths:
       parameters:
       - name: "X-Account-ApiKey"
         in: "header"
-        description: "Sub-Account API Key"
+        description: "Account API Key"
         required: true
         type: "string"
         x-exportParamName: "XAccountApiKey"
@@ -3567,6 +3590,182 @@ paths:
           description: "\"Retrieved Stats successfully\""
           schema:
             $ref: "#/definitions/models.Stat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/stat/aggregate/ip:
+    get:
+      tags:
+      - "account/stat"
+      description: "Get All Aggregate IP Stats"
+      operationId: "AccountStatRouter.Get All Aggregate IP Stats"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: true
+        type: "string"
+        x-exportParamName: "From"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: true
+        type: "string"
+        x-exportParamName: "To"
+      - name: "filterBy"
+        in: "query"
+        description: "filterBy"
+        required: false
+        type: "string"
+        x-exportParamName: "FilterBy"
+        x-optionalDataType: "String"
+      - name: "filterValue"
+        in: "query"
+        description: "filterValue"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "FilterValue"
+        x-optionalDataType: "Int64"
+      - name: "orderBy"
+        in: "query"
+        description: "orderBy"
+        required: false
+        type: "string"
+        x-exportParamName: "OrderBy"
+        x-optionalDataType: "String"
+      - name: "sortOrder"
+        in: "query"
+        description: "sortOrder"
+        required: false
+        type: "string"
+        x-exportParamName: "SortOrder"
+        x-optionalDataType: "String"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.AGIPStat"
+        "401":
+          description: "Not Authorized"
+        "500":
+          description: "Internal Server Error"
+  /account/stat/aggregate/subaccount:
+    get:
+      tags:
+      - "account/stat"
+      description: "Get All Aggregate SubAccount Stats"
+      operationId: "AccountStatRouter.Get All Aggregate SubAccount Stats"
+      parameters:
+      - name: "X-Account-ApiKey"
+        in: "header"
+        description: "Account API Key"
+        required: true
+        type: "string"
+        x-exportParamName: "XAccountApiKey"
+      - name: "from"
+        in: "query"
+        description: "from date"
+        required: true
+        type: "string"
+        x-exportParamName: "From"
+      - name: "to"
+        in: "query"
+        description: "to date"
+        required: true
+        type: "string"
+        x-exportParamName: "To"
+      - name: "filterBy"
+        in: "query"
+        description: "filterBy"
+        required: false
+        type: "string"
+        x-exportParamName: "FilterBy"
+        x-optionalDataType: "String"
+      - name: "filterValue"
+        in: "query"
+        description: "filterValue"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "FilterValue"
+        x-optionalDataType: "Int64"
+      - name: "orderBy"
+        in: "query"
+        description: "orderBy"
+        required: false
+        type: "string"
+        x-exportParamName: "OrderBy"
+        x-optionalDataType: "String"
+      - name: "sortOrder"
+        in: "query"
+        description: "sortOrder"
+        required: false
+        type: "string"
+        x-exportParamName: "SortOrder"
+        x-optionalDataType: "String"
+      - name: "search"
+        in: "query"
+        description: "search term"
+        required: false
+        type: "string"
+        x-exportParamName: "Search"
+        x-optionalDataType: "String"
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      responses:
+        "200":
+          description: "\"Retrieved Stats Successfully\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/models.AGSubAccountStat"
         "401":
           description: "Not Authorized"
         "500":
@@ -5247,6 +5446,20 @@ paths:
         required: true
         type: "string"
         x-exportParamName: "XSubAccountApiKey"
+      - name: "X-SendPost-Mock-Email"
+        in: "header"
+        description: "Mock email header"
+        required: false
+        type: "boolean"
+        x-exportParamName: "XSendPostMockEmail"
+        x-optionalDataType: "Bool"
+      - name: "X-SendPost-Mock-Time-Shift"
+        in: "header"
+        description: "Mock email time shift"
+        required: false
+        type: "string"
+        x-exportParamName: "XSendPostMockTimeShift"
+        x-optionalDataType: "String"
       - in: "body"
         name: "body"
         description: "The Email Message"
@@ -6409,6 +6622,55 @@ definitions:
     type: "object"
   api.GlockappsMailReport:
     type: "object"
+  models.AGIPStat:
+    type: "object"
+    properties:
+      clicked:
+        type: "integer"
+        format: "int64"
+      delivered:
+        type: "integer"
+        format: "int64"
+      dropped:
+        type: "integer"
+        format: "int64"
+      hardBounced:
+        type: "integer"
+        format: "int64"
+      ipId:
+        type: "integer"
+        format: "int64"
+      opened:
+        type: "integer"
+        format: "int64"
+      processed:
+        type: "integer"
+        format: "int64"
+      sent:
+        type: "integer"
+        format: "int64"
+      softBounced:
+        type: "integer"
+        format: "int64"
+      spam:
+        type: "integer"
+        format: "int64"
+      unsubscribed:
+        type: "integer"
+        format: "int64"
+    title: "AGIPStat"
+    example:
+      processed: 7
+      unsubscribed: 4
+      ipId: 5
+      hardBounced: 5
+      dropped: 1
+      softBounced: 3
+      delivered: 6
+      opened: 2
+      spam: 2
+      clicked: 0
+      sent: 9
   models.AGStat:
     type: "object"
     properties:
@@ -6430,6 +6692,55 @@ definitions:
         clicked: 0
         sent: 7
       group: "group"
+  models.AGSubAccountStat:
+    type: "object"
+    properties:
+      clicked:
+        type: "integer"
+        format: "int64"
+      delivered:
+        type: "integer"
+        format: "int64"
+      dropped:
+        type: "integer"
+        format: "int64"
+      hardBounced:
+        type: "integer"
+        format: "int64"
+      opened:
+        type: "integer"
+        format: "int64"
+      processed:
+        type: "integer"
+        format: "int64"
+      sent:
+        type: "integer"
+        format: "int64"
+      softBounced:
+        type: "integer"
+        format: "int64"
+      spam:
+        type: "integer"
+        format: "int64"
+      subAccountId:
+        type: "integer"
+        format: "int64"
+      unsubscribed:
+        type: "integer"
+        format: "int64"
+    title: "AGSubAccountStat"
+    example:
+      processed: 2
+      unsubscribed: 4
+      subAccountId: 2
+      hardBounced: 5
+      dropped: 1
+      softBounced: 9
+      delivered: 6
+      opened: 5
+      spam: 3
+      clicked: 0
+      sent: 7
   models.AIPStat:
     type: "object"
     properties:
@@ -6587,28 +6898,28 @@ definitions:
         created: 1
         name: "name"
         id: 5
-        type: 4
+        type: {}
         labels:
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         smtpAuths:
         - password: "password"
-          created: 9
-          id: 3
-          updated: 2
+          created: 7
+          id: 9
+          updated: 3
           username: "username"
         - password: "password"
-          created: 9
-          id: 3
-          updated: 2
+          created: 7
+          id: 9
+          updated: 3
           username: "username"
       trackVerified: true
   models.AccountIPPool:
@@ -6655,12 +6966,12 @@ definitions:
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         systemDomain:
           dkim:
             textValue: "textValue"
@@ -6722,12 +7033,12 @@ definitions:
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         systemDomain:
           dkim:
             textValue: "textValue"
@@ -7471,28 +7782,28 @@ definitions:
           created: 1
           name: "name"
           id: 5
-          type: 4
+          type: {}
           labels:
           - color: "color"
             created: 5
             name: "name"
             id: 2
-            type: 7
+            type: {}
           - color: "color"
             created: 5
             name: "name"
             id: 2
-            type: 7
+            type: {}
           smtpAuths:
           - password: "password"
-            created: 9
-            id: 3
-            updated: 2
+            created: 7
+            id: 9
+            updated: 3
             username: "username"
           - password: "password"
-            created: 9
-            id: 3
-            updated: 2
+            created: 7
+            id: 9
+            updated: 3
             username: "username"
         author:
           phoneNumber: "phoneNumber"
@@ -7523,12 +7834,12 @@ definitions:
             created: 5
             name: "name"
             id: 2
-            type: 7
+            type: {}
           - color: "color"
             created: 5
             name: "name"
             id: 2
-            type: 7
+            type: {}
           systemDomain:
             dkim:
               textValue: "textValue"
@@ -7645,14 +7956,16 @@ definitions:
   models.CopyTo:
     type: "object"
     properties:
-      customFields: {}
-      email:
-        type: "string"
       name:
         type: "string"
+      email:
+        type: "string"
+      customFields:
+        type: "object"
+        properties: {}
     title: "CopyTo"
     example:
-      customFields: ""
+      customFields: "{}"
       name: "name"
       email: "email"
   models.CountStat:
@@ -8407,12 +8720,12 @@ definitions:
         created: 5
         name: "name"
         id: 2
-        type: 7
+        type: {}
       - color: "color"
         created: 5
         name: "name"
         id: 2
-        type: 7
+        type: {}
       systemDomain:
         dkim:
           textValue: "textValue"
@@ -8583,12 +8896,12 @@ definitions:
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         systemDomain:
           dkim:
             textValue: "textValue"
@@ -8650,12 +8963,12 @@ definitions:
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         systemDomain:
           dkim:
             textValue: "textValue"
@@ -8827,28 +9140,28 @@ definitions:
         created: 1
         name: "name"
         id: 5
-        type: 4
+        type: {}
         labels:
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         smtpAuths:
         - password: "password"
-          created: 9
-          id: 3
-          updated: 2
+          created: 7
+          id: 9
+          updated: 3
           username: "username"
         - password: "password"
-          created: 9
-          id: 3
-          updated: 2
+          created: 7
+          id: 9
+          updated: 3
           username: "username"
       author:
         phoneNumber: "phoneNumber"
@@ -8879,12 +9192,12 @@ definitions:
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: 7
+          type: {}
         systemDomain:
           dkim:
             textValue: "textValue"
@@ -9055,18 +9368,16 @@ definitions:
       name:
         type: "string"
       type:
-        type: "integer"
-        format: "int64"
+        $ref: "#/definitions/models.LabelType"
     title: "Label"
     example:
       color: "color"
       created: 5
       name: "name"
       id: 2
-      type: 7
+      type: {}
   models.LabelType:
-    type: "integer"
-    format: "int64"
+    type: "object"
   models.MailReportResult:
     type: "object"
     properties:
@@ -9303,7 +9614,9 @@ definitions:
       attempt:
         type: "integer"
         format: "int64"
-      customFields: {}
+      customFields:
+        type: "object"
+        properties: {}
       emailType:
         type: "string"
       from:
@@ -9361,17 +9674,17 @@ definitions:
         content: "content"
       - filename: "filename"
         content: "content"
-      customFields: ""
+      customFields: "{}"
       subject: "subject"
       messageID: "messageID"
       preText: "preText"
       publicIP: "publicIP"
       textBody: "textBody"
       headerCc:
-      - customFields: ""
+      - customFields: "{}"
         name: "name"
         email: "email"
-      - customFields: ""
+      - customFields: "{}"
         name: "name"
         email: "email"
       attempt: 6
@@ -9389,20 +9702,20 @@ definitions:
       groups: ""
       headerTo:
         cc:
-        - customFields: ""
+        - customFields: "{}"
           name: "name"
           email: "email"
-        - customFields: ""
+        - customFields: "{}"
           name: "name"
           email: "email"
         bcc:
-        - customFields: ""
+        - customFields: "{}"
           name: "name"
           email: "email"
-        - customFields: ""
+        - customFields: "{}"
           name: "name"
           email: "email"
-        customFields: ""
+        customFields: "{}"
         name: "name"
         email: "email"
       htmlBody: "htmlBody"
@@ -9413,27 +9726,27 @@ definitions:
       localIP: "localIP"
       to:
         cc:
-        - customFields: ""
+        - customFields: "{}"
           name: "name"
           email: "email"
-        - customFields: ""
+        - customFields: "{}"
           name: "name"
           email: "email"
         bcc:
-        - customFields: ""
+        - customFields: "{}"
           name: "name"
           email: "email"
-        - customFields: ""
+        - customFields: "{}"
           name: "name"
           email: "email"
-        customFields: ""
+        customFields: "{}"
         name: "name"
         email: "email"
       headerBcc:
-      - customFields: ""
+      - customFields: "{}"
         name: "name"
         email: "email"
-      - customFields: ""
+      - customFields: "{}"
         name: "name"
         email: "email"
   models.QEvent:
@@ -9688,9 +10001,9 @@ definitions:
     title: "SMTPAuth"
     example:
       password: "password"
-      created: 9
-      id: 3
-      updated: 2
+      created: 7
+      id: 9
+      updated: 3
       username: "username"
   models.SMTPStat:
     type: "object"
@@ -9909,40 +10222,38 @@ definitions:
         items:
           $ref: "#/definitions/models.SMTPAuth"
       type:
-        type: "integer"
-        format: "int64"
+        $ref: "#/definitions/models.SubAccountType"
     title: "SubAccount"
     example:
       apiKey: "apiKey"
       created: 1
       name: "name"
       id: 5
-      type: 4
+      type: {}
       labels:
       - color: "color"
         created: 5
         name: "name"
         id: 2
-        type: 7
+        type: {}
       - color: "color"
         created: 5
         name: "name"
         id: 2
-        type: 7
+        type: {}
       smtpAuths:
       - password: "password"
-        created: 9
-        id: 3
-        updated: 2
+        created: 7
+        id: 9
+        updated: 3
         username: "username"
       - password: "password"
-        created: 9
-        id: 3
-        updated: 2
+        created: 7
+        id: 9
+        updated: 3
         username: "username"
   models.SubAccountType:
-    type: "integer"
-    format: "int64"
+    type: "object"
   models.Suppression:
     type: "object"
     properties:
@@ -10102,36 +10413,38 @@ definitions:
   models.To:
     type: "object"
     properties:
-      bcc:
-        type: "array"
-        items:
-          $ref: "#/definitions/models.CopyTo"
+      name:
+        type: "string"
+      email:
+        type: "string"
       cc:
         type: "array"
         items:
           $ref: "#/definitions/models.CopyTo"
-      customFields: {}
-      email:
-        type: "string"
-      name:
-        type: "string"
+      bcc:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.CopyTo"
+      customFields:
+        type: "object"
+        properties: {}
     title: "To"
     example:
       cc:
-      - customFields: ""
+      - customFields: "{}"
         name: "name"
         email: "email"
-      - customFields: ""
+      - customFields: "{}"
         name: "name"
         email: "email"
       bcc:
-      - customFields: ""
+      - customFields: "{}"
         name: "name"
         email: "email"
-      - customFields: ""
+      - customFields: "{}"
         name: "name"
         email: "email"
-      customFields: ""
+      customFields: "{}"
       name: "name"
       email: "email"
   models.Validation:

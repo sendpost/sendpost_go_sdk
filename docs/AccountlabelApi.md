@@ -129,7 +129,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LabelRouterGetAll**
-> []ModelsLabel LabelRouterGetAll(ctx, xAccountApiKey, type_)
+> []ModelsLabel LabelRouterGetAll(ctx, xAccountApiKey, type_, optional)
 
 
 Get All Labels
@@ -141,6 +141,18 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **xAccountApiKey** | **string**| Account API Key | 
   **type_** | **string**| get all labels type | 
+ **optional** | ***AccountlabelApiLabelRouterGetAllOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a AccountlabelApiLabelRouterGetAllOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **offset** | **optional.Int64**| offset | 
+ **limit** | **optional.Int64**| limit | 
+ **search** | **optional.String**| search term | 
 
 ### Return type
 

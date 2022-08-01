@@ -18,6 +18,7 @@ import (
 	"net/url"
 	"strings"
 	"fmt"
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -390,10 +391,21 @@ Get All Labels
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param xAccountApiKey Account API Key
  * @param type_ get all labels type
+ * @param optional nil or *AccountlabelApiLabelRouterGetAllOpts - Optional Parameters:
+     * @param "Offset" (optional.Int64) -  offset
+     * @param "Limit" (optional.Int64) -  limit
+     * @param "Search" (optional.String) -  search term
 
 @return []ModelsLabel
 */
-func (a *AccountlabelApiService) LabelRouterGetAll(ctx context.Context, xAccountApiKey string, type_ string) ([]ModelsLabel, *http.Response, error) {
+
+type AccountlabelApiLabelRouterGetAllOpts struct { 
+	Offset optional.Int64
+	Limit optional.Int64
+	Search optional.String
+}
+
+func (a *AccountlabelApiService) LabelRouterGetAll(ctx context.Context, xAccountApiKey string, type_ string, localVarOptionals *AccountlabelApiLabelRouterGetAllOpts) ([]ModelsLabel, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -410,6 +422,15 @@ func (a *AccountlabelApiService) LabelRouterGetAll(ctx context.Context, xAccount
 	localVarFormParams := url.Values{}
 
 	localVarQueryParams.Add("type", parameterToString(type_, ""))
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Search.IsSet() {
+		localVarQueryParams.Add("search", parameterToString(localVarOptionals.Search.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{"application/json"}
 

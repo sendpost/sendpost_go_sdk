@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **EmailRouterSendEmail**
-> []ModelsEmailResponse EmailRouterSendEmail(ctx, xSubAccountApiKey, body)
+> []ModelsEmailResponse EmailRouterSendEmail(ctx, xSubAccountApiKey, body, optional)
 
 
 Send Email To Contacts
@@ -21,6 +21,17 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **xSubAccountApiKey** | **string**| Sub-Account API Key | 
   **body** | [**ModelsEmailMessage**](ModelsEmailMessage.md)| The Email Message | 
+ **optional** | ***SubaccountemailApiEmailRouterSendEmailOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a SubaccountemailApiEmailRouterSendEmailOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **xSendPostMockEmail** | **optional.Bool**| Mock email header | 
+ **xSendPostMockTimeShift** | **optional.String**| Mock email time shift | 
 
 ### Return type
 

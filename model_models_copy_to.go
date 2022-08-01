@@ -11,7 +11,7 @@
 package swagger
 
 type ModelsCopyTo struct {
-	CustomFields interface{} `json:"customFields,omitempty"`
-	Email string `json:"email,omitempty"`
 	Name string `json:"name,omitempty"`
+	Email string `json:"email,omitempty"`
+	CustomFields interface{} `json:"customFields,omitempty"`
 }
