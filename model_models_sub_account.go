@@ -17,5 +17,5 @@ type ModelsSubAccount struct {
 	Labels []ModelsLabel `json:"labels,omitempty"`
 	Name string `json:"name,omitempty"`
 	SmtpAuths []ModelsSmtpAuth `json:"smtpAuths,omitempty"`
-	Type_ *ModelsSubAccountType `json:"type,omitempty"`
+	Type_ int64 `json:"type,omitempty"`
 }

@@ -15,5 +15,5 @@ type ModelsLabel struct {
 	Created int64 `json:"created,omitempty"`
 	Id int64 `json:"id,omitempty"`
 	Name string `json:"name,omitempty"`
-	Type_ *ModelsLabelType `json:"type,omitempty"`
+	Type_ int64 `json:"type,omitempty"`
 }

@@ -6898,28 +6898,28 @@ definitions:
         created: 1
         name: "name"
         id: 5
-        type: {}
+        type: 4
         labels:
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         smtpAuths:
         - password: "password"
-          created: 7
-          id: 9
-          updated: 3
+          created: 9
+          id: 3
+          updated: 2
           username: "username"
         - password: "password"
-          created: 7
-          id: 9
-          updated: 3
+          created: 9
+          id: 3
+          updated: 2
           username: "username"
       trackVerified: true
   models.AccountIPPool:
@@ -6966,12 +6966,12 @@ definitions:
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         systemDomain:
           dkim:
             textValue: "textValue"
@@ -7033,12 +7033,12 @@ definitions:
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         systemDomain:
           dkim:
             textValue: "textValue"
@@ -7782,28 +7782,28 @@ definitions:
           created: 1
           name: "name"
           id: 5
-          type: {}
+          type: 4
           labels:
           - color: "color"
             created: 5
             name: "name"
             id: 2
-            type: {}
+            type: 7
           - color: "color"
             created: 5
             name: "name"
             id: 2
-            type: {}
+            type: 7
           smtpAuths:
           - password: "password"
-            created: 7
-            id: 9
-            updated: 3
+            created: 9
+            id: 3
+            updated: 2
             username: "username"
           - password: "password"
-            created: 7
-            id: 9
-            updated: 3
+            created: 9
+            id: 3
+            updated: 2
             username: "username"
         author:
           phoneNumber: "phoneNumber"
@@ -7834,12 +7834,12 @@ definitions:
             created: 5
             name: "name"
             id: 2
-            type: {}
+            type: 7
           - color: "color"
             created: 5
             name: "name"
             id: 2
-            type: {}
+            type: 7
           systemDomain:
             dkim:
               textValue: "textValue"
@@ -8720,12 +8720,12 @@ definitions:
         created: 5
         name: "name"
         id: 2
-        type: {}
+        type: 7
       - color: "color"
         created: 5
         name: "name"
         id: 2
-        type: {}
+        type: 7
       systemDomain:
         dkim:
           textValue: "textValue"
@@ -8896,12 +8896,12 @@ definitions:
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         systemDomain:
           dkim:
             textValue: "textValue"
@@ -8963,12 +8963,12 @@ definitions:
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         systemDomain:
           dkim:
             textValue: "textValue"
@@ -9140,28 +9140,28 @@ definitions:
         created: 1
         name: "name"
         id: 5
-        type: {}
+        type: 4
         labels:
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         smtpAuths:
         - password: "password"
-          created: 7
-          id: 9
-          updated: 3
+          created: 9
+          id: 3
+          updated: 2
           username: "username"
         - password: "password"
-          created: 7
-          id: 9
-          updated: 3
+          created: 9
+          id: 3
+          updated: 2
           username: "username"
       author:
         phoneNumber: "phoneNumber"
@@ -9192,12 +9192,12 @@ definitions:
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         - color: "color"
           created: 5
           name: "name"
           id: 2
-          type: {}
+          type: 7
         systemDomain:
           dkim:
             textValue: "textValue"
@@ -9368,17 +9368,15 @@ definitions:
       name:
         type: "string"
       type:
-        $ref: "#/definitions/models.LabelType"
+        type: "integer"
+        format: "int64"
     title: "Label"
     example:
       color: "color"
       created: 5
       name: "name"
       id: 2
-      type: {}
-  models.LabelType:
-    type: "integer"
-    format: "int64"
+      type: 7
   models.MailReportResult:
     type: "object"
     properties:
@@ -10002,9 +10000,9 @@ definitions:
     title: "SMTPAuth"
     example:
       password: "password"
-      created: 7
-      id: 9
-      updated: 3
+      created: 9
+      id: 3
+      updated: 2
       username: "username"
   models.SMTPStat:
     type: "object"
@@ -10223,38 +10221,37 @@ definitions:
         items:
           $ref: "#/definitions/models.SMTPAuth"
       type:
-        $ref: "#/definitions/models.SubAccountType"
+        type: "integer"
+        format: "int64"
     title: "SubAccount"
     example:
       apiKey: "apiKey"
       created: 1
       name: "name"
       id: 5
-      type: {}
+      type: 4
       labels:
       - color: "color"
         created: 5
         name: "name"
         id: 2
-        type: {}
+        type: 7
       - color: "color"
         created: 5
         name: "name"
         id: 2
-        type: {}
+        type: 7
       smtpAuths:
       - password: "password"
-        created: 7
-        id: 9
-        updated: 3
+        created: 9
+        id: 3
+        updated: 2
         username: "username"
       - password: "password"
-        created: 7
-        id: 9
-        updated: 3
+        created: 9
+        id: 3
+        updated: 2
         username: "username"
-  models.SubAccountType:
-    type: "object"
   models.Suppression:
     type: "object"
     properties:
