@@ -13,7 +13,9 @@ go get github.com/sendpost/sendpost_go_sdk
 Put the package under your project folder and add the following in import:
 
 ```golang
-import "github.com/sendpost/sendpost_go_sdk"
+import (
+	sendpost "github.com/sendpost/sendpost_go_sdk"
+)
 ```
 
 ## Getting Started
