@@ -44,6 +44,45 @@ emailRequest = emailRequest.EmailMessage(emailMessage)
 res, _, err := client.EmailApi.SendEmailExecute(emailRequest)
 ```
 
+Example with cc, bcc and template:
+
+```go
+cfg := sendpost.NewConfiguration()
+client := sendpost.NewAPIClient(cfg)
+
+emailMessage := sendpost.EmailMessage{}
+emailMessage.SetSubject("Hello World")
+emailMessage.SetHtmlBody("<strong>it works!</strong>")
+emailMessage.SetIppool("PiedPiper")
+emailMessage.From = &sendpost.From{}
+emailMessage.From.SetEmail("richard@piedpiper.com")
+
+emailMessage.SetTemplate("Welcome Mail")
+
+tos := make([]sendpost.To, 0)
+to := &sendpost.To{}
+to.SetEmail("gavin@hooli.com")
+
+ccs := make([]sendpost.CopyTo, 0)
+cc := &sendpost.CopyTo{}
+cc.SetEmail("dinesh@bachmanity.com")
+ccs = append(ccs, *cc)
+to.SetCc(ccs)
+bccs := make([]sendpost.CopyTo, 0)
+bcc := &sendpost.CopyTo{}
+bcc.SetEmail("jian@bachmanity.com")
+bccs = append(bccs, *bcc)
+to.SetBcc(bccs)
+
+tos = append(tos, *to)
+emailMessage.To = tos
+
+emailRequest := sendpost.ApiSendEmailWithTemplateRequest{}
+emailRequest = emailRequest.XSubAccountApiKey("your_api_key")
+emailRequest = emailRequest.EmailMessage(emailMessage)
+res, _, err := client.EmailApi.SendEmailWithTemplateExecute(emailRequest)
+```
+
 ## Documentation for API Endpoints
 
 All URIs are relative to *https://api.sendpost.io/api/v1*
