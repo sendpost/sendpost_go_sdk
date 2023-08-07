@@ -83,6 +83,85 @@ emailRequest = emailRequest.EmailMessage(emailMessage)
 res, _, err := client.EmailApi.SendEmailWithTemplateExecute(emailRequest)
 ```
 
+## Suppressions
+
+Create Suppressions
+
+```go
+cfg := sendpost.NewConfiguration()
+client := sendpost.NewAPIClient(cfg)
+
+rSuppression := sendpost.RSuppression{}
+suppressionEmails := make([]sendpost.SuppressionEmail, 0)
+email := "richard@piedpiper_fake.com"
+suppressionEmails = append(suppressionEmails, sendpost.SuppressionEmail{
+	Email: &email,
+})
+rSuppression.SetHardBounce(suppressionEmails)
+
+// fields are optional, but you have to send at least one of them.
+
+//rSuppression.SetManual(suppressionEmails)
+//rSuppression.SetUnsubscribe(suppressionEmails)
+//rSuppression.SetSpamComplaint(suppressionEmails)
+
+createSuppressionReq := sendpost.ApiCreateSuppressionsRequest{}
+createSuppressionReq = createSuppressionReq.XSubAccountApiKey("your_api_key")
+createSuppressionReq = createSuppressionReq.RSuppression(rSuppression)
+res, _, err := client.SuppressionApi.CreateSuppressionsExecute(createSuppressionReq)
+```
+
+Get Suppressions
+
+```go
+cfg := sendpost.NewConfiguration()
+client := sendpost.NewAPIClient(cfg)
+
+getSuppressionReq := sendpost.ApiGetSuppressionsRequest{}
+getSuppressionReq = getSuppressionReq.XSubAccountApiKey("your_api_key")
+getSuppressionReq = getSuppressionReq.From("2023-06-07")
+getSuppressionReq = getSuppressionReq.To("2023-08-08")
+getSuppressionReq = getSuppressionReq.Offset(0)
+getSuppressionReq = getSuppressionReq.Limit(10)
+getSuppressionReq = getSuppressionReq.Search("")
+
+res, _, err := client.SuppressionApi.GetSuppressionsExecute(getSuppressionReq)
+```
+
+Delete Suppressions
+
+```go
+cfg := sendpost.NewConfiguration()
+client := sendpost.NewAPIClient(cfg)
+
+rDSuppression := sendpost.RDSuppression{}
+suppressionEmails := make([]sendpost.SuppressionEmail, 0)
+email := "richard@piedpiper_fake.com"
+suppressionEmails = append(suppressionEmails, sendpost.SuppressionEmail{
+	Email: &email,
+})
+rDSuppression.SetSuppressions(suppressionEmails)
+
+deleteSuppressionReq := sendpost.ApiDeleteSuppressionRequest{}
+deleteSuppressionReq = deleteSuppressionReq.XSubAccountApiKey("your_api_key")
+deleteSuppressionReq = deleteSuppressionReq.RDSuppression(rDSuppression)
+res, _, err := client.SuppressionApi.DeleteSuppressionExecute(deleteSuppressionReq)
+```
+
+Count Suppressions
+
+```go
+cfg := sendpost.NewConfiguration()
+client := sendpost.NewAPIClient(cfg)
+
+countSuppressionReq := sendpost.ApiCountRequest{}
+countSuppressionReq = countSuppressionReq.XSubAccountApiKey("your_api_key")
+countSuppressionReq = countSuppressionReq.From("2023-06-07")
+countSuppressionReq = countSuppressionReq.To("2023-08-08")
+
+res, _, err := client.SuppressionApi.CountExecute(countSuppressionReq)
+```
+
 ## Documentation for API Endpoints
 
 All URIs are relative to *https://api.sendpost.io/api/v1*
