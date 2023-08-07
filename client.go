@@ -51,6 +51,8 @@ type APIClient struct {
 	// API Services
 
 	EmailApi *EmailApiService
+
+	SuppressionApi *SuppressionApiService
 }
 
 type service struct {
@@ -70,6 +72,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.EmailApi = (*EmailApiService)(&c.common)
+	c.SuppressionApi = (*SuppressionApiService)(&c.common)
 
 	return c
 }

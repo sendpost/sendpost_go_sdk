@@ -83,6 +83,192 @@ paths:
           description: Internal Server Error
       tags:
       - email
+  /subaccount/suppression/:
+    delete:
+      description: Delete specific emails which are in suppression list
+      operationId: DeleteSuppression
+      parameters:
+      - description: Sub-Account API Key
+        explode: false
+        in: header
+        name: X-SubAccount-ApiKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RDSuppression'
+        description: Suppression content
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DeleteResponse'
+                type: array
+          description: '"Emails in suppression list have been deleted successfully"'
+        "401":
+          description: Not Authorized
+        "406":
+          description: suppression list is empty
+        "422":
+          description: Request body is not in proper format
+        "500":
+          description: Internal Server Error
+      tags:
+      - suppression
+    get:
+      description: Get all suppressions
+      operationId: GetSuppressions
+      parameters:
+      - description: Sub-Account API Key
+        explode: false
+        in: header
+        name: X-SubAccount-ApiKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: offset
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - description: limit
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - description: search
+        explode: true
+        in: query
+        name: search
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: from date
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: to date
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Suppression'
+                type: array
+          description: '"Suppressions retrieved successfully"'
+        "401":
+          description: Not Authorized
+        "500":
+          description: Internal Server Error
+      tags:
+      - suppression
+    post:
+      description: Add Email Addresses To Suppression List
+      operationId: CreateSuppressions
+      parameters:
+      - description: Sub-Account API Key
+        explode: false
+        in: header
+        name: X-SubAccount-ApiKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RSuppression'
+        description: Suppression content
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Suppression'
+                type: array
+          description: '"Suppressions created successfully"'
+        "401":
+          description: Not Authorized
+        "406":
+          description: Suppression list is empty
+        "422":
+          description: Request body is not in proper format
+        "500":
+          description: Internal Server Error
+      tags:
+      - suppression
+  /subaccount/suppression/count:
+    get:
+      description: Count Total Suppressions
+      operationId: Count
+      parameters:
+      - description: Sub-Account API Key
+        explode: false
+        in: header
+        name: X-SubAccount-ApiKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: from date
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: to date
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountStat'
+          description: '"Total count of Suppressions for a specific sub-account"'
+        "401":
+          description: Not Authorized
+        "500":
+          description: Internal Server Error
+      tags:
+      - suppression
 components:
   schemas:
     EmailMessage:
@@ -554,6 +740,103 @@ components:
         Patch:
           type: string
       title: UserAgent
+      type: object
+    Suppression:
+      example:
+        reason: 1
+        created: 0
+        id: 6
+        smtp_error: smtp_error
+        email: email
+      properties:
+        created:
+          format: int64
+          type: integer
+        email:
+          type: string
+        id:
+          format: int64
+          type: integer
+        reason:
+          format: int64
+          type: integer
+        smtp_error:
+          type: string
+      title: Suppression
+      type: object
+    RSuppression:
+      example:
+        spamComplaint:
+        - email: email
+        - email: email
+        unsubscribe:
+        - email: email
+        - email: email
+        manual:
+        - email: email
+        - email: email
+        hardBounce:
+        - email: email
+        - email: email
+      properties:
+        hardBounce:
+          items:
+            $ref: '#/components/schemas/SuppressionEmail'
+          type: array
+        manual:
+          items:
+            $ref: '#/components/schemas/SuppressionEmail'
+          type: array
+        spamComplaint:
+          items:
+            $ref: '#/components/schemas/SuppressionEmail'
+          type: array
+        unsubscribe:
+          items:
+            $ref: '#/components/schemas/SuppressionEmail'
+          type: array
+      title: RSuppression
+      type: object
+    SuppressionEmail:
+      example:
+        email: email
+      properties:
+        email:
+          type: string
+      title: SuppressionEmail
+      type: object
+    RDSuppression:
+      example:
+        suppressions:
+        - email: email
+        - email: email
+      properties:
+        suppressions:
+          items:
+            $ref: '#/components/schemas/SuppressionEmail'
+          type: array
+      title: RDSuppression
+      type: object
+    DeleteResponse:
+      example:
+        id: 0
+        message: message
+      properties:
+        id:
+          format: int64
+          type: integer
+        message:
+          type: string
+      title: DeleteResponse
+      type: object
+    CountStat:
+      example:
+        count: 0
+      properties:
+        count:
+          format: int64
+          type: integer
+      title: CountStat
       type: object
     City:
       properties:
