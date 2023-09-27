@@ -20,12 +20,12 @@ import (
 )
 
 
-// EmailApiService EmailApi service
-type EmailApiService service
+// EmailAPIService EmailAPI service
+type EmailAPIService service
 
 type ApiSendEmailRequest struct {
 	ctx context.Context
-	ApiService *EmailApiService
+	ApiService *EmailAPIService
 	xSubAccountApiKey *string
 	emailMessage *EmailMessage
 }
@@ -54,7 +54,7 @@ Send Email To Contacts
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSendEmailRequest
 */
-func (a *EmailApiService) SendEmail(ctx context.Context) ApiSendEmailRequest {
+func (a *EmailAPIService) SendEmail(ctx context.Context) ApiSendEmailRequest {
 	return ApiSendEmailRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -63,7 +63,7 @@ func (a *EmailApiService) SendEmail(ctx context.Context) ApiSendEmailRequest {
 
 // Execute executes the request
 //  @return []EmailResponse
-func (a *EmailApiService) SendEmailExecute(r ApiSendEmailRequest) ([]EmailResponse, *http.Response, error) {
+func (a *EmailAPIService) SendEmailExecute(r ApiSendEmailRequest) ([]EmailResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -71,7 +71,7 @@ func (a *EmailApiService) SendEmailExecute(r ApiSendEmailRequest) ([]EmailRespon
 		localVarReturnValue  []EmailResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailApiService.SendEmail")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.SendEmail")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -144,7 +144,7 @@ func (a *EmailApiService) SendEmailExecute(r ApiSendEmailRequest) ([]EmailRespon
 
 type ApiSendEmailWithTemplateRequest struct {
 	ctx context.Context
-	ApiService *EmailApiService
+	ApiService *EmailAPIService
 	xSubAccountApiKey *string
 	emailMessage *EmailMessage
 }
@@ -173,7 +173,7 @@ Send Email To Contacts With Template
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSendEmailWithTemplateRequest
 */
-func (a *EmailApiService) SendEmailWithTemplate(ctx context.Context) ApiSendEmailWithTemplateRequest {
+func (a *EmailAPIService) SendEmailWithTemplate(ctx context.Context) ApiSendEmailWithTemplateRequest {
 	return ApiSendEmailWithTemplateRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -182,7 +182,7 @@ func (a *EmailApiService) SendEmailWithTemplate(ctx context.Context) ApiSendEmai
 
 // Execute executes the request
 //  @return []EmailResponse
-func (a *EmailApiService) SendEmailWithTemplateExecute(r ApiSendEmailWithTemplateRequest) ([]EmailResponse, *http.Response, error) {
+func (a *EmailAPIService) SendEmailWithTemplateExecute(r ApiSendEmailWithTemplateRequest) ([]EmailResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -190,7 +190,7 @@ func (a *EmailApiService) SendEmailWithTemplateExecute(r ApiSendEmailWithTemplat
 		localVarReturnValue  []EmailResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailApiService.SendEmailWithTemplate")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.SendEmailWithTemplate")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
