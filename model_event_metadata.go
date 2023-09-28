@@ -21,6 +21,8 @@ var _ MappedNullable = &EventMetadata{}
 // EventMetadata struct for EventMetadata
 type EventMetadata struct {
 	ClickedURL *string `json:"clickedURL,omitempty"`
+	TrackedIP *string `json:"trackedIP,omitempty"`
+	RawUserAgent *string `json:"rawUserAgent,omitempty"`
 	Device *Device `json:"device,omitempty"`
 	Geo *City `json:"geo,omitempty"`
 	Os *Os `json:"os,omitempty"`
@@ -76,6 +78,70 @@ func (o *EventMetadata) HasClickedURL() bool {
 // SetClickedURL gets a reference to the given string and assigns it to the ClickedURL field.
 func (o *EventMetadata) SetClickedURL(v string) {
 	o.ClickedURL = &v
+}
+
+// GetTrackedIP returns the TrackedIP field value if set, zero value otherwise.
+func (o *EventMetadata) GetTrackedIP() string {
+	if o == nil || IsNil(o.TrackedIP) {
+		var ret string
+		return ret
+	}
+	return *o.TrackedIP
+}
+
+// GetTrackedIPOk returns a tuple with the TrackedIP field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventMetadata) GetTrackedIPOk() (*string, bool) {
+	if o == nil || IsNil(o.TrackedIP) {
+		return nil, false
+	}
+	return o.TrackedIP, true
+}
+
+// HasTrackedIP returns a boolean if a field has been set.
+func (o *EventMetadata) HasTrackedIP() bool {
+	if o != nil && !IsNil(o.TrackedIP) {
+		return true
+	}
+
+	return false
+}
+
+// SetTrackedIP gets a reference to the given string and assigns it to the TrackedIP field.
+func (o *EventMetadata) SetTrackedIP(v string) {
+	o.TrackedIP = &v
+}
+
+// GetRawUserAgent returns the RawUserAgent field value if set, zero value otherwise.
+func (o *EventMetadata) GetRawUserAgent() string {
+	if o == nil || IsNil(o.RawUserAgent) {
+		var ret string
+		return ret
+	}
+	return *o.RawUserAgent
+}
+
+// GetRawUserAgentOk returns a tuple with the RawUserAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventMetadata) GetRawUserAgentOk() (*string, bool) {
+	if o == nil || IsNil(o.RawUserAgent) {
+		return nil, false
+	}
+	return o.RawUserAgent, true
+}
+
+// HasRawUserAgent returns a boolean if a field has been set.
+func (o *EventMetadata) HasRawUserAgent() bool {
+	if o != nil && !IsNil(o.RawUserAgent) {
+		return true
+	}
+
+	return false
+}
+
+// SetRawUserAgent gets a reference to the given string and assigns it to the RawUserAgent field.
+func (o *EventMetadata) SetRawUserAgent(v string) {
+	o.RawUserAgent = &v
 }
 
 // GetDevice returns the Device field value if set, zero value otherwise.
@@ -282,6 +348,12 @@ func (o EventMetadata) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ClickedURL) {
 		toSerialize["clickedURL"] = o.ClickedURL
+	}
+	if !IsNil(o.TrackedIP) {
+		toSerialize["trackedIP"] = o.TrackedIP
+	}
+	if !IsNil(o.RawUserAgent) {
+		toSerialize["rawUserAgent"] = o.RawUserAgent
 	}
 	if !IsNil(o.Device) {
 		toSerialize["device"] = o.Device

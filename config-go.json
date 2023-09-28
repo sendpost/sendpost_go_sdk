@@ -1,5 +1,5 @@
 {
   "packageName": "sendpost",
-  "packageVersion": "1.1.0",
+  "packageVersion": "1.2.2",
   "prependFormOrBodyParameters": true
 }

@@ -168,12 +168,12 @@ All URIs are relative to *https://api.sendpost.io/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*EmailApi* | [**SendEmail**](docs/EmailApi.md#sendemail) | **Post** /subaccount/email/ | 
-*EmailApi* | [**SendEmailWithTemplate**](docs/EmailApi.md#sendemailwithtemplate) | **Post** /subaccount/email/template | 
-*SuppressionApi* | [**Count**](docs/SuppressionApi.md#count) | **Get** /subaccount/suppression/count | 
-*SuppressionApi* | [**CreateSuppressions**](docs/SuppressionApi.md#createsuppressions) | **Post** /subaccount/suppression/ | 
-*SuppressionApi* | [**DeleteSuppression**](docs/SuppressionApi.md#deletesuppression) | **Delete** /subaccount/suppression/ | 
-*SuppressionApi* | [**GetSuppressions**](docs/SuppressionApi.md#getsuppressions) | **Get** /subaccount/suppression/ | 
+*EmailAPI* | [**SendEmail**](docs/EmailAPI.md#sendemail) | **Post** /subaccount/email/ | 
+*EmailAPI* | [**SendEmailWithTemplate**](docs/EmailAPI.md#sendemailwithtemplate) | **Post** /subaccount/email/template | 
+*SuppressionAPI* | [**Count**](docs/SuppressionAPI.md#count) | **Get** /subaccount/suppression/count | 
+*SuppressionAPI* | [**CreateSuppressions**](docs/SuppressionAPI.md#createsuppressions) | **Post** /subaccount/suppression/ | 
+*SuppressionAPI* | [**DeleteSuppression**](docs/SuppressionAPI.md#deletesuppression) | **Delete** /subaccount/suppression/ | 
+*SuppressionAPI* | [**GetSuppressions**](docs/SuppressionAPI.md#getsuppressions) | **Get** /subaccount/suppression/ | 
 
 
 ## Documentation For Models
@@ -224,4 +224,5 @@ Each of these functions takes a value of the given basic type and returns a poin
 
 ## Author
 
-dev@sendpost.io
+hello@sendpost.io
+

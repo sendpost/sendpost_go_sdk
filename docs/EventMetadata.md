@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClickedURL** | Pointer to **string** |  | [optional] 
+**TrackedIP** | Pointer to **string** |  | [optional] 
+**RawUserAgent** | Pointer to **string** |  | [optional] 
 **Device** | Pointer to [**Device**](Device.md) |  | [optional] 
 **Geo** | Pointer to [**City**](City.md) |  | [optional] 
 **Os** | Pointer to [**Os**](Os.md) |  | [optional] 
@@ -55,6 +57,56 @@ SetClickedURL sets ClickedURL field to given value.
 `func (o *EventMetadata) HasClickedURL() bool`
 
 HasClickedURL returns a boolean if a field has been set.
+
+### GetTrackedIP
+
+`func (o *EventMetadata) GetTrackedIP() string`
+
+GetTrackedIP returns the TrackedIP field if non-nil, zero value otherwise.
+
+### GetTrackedIPOk
+
+`func (o *EventMetadata) GetTrackedIPOk() (*string, bool)`
+
+GetTrackedIPOk returns a tuple with the TrackedIP field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrackedIP
+
+`func (o *EventMetadata) SetTrackedIP(v string)`
+
+SetTrackedIP sets TrackedIP field to given value.
+
+### HasTrackedIP
+
+`func (o *EventMetadata) HasTrackedIP() bool`
+
+HasTrackedIP returns a boolean if a field has been set.
+
+### GetRawUserAgent
+
+`func (o *EventMetadata) GetRawUserAgent() string`
+
+GetRawUserAgent returns the RawUserAgent field if non-nil, zero value otherwise.
+
+### GetRawUserAgentOk
+
+`func (o *EventMetadata) GetRawUserAgentOk() (*string, bool)`
+
+GetRawUserAgentOk returns a tuple with the RawUserAgent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRawUserAgent
+
+`func (o *EventMetadata) SetRawUserAgent(v string)`
+
+SetRawUserAgent sets RawUserAgent field to given value.
+
+### HasRawUserAgent
+
+`func (o *EventMetadata) HasRawUserAgent() bool`
+
+HasRawUserAgent returns a boolean if a field has been set.
 
 ### GetDevice
 

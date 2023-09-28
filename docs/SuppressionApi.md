@@ -1,13 +1,13 @@
-# \SuppressionApi
+# \SuppressionAPI
 
 All URIs are relative to *https://api.sendpost.io/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Count**](SuppressionApi.md#Count) | **Get** /subaccount/suppression/count | 
-[**CreateSuppressions**](SuppressionApi.md#CreateSuppressions) | **Post** /subaccount/suppression/ | 
-[**DeleteSuppression**](SuppressionApi.md#DeleteSuppression) | **Delete** /subaccount/suppression/ | 
-[**GetSuppressions**](SuppressionApi.md#GetSuppressions) | **Get** /subaccount/suppression/ | 
+[**Count**](SuppressionAPI.md#Count) | **Get** /subaccount/suppression/count | 
+[**CreateSuppressions**](SuppressionAPI.md#CreateSuppressions) | **Post** /subaccount/suppression/ | 
+[**DeleteSuppression**](SuppressionAPI.md#DeleteSuppression) | **Delete** /subaccount/suppression/ | 
+[**GetSuppressions**](SuppressionAPI.md#GetSuppressions) | **Get** /subaccount/suppression/ | 
 
 
 
@@ -28,7 +28,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/sendpost/sendpost_go_sdk"
 )
 
 func main() {
@@ -38,13 +38,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SuppressionApi.Count(context.Background()).XSubAccountApiKey(xSubAccountApiKey).From(from).To(to).Execute()
+    resp, r, err := apiClient.SuppressionAPI.Count(context.Background()).XSubAccountApiKey(xSubAccountApiKey).From(from).To(to).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SuppressionApi.Count``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SuppressionAPI.Count``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `Count`: CountStat
-    fmt.Fprintf(os.Stdout, "Response from `SuppressionApi.Count`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `SuppressionAPI.Count`: %v\n", resp)
 }
 ```
 
@@ -98,7 +98,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/sendpost/sendpost_go_sdk"
 )
 
 func main() {
@@ -107,13 +107,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SuppressionApi.CreateSuppressions(context.Background()).XSubAccountApiKey(xSubAccountApiKey).RSuppression(rSuppression).Execute()
+    resp, r, err := apiClient.SuppressionAPI.CreateSuppressions(context.Background()).XSubAccountApiKey(xSubAccountApiKey).RSuppression(rSuppression).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SuppressionApi.CreateSuppressions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SuppressionAPI.CreateSuppressions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `CreateSuppressions`: []Suppression
-    fmt.Fprintf(os.Stdout, "Response from `SuppressionApi.CreateSuppressions`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `SuppressionAPI.CreateSuppressions`: %v\n", resp)
 }
 ```
 
@@ -166,7 +166,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/sendpost/sendpost_go_sdk"
 )
 
 func main() {
@@ -175,13 +175,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SuppressionApi.DeleteSuppression(context.Background()).XSubAccountApiKey(xSubAccountApiKey).RDSuppression(rDSuppression).Execute()
+    resp, r, err := apiClient.SuppressionAPI.DeleteSuppression(context.Background()).XSubAccountApiKey(xSubAccountApiKey).RDSuppression(rDSuppression).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SuppressionApi.DeleteSuppression``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SuppressionAPI.DeleteSuppression``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `DeleteSuppression`: []DeleteResponse
-    fmt.Fprintf(os.Stdout, "Response from `SuppressionApi.DeleteSuppression`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `SuppressionAPI.DeleteSuppression`: %v\n", resp)
 }
 ```
 
@@ -234,7 +234,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/sendpost/sendpost_go_sdk"
 )
 
 func main() {
@@ -247,13 +247,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SuppressionApi.GetSuppressions(context.Background()).XSubAccountApiKey(xSubAccountApiKey).Offset(offset).Limit(limit).Search(search).From(from).To(to).Execute()
+    resp, r, err := apiClient.SuppressionAPI.GetSuppressions(context.Background()).XSubAccountApiKey(xSubAccountApiKey).Offset(offset).Limit(limit).Search(search).From(from).To(to).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SuppressionApi.GetSuppressions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SuppressionAPI.GetSuppressions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetSuppressions`: []Suppression
-    fmt.Fprintf(os.Stdout, "Response from `SuppressionApi.GetSuppressions`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `SuppressionAPI.GetSuppressions`: %v\n", resp)
 }
 ```
 

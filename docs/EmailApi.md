@@ -1,11 +1,11 @@
-# \EmailApi
+# \EmailAPI
 
 All URIs are relative to *https://api.sendpost.io/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**SendEmail**](EmailApi.md#SendEmail) | **Post** /subaccount/email/ | 
-[**SendEmailWithTemplate**](EmailApi.md#SendEmailWithTemplate) | **Post** /subaccount/email/template | 
+[**SendEmail**](EmailAPI.md#SendEmail) | **Post** /subaccount/email/ | 
+[**SendEmailWithTemplate**](EmailAPI.md#SendEmailWithTemplate) | **Post** /subaccount/email/template | 
 
 
 
@@ -26,7 +26,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/sendpost/sendpost_go_sdk"
 )
 
 func main() {
@@ -35,13 +35,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EmailApi.SendEmail(context.Background()).XSubAccountApiKey(xSubAccountApiKey).EmailMessage(emailMessage).Execute()
+    resp, r, err := apiClient.EmailAPI.SendEmail(context.Background()).XSubAccountApiKey(xSubAccountApiKey).EmailMessage(emailMessage).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EmailApi.SendEmail``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.SendEmail``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `SendEmail`: []EmailResponse
-    fmt.Fprintf(os.Stdout, "Response from `EmailApi.SendEmail`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `EmailAPI.SendEmail`: %v\n", resp)
 }
 ```
 
@@ -94,7 +94,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/sendpost/sendpost_go_sdk"
 )
 
 func main() {
@@ -103,13 +103,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EmailApi.SendEmailWithTemplate(context.Background()).XSubAccountApiKey(xSubAccountApiKey).EmailMessage(emailMessage).Execute()
+    resp, r, err := apiClient.EmailAPI.SendEmailWithTemplate(context.Background()).XSubAccountApiKey(xSubAccountApiKey).EmailMessage(emailMessage).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EmailApi.SendEmailWithTemplate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.SendEmailWithTemplate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `SendEmailWithTemplate`: []EmailResponse
-    fmt.Fprintf(os.Stdout, "Response from `EmailApi.SendEmailWithTemplate`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `EmailAPI.SendEmailWithTemplate`: %v\n", resp)
 }
 ```
 

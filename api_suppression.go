@@ -20,12 +20,12 @@ import (
 )
 
 
-// SuppressionApiService SuppressionApi service
-type SuppressionApiService service
+// SuppressionAPIService SuppressionAPI service
+type SuppressionAPIService service
 
 type ApiCountRequest struct {
 	ctx context.Context
-	ApiService *SuppressionApiService
+	ApiService *SuppressionAPIService
 	xSubAccountApiKey *string
 	from *string
 	to *string
@@ -61,7 +61,7 @@ Count Total Suppressions
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCountRequest
 */
-func (a *SuppressionApiService) Count(ctx context.Context) ApiCountRequest {
+func (a *SuppressionAPIService) Count(ctx context.Context) ApiCountRequest {
 	return ApiCountRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -70,7 +70,7 @@ func (a *SuppressionApiService) Count(ctx context.Context) ApiCountRequest {
 
 // Execute executes the request
 //  @return CountStat
-func (a *SuppressionApiService) CountExecute(r ApiCountRequest) (*CountStat, *http.Response, error) {
+func (a *SuppressionAPIService) CountExecute(r ApiCountRequest) (*CountStat, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -78,7 +78,7 @@ func (a *SuppressionApiService) CountExecute(r ApiCountRequest) (*CountStat, *ht
 		localVarReturnValue  *CountStat
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SuppressionApiService.Count")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SuppressionAPIService.Count")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -155,7 +155,7 @@ func (a *SuppressionApiService) CountExecute(r ApiCountRequest) (*CountStat, *ht
 
 type ApiCreateSuppressionsRequest struct {
 	ctx context.Context
-	ApiService *SuppressionApiService
+	ApiService *SuppressionAPIService
 	xSubAccountApiKey *string
 	rSuppression *RSuppression
 }
@@ -184,7 +184,7 @@ Add Email Addresses To Suppression List
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateSuppressionsRequest
 */
-func (a *SuppressionApiService) CreateSuppressions(ctx context.Context) ApiCreateSuppressionsRequest {
+func (a *SuppressionAPIService) CreateSuppressions(ctx context.Context) ApiCreateSuppressionsRequest {
 	return ApiCreateSuppressionsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -193,7 +193,7 @@ func (a *SuppressionApiService) CreateSuppressions(ctx context.Context) ApiCreat
 
 // Execute executes the request
 //  @return []Suppression
-func (a *SuppressionApiService) CreateSuppressionsExecute(r ApiCreateSuppressionsRequest) ([]Suppression, *http.Response, error) {
+func (a *SuppressionAPIService) CreateSuppressionsExecute(r ApiCreateSuppressionsRequest) ([]Suppression, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -201,7 +201,7 @@ func (a *SuppressionApiService) CreateSuppressionsExecute(r ApiCreateSuppression
 		localVarReturnValue  []Suppression
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SuppressionApiService.CreateSuppressions")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SuppressionAPIService.CreateSuppressions")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -274,7 +274,7 @@ func (a *SuppressionApiService) CreateSuppressionsExecute(r ApiCreateSuppression
 
 type ApiDeleteSuppressionRequest struct {
 	ctx context.Context
-	ApiService *SuppressionApiService
+	ApiService *SuppressionAPIService
 	xSubAccountApiKey *string
 	rDSuppression *RDSuppression
 }
@@ -303,7 +303,7 @@ Delete specific emails which are in suppression list
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDeleteSuppressionRequest
 */
-func (a *SuppressionApiService) DeleteSuppression(ctx context.Context) ApiDeleteSuppressionRequest {
+func (a *SuppressionAPIService) DeleteSuppression(ctx context.Context) ApiDeleteSuppressionRequest {
 	return ApiDeleteSuppressionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -312,7 +312,7 @@ func (a *SuppressionApiService) DeleteSuppression(ctx context.Context) ApiDelete
 
 // Execute executes the request
 //  @return []DeleteResponse
-func (a *SuppressionApiService) DeleteSuppressionExecute(r ApiDeleteSuppressionRequest) ([]DeleteResponse, *http.Response, error) {
+func (a *SuppressionAPIService) DeleteSuppressionExecute(r ApiDeleteSuppressionRequest) ([]DeleteResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -320,7 +320,7 @@ func (a *SuppressionApiService) DeleteSuppressionExecute(r ApiDeleteSuppressionR
 		localVarReturnValue  []DeleteResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SuppressionApiService.DeleteSuppression")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SuppressionAPIService.DeleteSuppression")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -393,7 +393,7 @@ func (a *SuppressionApiService) DeleteSuppressionExecute(r ApiDeleteSuppressionR
 
 type ApiGetSuppressionsRequest struct {
 	ctx context.Context
-	ApiService *SuppressionApiService
+	ApiService *SuppressionAPIService
 	xSubAccountApiKey *string
 	offset *int64
 	limit *int64
@@ -450,7 +450,7 @@ Get all suppressions
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetSuppressionsRequest
 */
-func (a *SuppressionApiService) GetSuppressions(ctx context.Context) ApiGetSuppressionsRequest {
+func (a *SuppressionAPIService) GetSuppressions(ctx context.Context) ApiGetSuppressionsRequest {
 	return ApiGetSuppressionsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -459,7 +459,7 @@ func (a *SuppressionApiService) GetSuppressions(ctx context.Context) ApiGetSuppr
 
 // Execute executes the request
 //  @return []Suppression
-func (a *SuppressionApiService) GetSuppressionsExecute(r ApiGetSuppressionsRequest) ([]Suppression, *http.Response, error) {
+func (a *SuppressionAPIService) GetSuppressionsExecute(r ApiGetSuppressionsRequest) ([]Suppression, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -467,7 +467,7 @@ func (a *SuppressionApiService) GetSuppressionsExecute(r ApiGetSuppressionsReque
 		localVarReturnValue  []Suppression
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SuppressionApiService.GetSuppressions")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SuppressionAPIService.GetSuppressions")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

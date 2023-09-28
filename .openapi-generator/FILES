@@ -12,7 +12,7 @@ docs/CopyTo.md
 docs/CountStat.md
 docs/DeleteResponse.md
 docs/Device.md
-docs/EmailApi.md
+docs/EmailAPI.md
 docs/EmailMessage.md
 docs/EmailResponse.md
 docs/EventMetadata.md
@@ -24,7 +24,7 @@ docs/RDSuppression.md
 docs/RSuppression.md
 docs/ReplyTo.md
 docs/Suppression.md
-docs/SuppressionApi.md
+docs/SuppressionAPI.md
 docs/SuppressionEmail.md
 docs/To.md
 docs/UserAgent.md
@@ -54,5 +54,4 @@ model_to.go
 model_user_agent.go
 model_webhook_event.go
 response.go
-test/api_suppression_test.go
 utils.go
