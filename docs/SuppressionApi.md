@@ -28,7 +28,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/sendpost/sendpost_go_sdk/v1"
+    openapiclient "github.com/sendpost/sendpost_go_sdk"
 )
 
 func main() {
@@ -98,7 +98,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/sendpost/sendpost_go_sdk/v1"
+    openapiclient "github.com/sendpost/sendpost_go_sdk"
 )
 
 func main() {
@@ -166,7 +166,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/sendpost/sendpost_go_sdk/v1"
+    openapiclient "github.com/sendpost/sendpost_go_sdk"
 )
 
 func main() {
@@ -234,7 +234,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/sendpost/sendpost_go_sdk/v1"
+    openapiclient "github.com/sendpost/sendpost_go_sdk"
 )
 
 func main() {

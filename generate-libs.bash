@@ -1,1 +1,1 @@
-openapi-generator generate -i sendpost.yaml -g go -o ./ -c ./config-go.json --git-repo-id sendpost_go_sdk/v1 --git-user-id sendpost
+openapi-generator generate -i sendpost.yaml -g go -o ./ -c ./config-go.json --git-repo-id sendpost_go_sdk --git-user-id sendpost
