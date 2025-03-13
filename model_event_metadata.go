@@ -23,6 +23,7 @@ type EventMetadata struct {
 	ClickedURL *string `json:"clickedURL,omitempty"`
 	TrackedIP *string `json:"trackedIP,omitempty"`
 	RawUserAgent *string `json:"rawUserAgent,omitempty"`
+	SendpostLinkId *string `json:"sendpostLinkId,omitempty"`
 	Device *Device `json:"device,omitempty"`
 	Geo *City `json:"geo,omitempty"`
 	Os *Os `json:"os,omitempty"`
@@ -142,6 +143,38 @@ func (o *EventMetadata) HasRawUserAgent() bool {
 // SetRawUserAgent gets a reference to the given string and assigns it to the RawUserAgent field.
 func (o *EventMetadata) SetRawUserAgent(v string) {
 	o.RawUserAgent = &v
+}
+
+// GetSendpostLinkId returns the SendpostLinkId field value if set, zero value otherwise.
+func (o *EventMetadata) GetSendpostLinkId() string {
+	if o == nil || IsNil(o.SendpostLinkId) {
+		var ret string
+		return ret
+	}
+	return *o.SendpostLinkId
+}
+
+// GetSendpostLinkIdOk returns a tuple with the SendpostLinkId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventMetadata) GetSendpostLinkIdOk() (*string, bool) {
+	if o == nil || IsNil(o.SendpostLinkId) {
+		return nil, false
+	}
+	return o.SendpostLinkId, true
+}
+
+// HasSendpostLinkId returns a boolean if a field has been set.
+func (o *EventMetadata) HasSendpostLinkId() bool {
+	if o != nil && !IsNil(o.SendpostLinkId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSendpostLinkId gets a reference to the given string and assigns it to the SendpostLinkId field.
+func (o *EventMetadata) SetSendpostLinkId(v string) {
+	o.SendpostLinkId = &v
 }
 
 // GetDevice returns the Device field value if set, zero value otherwise.
@@ -354,6 +387,9 @@ func (o EventMetadata) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.RawUserAgent) {
 		toSerialize["rawUserAgent"] = o.RawUserAgent
+	}
+	if !IsNil(o.SendpostLinkId) {
+		toSerialize["sendpostLinkId"] = o.SendpostLinkId
 	}
 	if !IsNil(o.Device) {
 		toSerialize["device"] = o.Device

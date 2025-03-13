@@ -515,6 +515,8 @@ components:
           type: string
         rawUserAgent:
           type: string
+        sendpostLinkId:
+          type: string
         device:
           $ref: '#/components/schemas/Device'
         geo:

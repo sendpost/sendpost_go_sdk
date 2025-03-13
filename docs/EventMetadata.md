@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClickedURL** | Pointer to **string** |  | [optional] 
 **TrackedIP** | Pointer to **string** |  | [optional] 
 **RawUserAgent** | Pointer to **string** |  | [optional] 
+**SendpostLinkId** | Pointer to **string** |  | [optional] 
 **Device** | Pointer to [**Device**](Device.md) |  | [optional] 
 **Geo** | Pointer to [**City**](City.md) |  | [optional] 
 **Os** | Pointer to [**Os**](Os.md) |  | [optional] 
@@ -107,6 +108,31 @@ SetRawUserAgent sets RawUserAgent field to given value.
 `func (o *EventMetadata) HasRawUserAgent() bool`
 
 HasRawUserAgent returns a boolean if a field has been set.
+
+### GetSendpostLinkId
+
+`func (o *EventMetadata) GetSendpostLinkId() string`
+
+GetSendpostLinkId returns the SendpostLinkId field if non-nil, zero value otherwise.
+
+### GetSendpostLinkIdOk
+
+`func (o *EventMetadata) GetSendpostLinkIdOk() (*string, bool)`
+
+GetSendpostLinkIdOk returns a tuple with the SendpostLinkId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSendpostLinkId
+
+`func (o *EventMetadata) SetSendpostLinkId(v string)`
+
+SetSendpostLinkId sets SendpostLinkId field to given value.
+
+### HasSendpostLinkId
+
+`func (o *EventMetadata) HasSendpostLinkId() bool`
+
+HasSendpostLinkId returns a boolean if a field has been set.
 
 ### GetDevice
 
